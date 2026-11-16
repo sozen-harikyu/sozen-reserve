@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>銀座そうぜん鍼灸院 ご予約フォーム</title>
+  <title>銀座そうぜん鍼灸院 ご予約</title>
   <style>
     html, body {
       margin: 0;
@@ -15,7 +15,7 @@
     }
     iframe {
       position: fixed;
-      top: -48px; /* GAS上部の警告バナーを画面外へ押し出す */
+      top: -48px;
       left: 0;
       width: 100vw;
       height: calc(100vh + 48px);
@@ -25,6 +25,14 @@
   </style>
 </head>
 <body>
-  <iframe src="https://script.google.com/macros/s/AKfycbwdWIpPpxm6AH2NXDby99t8whlphY3CEAhjsOzboE--QDKMVNhFxDvJdVh5NO3jdt4G7A/exec" allow="geolocation"></iframe>
+  <iframe id="gas-frame" allow="geolocation"></iframe>
+
+  <script>
+    // 現在のGASのウェブアプリURL
+    const baseGasUrl = "https://script.google.com/macros/s/AKfycbzC0GNYQv17835U9S73zAp0sRkoP3KP9xGQg65IB0U6GJcwOCfuyv9asgyOKQuxrck5BA/exec";
+    // URLの後ろについた ?action=cancel&key=... をそのままGAS側へ引き継ぐ
+    const params = window.location.search;
+    document.getElementById("gas-frame").src = baseGasUrl + params;
+  </script>
 </body>
 </html>
