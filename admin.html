@@ -37,21 +37,21 @@
       background-color: var(--bg);
       color: var(--text);
       line-height: 1.6;
-      padding-bottom: 60px;
+      padding-bottom: 64px;
     }
 
     /* ヘッダー */
     .top-bar {
       background: var(--primary);
       color: #fff;
-      padding: 16px 16px 14px;
+      padding: 15px 16px 13px;
       position: sticky;
       top: 0;
       z-index: 30;
       box-shadow: 0 2px 10px rgba(0,0,0,0.12);
     }
     .top-bar-inner {
-      max-width: 560px;
+      max-width: 580px;
       margin: 0 auto;
       display: flex;
       justify-content: space-between;
@@ -59,7 +59,7 @@
     }
     .top-title {
       font-family: 'Shippori Mincho', serif;
-      font-size: 1.08rem;
+      font-size: 1.06rem;
       font-weight: 600;
       letter-spacing: 0.05em;
     }
@@ -79,9 +79,9 @@
     }
 
     .container {
-      max-width: 560px;
+      max-width: 580px;
       margin: 0 auto;
-      padding: 16px 14px;
+      padding: 14px 12px;
     }
 
     /* ログイン画面 */
@@ -119,22 +119,22 @@
       border-color: var(--accent);
     }
 
-    /* タブナビ */
+    /* タブナビ（4タブ） */
     .tab-bar {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 6px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 4px;
       background: #e9e4dc;
-      padding: 5px;
+      padding: 4px;
       border-radius: 12px;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
     .tab-btn {
       border: none;
       background: transparent;
-      padding: 10px 4px;
+      padding: 10px 2px;
       border-radius: 9px;
-      font-size: 0.82rem;
+      font-size: 0.76rem;
       font-weight: 700;
       color: var(--text-sub);
       cursor: pointer;
@@ -158,13 +158,13 @@
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 16px;
+      padding: 15px;
       margin-bottom: 14px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.03);
     }
     .card-title {
       font-family: 'Shippori Mincho', serif;
-      font-size: 0.98rem;
+      font-size: 0.96rem;
       font-weight: 600;
       margin-bottom: 12px;
       padding-bottom: 8px;
@@ -180,8 +180,8 @@
       justify-content: center;
       border: none;
       border-radius: 8px;
-      padding: 11px 16px;
-      font-size: 0.88rem;
+      padding: 10px 14px;
+      font-size: 0.85rem;
       font-weight: 700;
       cursor: pointer;
       font-family: inherit;
@@ -205,13 +205,197 @@
       color: var(--primary);
       border: 1px solid var(--border);
     }
+    .btn-danger {
+      background: var(--danger);
+      color: #fff;
+    }
     .btn-danger-outline {
       background: #fff;
       color: var(--danger);
       border: 1px solid #e6b8b2;
     }
 
-    /* 予約一覧カード */
+    /* ===== タブ1：日報ビュー ===== */
+    .day-nav {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .day-nav .btn-nav {
+      padding: 9px 10px;
+      font-size: 0.8rem;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      color: var(--primary);
+      white-space: nowrap;
+    }
+    .day-nav input[type="date"] {
+      flex: 1;
+      padding: 8px 10px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-family: inherit;
+      background: #fff;
+      min-width: 0;
+    }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+    .kpi-box {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 8px 4px;
+      text-align: center;
+    }
+    .kpi-label {
+      font-size: 0.66rem;
+      color: var(--text-sub);
+    }
+    .kpi-val {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-top: 2px;
+    }
+    .kpi-val.money {
+      color: var(--accent);
+    }
+
+    .filter-strip {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 0.78rem;
+      color: var(--text-sub);
+    }
+    .filter-strip label {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .tt-row {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 12px;
+      margin-bottom: 7px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .tt-row.tt-patient {
+      border-left: 4px solid var(--accent);
+      cursor: pointer;
+    }
+    .tt-row.tt-blocked {
+      background: var(--danger-bg);
+      border-color: #eed0cc;
+      border-left: 4px solid var(--danger);
+    }
+    .tt-row.tt-empty {
+      background: #faf9f7;
+      padding: 7px 12px;
+      color: #a69f97;
+    }
+    .tt-time {
+      font-size: 0.9rem;
+      font-weight: 700;
+      width: 48px;
+      flex-shrink: 0;
+      color: var(--primary);
+    }
+    .tt-empty .tt-time {
+      color: #a69f97;
+      font-weight: 500;
+    }
+    .tt-body {
+      flex: 1;
+      min-width: 0;
+    }
+    .tt-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 6px;
+    }
+    .tt-name {
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+    .tt-amount {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+    .tt-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 4px;
+    }
+    .tag {
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 1px 7px;
+      border-radius: 6px;
+      background: var(--accent-light);
+      color: var(--accent);
+      border: 1px solid #e5d8c8;
+    }
+    .tag-new {
+      background: #fff1e6;
+      color: #c25e00;
+      border-color: #f5cfa9;
+    }
+    .tag-clothes {
+      background: var(--info-bg);
+      color: var(--info);
+      border-color: #c2daf2;
+    }
+    .tag-receipt {
+      background: var(--ok-bg);
+      color: var(--ok);
+      border-color: #b7dfc9;
+    }
+    .tt-detail-drawer {
+      display: none;
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px dashed #e6e0d8;
+      font-size: 0.78rem;
+      color: var(--text-sub);
+    }
+    .tt-row.expanded .tt-detail-drawer {
+      display: block;
+    }
+    .tt-drawer-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .tt-drawer-actions .btn {
+      padding: 7px 6px;
+      font-size: 0.78rem;
+    }
+
+    /* ===== タブ2：予約一覧カード ===== */
     .search-box {
       width: 100%;
       padding: 10px 14px;
@@ -272,7 +456,36 @@
       font-size: 0.82rem;
     }
 
-    /* 枠ブロック管理 */
+    /* ===== タブ3：枠ブロック管理（一括 ＋ 個別） ===== */
+    .bulk-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    .bulk-field label {
+      display: block;
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: var(--text-sub);
+      margin-bottom: 4px;
+    }
+    .bulk-field input, .bulk-field select {
+      width: 100%;
+      padding: 9px 10px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.86rem;
+      font-family: inherit;
+      background: #fff;
+    }
+    .bulk-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
     .date-picker-row {
       display: flex;
       gap: 8px;
@@ -356,7 +569,7 @@
       color: var(--accent);
     }
 
-    /* 設定シート編集 */
+    /* ===== タブ4：設定シート編集 ===== */
     .setting-row {
       display: flex;
       justify-content: space-between;
@@ -507,6 +720,9 @@
       display: none;
       z-index: 200;
       white-space: nowrap;
+      max-width: 92vw;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .empty-msg {
       text-align: center;
@@ -547,24 +763,99 @@
     <!-- 管理メイン画面 -->
     <div id="mainView" style="display:none;">
       <div class="tab-bar">
-        <button type="button" class="tab-btn active" onclick="switchTab('reservations', this)">予約変更・取消</button>
-        <button type="button" class="tab-btn" onclick="switchTab('blocks', this)">予約不可設定</button>
+        <button type="button" class="tab-btn active" onclick="switchTab('daily', this)">日報ビュー</button>
+        <button type="button" class="tab-btn" onclick="switchTab('reservations', this)">予約一覧</button>
+        <button type="button" class="tab-btn" onclick="switchTab('blocks', this)">予約不可</button>
         <button type="button" class="tab-btn" onclick="switchTab('settings', this)">基本設定</button>
       </div>
 
-      <!-- タブ1：予約一覧（変更・キャンセル） -->
-      <div id="tab-reservations" class="tab-panel active">
+      <!-- タブ1：日報タイムテーブル画面 -->
+      <div id="tab-daily" class="tab-panel active">
+        <div class="day-nav">
+          <button type="button" class="btn-nav" onclick="shiftDailyDate(-1)">◀ 前日</button>
+          <input type="date" id="dailyDateInput" onchange="loadDailyReport()">
+          <button type="button" class="btn-nav" onclick="setDailyToday()">今日</button>
+          <button type="button" class="btn-nav" onclick="shiftDailyDate(1)">翌日 ▶</button>
+        </div>
+
+        <div class="kpi-grid">
+          <div class="kpi-box">
+            <div class="kpi-label">患者様</div>
+            <div class="kpi-val" id="kpiPatients">-名</div>
+          </div>
+          <div class="kpi-box">
+            <div class="kpi-label">予定売上</div>
+            <div class="kpi-val money" id="kpiAmount">¥0</div>
+          </div>
+          <div class="kpi-box">
+            <div class="kpi-label">着替え</div>
+            <div class="kpi-val" id="kpiClothes">0件</div>
+          </div>
+          <div class="kpi-box">
+            <div class="kpi-label">領収書</div>
+            <div class="kpi-val" id="kpiReceipt">0件</div>
+          </div>
+        </div>
+
+        <div class="filter-strip">
+          <span id="dailyDateLabel">読み込み中...</span>
+          <label>
+            <input type="checkbox" id="dailyOnlyActiveCheck" checked onchange="renderDailyTable()">
+            <span>予約・不可のみ表示</span>
+          </label>
+        </div>
+
+        <div id="dailyTableContainer">
+          <div class="empty-msg">日報データを読み込み中...</div>
+        </div>
+      </div>
+
+      <!-- タブ2：予約一覧（検索・変更・キャンセル） -->
+      <div id="tab-reservations" class="tab-panel">
         <input type="text" id="resSearch" class="search-box" placeholder="お名前・メニュー・日付で検索..." oninput="renderReservations()">
         <div id="resListContainer">
           <div class="empty-msg">読み込み中...</div>
         </div>
       </div>
 
-      <!-- タブ2：予約不可（枠ブロック） -->
+      <!-- タブ3：予約不可（期間一括 ＋ 個別タップ） -->
       <div id="tab-blocks" class="tab-panel">
         <div class="card">
           <div class="card-title">
-            <span>日付を選んで枠をタップ</span>
+            <span>期間・時間帯で一括設定</span>
+            <span style="font-size:0.72rem; color:var(--text-sub); font-weight:500;">既存予約は保護されます</span>
+          </div>
+          <div class="bulk-grid">
+            <div class="bulk-field">
+              <label>開始日</label>
+              <input type="date" id="bulkStartDate">
+            </div>
+            <div class="bulk-field">
+              <label>終了日</label>
+              <input type="date" id="bulkEndDate">
+            </div>
+            <div class="bulk-field">
+              <label>開始時間</label>
+              <select id="bulkStartTime"></select>
+            </div>
+            <div class="bulk-field">
+              <label>終了時間</label>
+              <select id="bulkEndTime"></select>
+            </div>
+          </div>
+          <div class="bulk-field">
+            <label>日報に記載する文字（ラベル）</label>
+            <input type="text" id="bulkLabel" value="予約不可" placeholder="例：予約不可、休診、ミーティング">
+          </div>
+          <div class="bulk-actions">
+            <button type="button" class="btn btn-danger" id="bulkBlockBtn" onclick="executeBulkBlock(true)">まとめて予約不可</button>
+            <button type="button" class="btn btn-outline" id="bulkUnblockBtn" onclick="executeBulkBlock(false)">まとめて解除</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">
+            <span>1枠ずつタップで切り替え</span>
             <span id="blockDateTitle" style="font-size:0.82rem; color:var(--accent);"></span>
           </div>
           <div class="date-picker-row">
@@ -582,7 +873,7 @@
         </div>
       </div>
 
-      <!-- タブ3：設定シート編集 -->
+      <!-- タブ4：設定シート編集 -->
       <div id="tab-settings" class="tab-panel">
         <div class="card">
           <div class="card-title">受付日数・初診料の設定</div>
@@ -667,12 +958,16 @@
     let adminPin = '';
     let adminConfig = null;
     let adminReservations = [];
+    let currentDailyData = null;
     let editingCancelKey = '';
 
     window.addEventListener('DOMContentLoaded', () => {
-      initTimeDropdown();
+      initTimeDropdowns();
       const todayStr = getLocalDateString(new Date());
+      document.getElementById('dailyDateInput').value = todayStr;
       document.getElementById('blockDateInput').value = todayStr;
+      document.getElementById('bulkStartDate').value = todayStr;
+      document.getElementById('bulkEndDate').value = todayStr;
 
       const savedPin = sessionStorage.getItem('sozen_admin_pin');
       if (savedPin) {
@@ -692,25 +987,28 @@
       return `${y}-${m}-${day}`;
     }
 
-    function initTimeDropdown() {
-      const sel = document.getElementById('newTimeSelect');
-      sel.innerHTML = '';
+    function initTimeDropdowns() {
+      const timeList = [];
       for (let h = 8; h < 20; h++) {
         for (let m = 0; m < 60; m += 15) {
-          const t = `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
-          const opt = document.createElement('option');
-          opt.value = t;
-          opt.text = t;
-          sel.appendChild(opt);
+          timeList.push(`${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`);
         }
       }
+
+      ['newTimeSelect', 'bulkStartTime', 'bulkEndTime'].forEach(id => {
+        const sel = document.getElementById(id);
+        sel.innerHTML = timeList.map(t => `<option value="${t}">${t}</option>`).join('');
+      });
+
+      document.getElementById('bulkStartTime').value = '08:00';
+      document.getElementById('bulkEndTime').value = '19:45';
     }
 
     function showToast(msg) {
       const t = document.getElementById('toast');
       t.textContent = msg;
       t.style.display = 'block';
-      setTimeout(() => { t.style.display = 'none'; }, 2800);
+      setTimeout(() => { t.style.display = 'none'; }, 3000);
     }
 
     async function attemptLogin() {
@@ -748,6 +1046,7 @@
 
         renderReservations();
         renderSettings();
+        loadDailyReport();
         loadDaySlots();
       } catch (err) {
         errEl.textContent = '通信エラーが発生しました。時間をおいてお試しください。';
@@ -766,6 +1065,7 @@
           adminReservations = data.reservations || [];
           renderReservations();
           renderSettings();
+          loadDailyReport();
           loadDaySlots();
           showToast('最新の状態に更新しました');
         }
@@ -779,10 +1079,119 @@
       document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
       btnEl.classList.add('active');
       document.getElementById('tab-' + tabName).classList.add('active');
+      if (tabName === 'daily') loadDailyReport();
       if (tabName === 'blocks') loadDaySlots();
     }
 
-    /* ----- タブ1：予約一覧（変更・キャンセル） ----- */
+    /* ----- タブ1：日報ビュー ----- */
+    function shiftDailyDate(delta) {
+      const input = document.getElementById('dailyDateInput');
+      const parts = (input.value || getLocalDateString(new Date())).split('-').map(Number);
+      const d = new Date(parts[0], parts[1] - 1, parts[2] + delta);
+      input.value = getLocalDateString(d);
+      loadDailyReport();
+    }
+
+    function setDailyToday() {
+      document.getElementById('dailyDateInput').value = getLocalDateString(new Date());
+      loadDailyReport();
+    }
+
+    async function loadDailyReport() {
+      const dateVal = document.getElementById('dailyDateInput').value;
+      const container = document.getElementById('dailyTableContainer');
+      if (!dateVal) return;
+
+      container.innerHTML = '<div class="empty-msg">日報データを読み込み中...</div>';
+      try {
+        const res = await fetch(`${GAS_API_URL}?api=adminDailyReport&pin=${encodeURIComponent(adminPin)}&date=${encodeURIComponent(dateVal)}`);
+        const data = await res.json();
+        if (!data.success) {
+          container.innerHTML = `<div class="empty-msg">${escapeHtml(data.message || '読み込みに失敗しました')}</div>`;
+          return;
+        }
+        currentDailyData = data;
+        document.getElementById('dailyDateLabel').textContent = data.dateStr + (data.hasDailySheet ? '' : '（日報未作成）');
+        document.getElementById('kpiPatients').textContent = `${data.summary.patients}名`;
+        document.getElementById('kpiAmount').textContent = `¥${Number(data.summary.totalAmount).toLocaleString()}`;
+        document.getElementById('kpiClothes').textContent = `${data.summary.clothes}件`;
+        document.getElementById('kpiReceipt').textContent = `${data.summary.receipt}件`;
+        renderDailyTable();
+      } catch (e) {
+        container.innerHTML = '<div class="empty-msg">通信エラーが発生しました。</div>';
+      }
+    }
+
+    function renderDailyTable() {
+      if (!currentDailyData) return;
+      const container = document.getElementById('dailyTableContainer');
+      const onlyActive = document.getElementById('dailyOnlyActiveCheck').checked;
+      const list = onlyActive
+        ? currentDailyData.rows.filter(r => r.type !== 'empty')
+        : currentDailyData.rows;
+
+      if (list.length === 0) {
+        container.innerHTML = '<div class="empty-msg">この日の予約・ブロックはありません。<br>（右上のチェックを外すと全時間枠が表示されます）</div>';
+        return;
+      }
+
+      container.innerHTML = list.map((r, idx) => {
+        if (r.type === 'empty') {
+          return `
+            <div class="tt-row tt-empty">
+              <div class="tt-time">${escapeHtml(r.time)}</div>
+              <div class="tt-body" style="font-size:0.78rem;">空き</div>
+            </div>
+          `;
+        }
+        if (r.type === 'blocked') {
+          return `
+            <div class="tt-row tt-blocked">
+              <div class="tt-time">${escapeHtml(r.time)}</div>
+              <div class="tt-body">
+                <div class="tt-name" style="color:var(--danger);">${escapeHtml(r.name)}</div>
+              </div>
+            </div>
+          `;
+        }
+
+        const isNew = r.customerType && r.customerType.includes('新規');
+        const tagsHtml = [
+          isNew ? '<span class="tag tag-new">新規</span>' : (r.customerType ? '<span class="tag">リピーター</span>' : ''),
+          r.menuName ? `<span class="tag">${escapeHtml(r.menuName)}</span>` : '',
+          (r.clothes && r.clothes !== '不要') ? `<span class="tag tag-clothes">着替:${escapeHtml(r.clothes)}</span>` : '',
+          r.receipt ? '<span class="tag tag-receipt">領収書</span>' : ''
+        ].filter(Boolean).join('');
+
+        const drawerActions = r.cancelKey
+          ? `<div class="tt-drawer-actions">
+               <button type="button" class="btn btn-outline" onclick="event.stopPropagation(); openRescheduleModal('${escapeHtml(r.cancelKey)}')">日時を変更</button>
+               <button type="button" class="btn btn-danger-outline" onclick="event.stopPropagation(); executeAdminCancel('${escapeHtml(r.cancelKey)}', '${escapeHtml(r.name)}', '${escapeHtml(currentDailyData.dateStr)} ${escapeHtml(r.time)}')">キャンセル</button>
+             </div>`
+          : `<div style="margin-top:6px; font-size:0.72rem; color:var(--text-sub);">※日報シート手入力の枠です</div>`;
+
+        return `
+          <div class="tt-row tt-patient" onclick="this.classList.toggle('expanded')">
+            <div class="tt-time">${escapeHtml(r.time)}</div>
+            <div class="tt-body">
+              <div class="tt-header">
+                <div class="tt-name">${escapeHtml(r.name)} 様</div>
+                <div class="tt-amount">${r.amount > 0 ? '¥' + Number(r.amount).toLocaleString() : ''}</div>
+              </div>
+              <div class="tt-tags">${tagsHtml}</div>
+              ${r.options ? `<div style="font-size:0.74rem; color:var(--text-sub); margin-top:3px;">OP: ${escapeHtml(r.options)}</div>` : ''}
+              <div class="tt-detail-drawer">
+                ${r.tel ? `<div>電話：<a href="tel:${escapeHtml(r.tel)}" onclick="event.stopPropagation()" style="color:var(--info);font-weight:700;">${escapeHtml(r.tel)}</a></div>` : ''}
+                ${r.memo && r.memo !== 'なし' ? `<div>メモ：${escapeHtml(r.memo)}</div>` : ''}
+                ${drawerActions}
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    /* ----- タブ2：予約一覧（変更・キャンセル） ----- */
     function renderReservations() {
       const kw = (document.getElementById('resSearch').value || '').trim().toLowerCase();
       const container = document.getElementById('resListContainer');
@@ -820,7 +1229,10 @@
 
     function openRescheduleModal(cancelKey) {
       const target = adminReservations.find(r => r.cancelKey === cancelKey);
-      if (!target) return;
+      if (!target) {
+        alert('対象データが見つかりません。右上の「更新」を押してからお試しください。');
+        return;
+      }
       editingCancelKey = cancelKey;
       document.getElementById('modalTargetInfo').innerHTML =
         `<strong>${escapeHtml(target.name)} 様</strong><br>現在：${escapeHtml(target.dateStr)}（${escapeHtml(target.menuName)}）`;
@@ -903,7 +1315,62 @@
       }
     }
 
-    /* ----- タブ2：予約不可（枠ブロック） ----- */
+    /* ----- タブ3：予約不可（一括 ＋ 個別） ----- */
+    async function executeBulkBlock(shouldBlock) {
+      const startDate = document.getElementById('bulkStartDate').value;
+      const endDate = document.getElementById('bulkEndDate').value;
+      const startTime = document.getElementById('bulkStartTime').value;
+      const endTime = document.getElementById('bulkEndTime').value;
+      const label = document.getElementById('bulkLabel').value.trim() || '予約不可';
+
+      if (!startDate || !endDate) {
+        alert('開始日と終了日を選択してください。');
+        return;
+      }
+
+      const confirmMsg = shouldBlock
+        ? `${startDate} 〜 ${endDate} の ${startTime}〜${endTime} を\nまとめて「${label}」に設定しますか？\n（※既存の予約枠は上書きされません）`
+        : `${startDate} 〜 ${endDate} の ${startTime}〜${endTime} の\n予約不可設定をまとめて解除しますか？\n（※患者様の予約枠は消えません）`;
+
+      if (!confirm(confirmMsg)) return;
+
+      const btn1 = document.getElementById('bulkBlockBtn');
+      const btn2 = document.getElementById('bulkUnblockBtn');
+      btn1.disabled = true;
+      btn2.disabled = true;
+      showToast(shouldBlock ? '期間一括で予約不可を設定中...' : '期間一括で解除中...');
+
+      try {
+        const res = await fetch(GAS_API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({
+            action: 'adminBulkBlock',
+            pin: adminPin,
+            startDate: startDate,
+            endDate: endDate,
+            startTime: startTime,
+            endTime: endTime,
+            block: shouldBlock,
+            label: label
+          })
+        });
+        const data = await res.json();
+        if (data.success) {
+          alert(data.message);
+          loadDaySlots();
+          loadDailyReport();
+        } else {
+          alert('エラー：' + (data.message || '処理に失敗しました'));
+        }
+      } catch (e) {
+        alert('通信エラーが発生しました。');
+      } finally {
+        btn1.disabled = false;
+        btn2.disabled = false;
+      }
+    }
+
     async function loadDaySlots() {
       const dateVal = document.getElementById('blockDateInput').value;
       const container = document.getElementById('daySlotsContainer');
@@ -973,6 +1440,7 @@
         if (data.success) {
           showToast(data.message || '更新しました');
           loadDaySlots();
+          loadDailyReport();
         } else {
           alert('エラー：' + (data.message || '更新に失敗しました'));
         }
@@ -981,7 +1449,7 @@
       }
     }
 
-    /* ----- タブ3：設定シート編集 ----- */
+    /* ----- タブ4：設定シート編集 ----- */
     function renderSettings() {
       if (!adminConfig) return;
       document.getElementById('setDirectorDays').value = adminConfig.bookingLimits.director;
