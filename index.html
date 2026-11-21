@@ -1,38 +1,1114 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>銀座そうぜん鍼灸院 ご予約</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
-    html, body {
+    :root {
+      --primary: #2b2826;
+      --accent: #876d50;
+      --accent-light: #f8f6f2;
+      --bg: #f9f8f6;
+      --card-bg: #ffffff;
+      --border: #e6e2dc;
+      --border-focus: #876d50;
+      --text: #2b2826;
+      --text-sub: #78736d;
+      --error: #b8382c;
+    }
+
+    * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      background-color: #ffffff;
+      -webkit-tap-highlight-color: transparent;
     }
-    iframe {
-      position: fixed;
-      top: -48px;
-      left: 0;
-      width: 100vw;
-      height: calc(100vh + 48px);
-      height: calc(100dvh + 48px);
+
+    body {
+      font-family: 'Zen Kaku Gothic New', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      padding: 28px 14px 64px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .wrapper {
+      max-width: 480px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      padding: 34px 22px;
+      border-radius: 14px;
+      box-shadow: 0 4px 24px rgba(43, 40, 38, 0.04);
+      border: 1px solid rgba(230, 226, 220, 0.6);
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .header-sub {
+      font-family: 'Zen Kaku Gothic New', sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      font-weight: 700;
+    }
+
+    .header-title {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 1.48rem;
+      font-weight: 600;
+      color: var(--primary);
+      letter-spacing: 0.08em;
+      margin-bottom: 5px;
+    }
+
+    .header-desc {
+      font-family: 'Zen Kaku Gothic New', sans-serif;
+      font-size: 0.78rem;
+      color: var(--text-sub);
+      letter-spacing: 0.06em;
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    .section-label {
+      display: flex;
+      align-items: center;
+      font-family: 'Shippori Mincho', serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 9px;
+      color: var(--primary);
+      letter-spacing: 0.04em;
+    }
+
+    .section-label::before {
+      content: "";
+      display: inline-block;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background-color: var(--accent);
+      margin-right: 8px;
+    }
+
+    .choice-group {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .choice-card {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+      background: #fff;
+      border-radius: 9px;
+      font-family: 'Zen Kaku Gothic New', sans-serif;
+      font-size: 0.9rem;
+      text-align: left;
+      cursor: pointer;
+      color: var(--text);
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      line-height: 1.45;
+      letter-spacing: 0.02em;
+    }
+
+    .choice-card.active {
+      border-color: var(--accent);
+      background-color: var(--accent-light);
+      color: var(--primary);
+      font-weight: 700;
+      box-shadow: 0 2px 8px rgba(135, 109, 80, 0.12);
+    }
+
+    .btn-toggle-group {
+      display: grid;
+      gap: 8px;
+    }
+    .grid-4 {
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .grid-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .toggle-btn {
+      padding: 12px 0;
+      text-align: center;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-family: 'Zen Kaku Gothic New', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 500;
+      cursor: pointer;
+      color: var(--text);
+      transition: all 0.15s ease;
+      letter-spacing: 0.03em;
+    }
+
+    .toggle-btn:hover:not(.active) {
+      background-color: var(--accent-light);
+      border-color: var(--accent);
+    }
+
+    .toggle-btn.active {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+      font-weight: 700;
+      box-shadow: 0 2px 6px rgba(135, 109, 80, 0.25);
+    }
+
+    select, input[type="text"], input[type="tel"], input[type="email"], input[type="date"], textarea {
+      width: 100%;
+      padding: 13px 14px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-family: 'Zen Kaku Gothic New', sans-serif;
+      font-size: 0.93rem;
+      outline: none;
+      background-color: #fff;
+      color: var(--text);
+      letter-spacing: 0.02em;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    select:focus, input:focus, textarea:focus {
+      border-color: var(--border-focus);
+      box-shadow: 0 0 0 3px rgba(135, 109, 80, 0.1);
+    }
+
+    .options-wrapper {
+      background: #fbf9f6;
+      padding: 14px 16px;
+      border-radius: 9px;
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .option-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: 'Zen Kaku Gothic New', sans-serif;
+      font-size: 0.88rem;
+      cursor: pointer;
+      letter-spacing: 0.02em;
+    }
+
+    .option-item input[type="checkbox"] {
+      margin-right: 9px;
+      accent-color: var(--accent);
+      width: 17px;
+      height: 17px;
+      cursor: pointer;
+    }
+
+    .option-price {
+      font-weight: 700;
+      color: var(--accent);
+      font-size: 0.85rem;
+    }
+
+    .time-period-group {
+      margin-top: 14px;
+      background: #fdfdfc;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      padding: 13px 14px;
+    }
+
+    .period-title {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 9px;
+      display: flex;
+      align-items: center;
+      letter-spacing: 0.04em;
+    }
+
+    .period-title::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: #ece7df;
+      margin-left: 9px;
+    }
+
+    .slots-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    .slot-btn {
+      padding: 11px 0;
+      text-align: center;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-family: 'Zen Kaku Gothic New', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      color: var(--text);
+      transition: all 0.15s ease;
+      letter-spacing: 0.02em;
+    }
+
+    .slot-btn:hover:not(.active) {
+      background-color: var(--accent-light);
+      border-color: var(--accent);
+    }
+
+    .slot-btn.active {
+      background: var(--accent) !important;
+      color: #fff !important;
+      border-color: var(--accent) !important;
+      font-weight: 700;
+      box-shadow: 0 2px 6px rgba(135, 109, 80, 0.3);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 70px;
+      line-height: 1.55;
+    }
+
+    .summary-card {
+      background: var(--accent-light);
+      border: 1px solid #ebd9c8;
+      padding: 16px 18px;
+      border-radius: 9px;
+      margin-top: 10px;
+      margin-bottom: 20px;
+      font-size: 0.88rem;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 6px;
+      color: var(--text-sub);
+      font-family: 'Zen Kaku Gothic New', sans-serif;
+      letter-spacing: 0.02em;
+    }
+
+    .summary-total {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-family: 'Shippori Mincho', serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--primary);
+      border-top: 1px dashed #d5c3b2;
+      padding-top: 10px;
+      margin-top: 8px;
+      letter-spacing: 0.04em;
+    }
+
+    .summary-total span:last-child {
+      font-size: 1.35rem;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .agreement-card {
+      background: #fdfaf7;
+      border: 1.5px solid #d5c3b2;
+      border-radius: 9px;
+      padding: 16px;
+      margin-bottom: 22px;
+    }
+
+    .agreement-title {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 8px;
+      letter-spacing: 0.04em;
+    }
+
+    .agreement-list {
+      font-size: 0.82rem;
+      color: var(--text);
+      line-height: 1.65;
+      padding-left: 18px;
+      margin-bottom: 12px;
+    }
+
+    .agreement-list li {
+      margin-bottom: 4px;
+    }
+
+    .agreement-label {
+      display: flex;
+      align-items: center;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--primary);
+      cursor: pointer;
+      user-select: none;
+      background: #fff;
+      padding: 10px 12px;
+      border-radius: 6px;
+      border: 1px solid #ebd9c8;
+    }
+
+    .agreement-label input[type="checkbox"] {
+      width: 19px;
+      height: 19px;
+      margin-right: 10px;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+
+    .submit-btn {
+      width: 100%;
+      background: #cfcbca;
+      color: #fff;
       border: none;
+      padding: 15px;
+      border-radius: 9px;
+      font-family: 'Shippori Mincho', serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      cursor: not-allowed;
+      letter-spacing: 0.08em;
+      transition: background 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .submit-btn.ready {
+      background: var(--primary);
+      cursor: pointer;
+    }
+
+    .submit-btn.ready:hover {
+      background: #423d38;
+    }
+
+    .status-msg {
+      font-size: 0.85rem;
+      color: var(--error);
+      margin-top: 6px;
+      text-align: center;
+      font-family: 'Zen Kaku Gothic New', sans-serif;
+    }
+
+    .complete-header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .complete-icon {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 14px;
+      border-radius: 50%;
+      background: var(--accent-light);
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      font-weight: bold;
+    }
+
+    .complete-title {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 8px;
+      letter-spacing: 0.06em;
+    }
+
+    .complete-lead {
+      font-size: 0.85rem;
+      color: var(--text-sub);
+      line-height: 1.6;
+    }
+
+    .complete-summary {
+      background: #fdfdfc;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 18px;
+      margin-bottom: 22px;
+    }
+
+    .complete-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      font-size: 0.88rem;
+      border-bottom: 1px dashed #eee;
+    }
+
+    .complete-row:last-child {
+      border-bottom: none;
+    }
+
+    .complete-row span:first-child {
+      color: var(--text-sub);
+    }
+
+    .complete-total {
+      margin-top: 6px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+      font-family: 'Shippori Mincho', serif;
+      font-size: 1.05rem;
+    }
+
+    .complete-total strong {
+      color: var(--accent);
+      font-size: 1.3rem;
+    }
+
+    .complete-notice-box {
+      background: var(--accent-light);
+      border: 1px solid #ebd9c8;
+      border-radius: 9px;
+      padding: 16px 18px;
+      margin-bottom: 24px;
+      font-size: 0.82rem;
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    .complete-notice-box .notice-title {
+      font-family: 'Shippori Mincho', serif;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+    }
+
+    .complete-notice-box ul {
+      padding-left: 18px;
+      margin: 0;
+    }
+
+    .complete-notice-box li {
+      margin-bottom: 5px;
+    }
+
+    .complete-notice-box li:last-child {
+      margin-bottom: 0;
+    }
+
+    .back-home-btn {
+      width: 100%;
+      background: #fff;
+      color: var(--primary);
+      border: 1px solid var(--border);
+      padding: 14px;
+      border-radius: 9px;
+      font-family: 'Zen Kaku Gothic New', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .back-home-btn:hover {
+      background: var(--accent-light);
+      border-color: var(--accent);
     }
   </style>
 </head>
 <body>
-  <iframe id="gas-frame" allow="geolocation"></iframe>
 
-  <script>
-    // 現在のGASのウェブアプリURL
-    const baseGasUrl = "https://script.google.com/macros/s/AKfycbwdWIpPpxm6AH2NXDby99t8whlphY3CEAhjsOzboE--QDKMVNhFxDvJdVh5NO3jdt4G7A/exec";
-    // URLの後ろについた ?action=cancel&key=... をそのままGAS側へ引き継ぐ
-    const params = window.location.search;
-    document.getElementById("gas-frame").src = baseGasUrl + params;
-  </script>
+<div class="wrapper">
+  <div class="header">
+    <div class="header-sub">GINZA SOZEN ACUPUNCTURE</div>
+    <div class="header-title">銀座そうぜん鍼灸院</div>
+    <div class="header-desc">完全予約制／完治を目指す鍼灸院</div>
+  </div>
+
+  <form id="reservationForm" onsubmit="return false;">
+    <div class="form-group">
+      <div class="section-label">患者様区分</div>
+      <div class="choice-group">
+        <button type="button" class="choice-card active" id="btnNew" onclick="setCustomerType('初めてのご来院（新規）')">
+          初めてのご来院（新規 / 院長施術のみ初診料¥10,000）
+        </button>
+        <button type="button" class="choice-card" id="btnRepeat" onclick="setCustomerType('2回目以降（リピーター）')">
+          2回目以降（リピーター）
+        </button>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="section-label">予約メニュー</div>
+      <select id="menuSelect" onchange="handleMenuSelect()" required>
+        <option value="">メニューを読み込み中...</option>
+      </select>
+    </div>
+
+    <div class="form-group" id="optionsBlock" style="display:none;">
+      <div class="section-label">追加オプション</div>
+      <div class="options-wrapper" id="optionsContainer"></div>
+    </div>
+
+    <div class="form-group">
+      <div class="section-label">お着替えのお貸し出し</div>
+      <div class="btn-toggle-group grid-4" id="clothesToggleGroup">
+        <button type="button" class="toggle-btn active" onclick="setClothes(this, '不要')">不要</button>
+        <button type="button" class="toggle-btn" onclick="setClothes(this, '上のみ')">上のみ</button>
+        <button type="button" class="toggle-btn" onclick="setClothes(this, '下のみ')">下のみ</button>
+        <button type="button" class="toggle-btn" onclick="setClothes(this, '上下')">上下</button>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="section-label">医療費控除に使える領収書</div>
+      <div class="btn-toggle-group grid-2" id="receiptToggleGroup">
+        <button type="button" class="toggle-btn active" onclick="setReceipt(this, '不要')">不要</button>
+        <button type="button" class="toggle-btn" onclick="setReceipt(this, '要')">必要</button>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="section-label">ご希望日</div>
+      <input type="date" id="dateInput" onchange="fetchAvailableSlots()" required>
+      <div id="slotNotice" class="status-msg"></div>
+    </div>
+
+    <div class="form-group" id="timeSlotBlock" style="display:none;">
+      <div class="section-label">ご希望時間枠</div>
+      <div id="timePeriodGroups"></div>
+    </div>
+
+    <div class="form-group">
+      <div class="section-label">お名前</div>
+      <input type="text" id="name" placeholder="山田 太郎" required>
+    </div>
+
+    <div class="form-group">
+      <div class="section-label">お電話番号</div>
+      <input type="tel" id="tel" placeholder="09012345678" required>
+    </div>
+
+    <div class="form-group">
+      <div class="section-label">メールアドレス</div>
+      <input type="email" id="email" placeholder="example@email.com" required>
+    </div>
+
+    <div class="form-group">
+      <div class="section-label">メモ・ご質問（任意）</div>
+      <textarea id="memo" maxlength="1000" rows="3" placeholder="症状のお悩みや気になる点などございましたらご自由にご記入ください（1000文字まで）"></textarea>
+    </div>
+
+    <div class="summary-card">
+      <div class="summary-row">
+        <span>施術料金:</span>
+        <span id="priceMenu">¥0</span>
+      </div>
+      <div class="summary-row" id="firstVisitRow" style="display:none;">
+        <span>初診料:</span>
+        <span id="priceFirstVisit">¥0</span>
+      </div>
+      <div class="summary-row" id="optionsRow" style="display:none;">
+        <span>オプション合計:</span>
+        <span id="priceOptions">¥0</span>
+      </div>
+      <div class="summary-total">
+        <span>合計金額（税込）</span>
+        <span id="priceTotal">¥0</span>
+      </div>
+    </div>
+
+    <div class="agreement-card">
+      <div class="agreement-title">【ご予約前の重要確認事項】</div>
+      <ul class="agreement-list">
+        <li><strong>海外旅行の予定や大事なご用事の前日</strong>は施術をお控えください（鍼の反応や内出血等が出る場合がございます）。</li>
+        <li><strong>当日キャンセルはキャンセル料が発生</strong>いたします（変更・キャンセルは前日21:00まで）。</li>
+      </ul>
+      <label class="agreement-label">
+        <input type="checkbox" id="agreementCheck" onchange="validateFormReadiness()">
+        <span>上記重要事項を確認・同意しました</span>
+      </label>
+    </div>
+
+    <button type="button" class="submit-btn" id="submitBtn" onclick="handleBookingSubmit()" disabled>
+      ご予約を確定する
+    </button>
+  </form>
+
+  <div id="completeView" style="display: none;">
+    <div class="complete-header">
+      <div class="complete-icon">✓</div>
+      <div class="complete-title">ご予約を承りました</div>
+      <div class="complete-lead">
+        ご予約いただき、誠にありがとうございます。<br>
+        ご入力いただいたメールアドレスへ確認メールをお送りいたしました。
+      </div>
+    </div>
+
+    <div class="complete-summary">
+      <div class="complete-row">
+        <span>ご予約日時</span>
+        <strong id="cDate">-</strong>
+      </div>
+      <div class="complete-row">
+        <span>メニュー</span>
+        <strong id="cMenu">-</strong>
+      </div>
+      <div class="complete-row">
+        <span>お名前</span>
+        <span id="cName">-</span>
+      </div>
+      <div class="complete-row">
+        <span>お着替え</span>
+        <span id="cClothes">-</span>
+      </div>
+      <div class="complete-row">
+        <span>領収書</span>
+        <span id="cReceipt">-</span>
+      </div>
+      <div class="complete-row complete-total">
+        <span>お支払い予定額（税込）</span>
+        <strong id="cTotal">¥0</strong>
+      </div>
+    </div>
+
+    <div class="complete-notice-box">
+      <div class="notice-title">ご来院・変更・キャンセルについて</div>
+      <ul>
+        <li>当日はお時間の5分前を目安にお越しください。</li>
+        <li>日時の変更は、確認メール記載のリンクより<strong>一度キャンセルの上、Webより再度お取り直し</strong>をお願いいたします。</li>
+        <li>日時変更や取り直しの連絡・相談は、<strong>電話ではなく予約完了・変更メールにご返信ください</strong>。</li>
+        <li>前日21:00以降の直前キャンセル・変更はメールにご返信ください（<strong>当日キャンセルはキャンセル料の対象となります</strong>）。</li>
+      </ul>
+    </div>
+
+    <button type="button" class="back-home-btn" onclick="resetAndShowForm()">新しく別の日時を予約する</button>
+  </div>
+</div>
+
+<script>
+  // ★ ここに予約システムGASのウェブアプリURL（/execで終わるURL）を貼ってください
+  const GAS_API_URL = 'ここにGASのウェブアプリURLを貼る';
+
+  const fallbackMenus = [
+    { name: "スタッフによる優しい鍼", duration: 50, price: 6000 },
+    { name: "スタッフによるゴリゴリ鍼", duration: 50, price: 6000 },
+    { name: "院長による鍼灸", duration: 50, price: 8000 }
+  ];
+
+  let serverConfig = {
+    menus: fallbackMenus,
+    options: [
+      { name: "耳ツボジュエリー", duration: 0, price: 1800 },
+      { name: "枕カバー・シーツ交換", duration: 0, price: 500 },
+      { name: "ヘッドマッサージ", duration: 0, price: 500 },
+      { name: "鍼追加（2倍）", duration: 0, price: 500 },
+      { name: "鍼追加（3倍）", duration: 0, price: 1000 },
+      { name: "吸玉", duration: 0, price: 1000 }
+    ],
+    firstVisit: { fee: 12000, duration: 0 },
+    bookingLimits: { director: 30, staff: 60 }
+  };
+
+  let activeCustomerType = '初めてのご来院（新規）';
+  let activeMenu = null;
+  let activeSlotIso = null;
+  let selectedClothes = '不要';
+  let selectedReceipt = '不要';
+  let finalTotalPrice = 0;
+  let finalTotalDuration = 0;
+
+  function getLocalDateString(d) {
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
+
+  window.addEventListener('DOMContentLoaded', async function() {
+    const today = getLocalDateString(new Date());
+    document.getElementById('dateInput').setAttribute('min', today);
+
+    populateMenuDropdown();
+    populateOptionsList();
+
+    try {
+      const res = await fetch(`${GAS_API_URL}?api=config`);
+      const config = await res.json();
+      if (config && config.menus && config.menus.length > 0) {
+        serverConfig = config;
+        populateMenuDropdown();
+        populateOptionsList();
+      }
+    } catch (err) {
+      console.error('設定取得スキップ:', err);
+    }
+  });
+
+  function setCustomerType(type) {
+    activeCustomerType = type;
+    document.getElementById('btnNew').classList.toggle('active', type.includes('新規'));
+    document.getElementById('btnRepeat').classList.toggle('active', type.includes('リピーター'));
+    recalculateTotals();
+    fetchAvailableSlots();
+  }
+
+  function setClothes(btn, val) {
+    btn.parentElement.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    selectedClothes = val;
+  }
+
+  function setReceipt(btn, val) {
+    btn.parentElement.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    selectedReceipt = val;
+  }
+
+  function populateMenuDropdown() {
+    const sel = document.getElementById('menuSelect');
+    const currentVal = sel.value;
+    sel.innerHTML = '<option value="">選択してください</option>';
+    if (!serverConfig || !serverConfig.menus) return;
+
+    serverConfig.menus.forEach((m, idx) => {
+      const opt = document.createElement('option');
+      opt.value = idx;
+      opt.text = `${m.name} (${m.duration}分 / ¥${m.price.toLocaleString()})`;
+      sel.appendChild(opt);
+    });
+
+    if (currentVal !== '') sel.value = currentVal;
+  }
+
+  function populateOptionsList() {
+    if (!serverConfig || !serverConfig.options || serverConfig.options.length === 0) return;
+    document.getElementById('optionsBlock').style.display = 'block';
+    const wrap = document.getElementById('optionsContainer');
+    wrap.innerHTML = '';
+
+    serverConfig.options.forEach((opt, idx) => {
+      const label = document.createElement('label');
+      label.className = 'option-item';
+      label.innerHTML = `
+        <div style="display:flex; align-items:center;">
+          <input type="checkbox" value="${idx}" onchange="recalculateTotals(); fetchAvailableSlots();">
+          <span>${opt.name}</span>
+        </div>
+        <div class="option-price">+¥${opt.price.toLocaleString()}</div>
+      `;
+      wrap.appendChild(label);
+    });
+  }
+
+  function handleMenuSelect() {
+    const val = document.getElementById('menuSelect').value;
+    activeMenu = (val !== '') ? serverConfig.menus[Number(val)] : null;
+
+    const dateInput = document.getElementById('dateInput');
+    if (activeMenu && serverConfig.bookingLimits) {
+      const isDirector = activeMenu.name.includes('院長');
+      const limitDays = isDirector ? serverConfig.bookingLimits.director : serverConfig.bookingLimits.staff;
+
+      const maxDateObj = new Date();
+      maxDateObj.setDate(maxDateObj.getDate() + limitDays);
+      const maxDateStr = getLocalDateString(maxDateObj);
+      dateInput.setAttribute('max', maxDateStr);
+
+      if (dateInput.value && dateInput.value > maxDateStr) {
+        dateInput.value = '';
+        document.getElementById('slotNotice').innerText = `※このメニューは${limitDays}日先までご予約いただけます。日付を再選択してください。`;
+      }
+    } else {
+      dateInput.removeAttribute('max');
+    }
+
+    recalculateTotals();
+    fetchAvailableSlots();
+  }
+
+  function getActiveOptions() {
+    const checked = [];
+    const boxes = document.querySelectorAll('#optionsContainer input[type="checkbox"]:checked');
+    boxes.forEach(b => {
+      checked.push(serverConfig.options[Number(b.value)]);
+    });
+    return checked;
+  }
+
+  function recalculateTotals() {
+    let menuPrice = 0;
+    let duration = 0;
+    let optionsPrice = 0;
+    let firstVisitFee = 0;
+
+    if (activeMenu) {
+      menuPrice = activeMenu.price;
+      duration = activeMenu.duration;
+
+      if (activeCustomerType.includes('新規') && activeMenu.name.includes('院長')) {
+        firstVisitFee = (serverConfig && serverConfig.firstVisit && serverConfig.firstVisit.fee) ? serverConfig.firstVisit.fee : 12000;
+      }
+    }
+
+    const opts = getActiveOptions();
+    opts.forEach(o => {
+      optionsPrice += o.price;
+      duration += (o.duration || 0);
+    });
+
+    finalTotalPrice = menuPrice + firstVisitFee + optionsPrice;
+    finalTotalDuration = duration;
+
+    document.getElementById('priceMenu').innerText = `¥${menuPrice.toLocaleString()}`;
+
+    const fRow = document.getElementById('firstVisitRow');
+    if (firstVisitFee > 0) {
+      fRow.style.display = 'flex';
+      document.getElementById('priceFirstVisit').innerText = `¥${firstVisitFee.toLocaleString()}`;
+    } else {
+      fRow.style.display = 'none';
+    }
+
+    const oRow = document.getElementById('optionsRow');
+    if (optionsPrice > 0) {
+      oRow.style.display = 'flex';
+      document.getElementById('priceOptions').innerText = `¥${optionsPrice.toLocaleString()}`;
+    } else {
+      oRow.style.display = 'none';
+    }
+
+    document.getElementById('priceTotal').innerText = `¥${finalTotalPrice.toLocaleString()}`;
+  }
+
+  async function fetchAvailableSlots() {
+    const dateVal = document.getElementById('dateInput').value;
+    const notice = document.getElementById('slotNotice');
+    const container = document.getElementById('timePeriodGroups');
+    const block = document.getElementById('timeSlotBlock');
+
+    container.innerHTML = '';
+    activeSlotIso = null;
+    validateFormReadiness();
+
+    if (!dateVal || !activeMenu) {
+      block.style.display = 'none';
+      notice.innerText = '';
+      return;
+    }
+
+    notice.style.color = 'var(--text-sub)';
+    notice.innerText = '空き状況を確認中...';
+
+    try {
+      const url = `${GAS_API_URL}?api=slots&date=${encodeURIComponent(dateVal)}&duration=${encodeURIComponent(finalTotalDuration)}&menu=${encodeURIComponent(activeMenu.name)}`;
+      const response = await fetch(url);
+      const res = await response.json();
+
+      if (!res.available) {
+        block.style.display = 'none';
+        notice.style.color = 'var(--error)';
+        notice.innerText = res.message || '空き枠を取得できませんでした。';
+        return;
+      }
+
+      notice.innerText = '';
+      block.style.display = 'block';
+
+      if (!res.slots || res.slots.length === 0) {
+        notice.style.color = 'var(--error)';
+        notice.innerText = '申し訳ございません。この日は満席です。';
+        return;
+      }
+
+      const periods = {
+        '午前（〜12:00）': [],
+        '午後（12:00〜16:00）': [],
+        '夕方・夜（16:00〜）': []
+      };
+
+      res.slots.forEach(slot => {
+        const hour = parseInt(slot.label.split(':')[0], 10);
+        if (hour < 12) {
+          periods['午前（〜12:00）'].push(slot);
+        } else if (hour < 16) {
+          periods['午後（12:00〜16:00）'].push(slot);
+        } else {
+          periods['夕方・夜（16:00〜）'].push(slot);
+        }
+      });
+
+      Object.keys(periods).forEach(title => {
+        const slotList = periods[title];
+        if (slotList.length === 0) return;
+
+        const groupDiv = document.createElement('div');
+        groupDiv.className = 'time-period-group';
+
+        const titleDiv = document.createElement('div');
+        titleDiv.className = 'period-title';
+        titleDiv.innerText = title;
+        groupDiv.appendChild(titleDiv);
+
+        const grid = document.createElement('div');
+        grid.className = 'slots-grid';
+
+        slotList.forEach(slot => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'slot-btn';
+          btn.innerText = slot.label;
+          btn.onclick = function() {
+            document.querySelectorAll('.slot-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            activeSlotIso = slot.isoString;
+            validateFormReadiness();
+          };
+          grid.appendChild(btn);
+        });
+
+        groupDiv.appendChild(grid);
+        container.appendChild(groupDiv);
+      });
+    } catch (err) {
+      notice.style.color = 'var(--error)';
+      notice.innerText = '空き枠取得エラーが発生しました。通信環境をご確認ください。';
+    }
+  }
+
+  function validateFormReadiness() {
+    const isAgreed = document.getElementById('agreementCheck').checked;
+    const ready = isAgreed && activeMenu && activeSlotIso &&
+      document.getElementById('name').value.trim() !== '' &&
+      document.getElementById('tel').value.trim() !== '' &&
+      document.getElementById('email').value.trim() !== '';
+
+    const btn = document.getElementById('submitBtn');
+    if (ready) {
+      btn.disabled = false;
+      btn.classList.add('ready');
+    } else {
+      btn.disabled = true;
+      btn.classList.remove('ready');
+    }
+  }
+
+  document.getElementById('name').addEventListener('input', validateFormReadiness);
+  document.getElementById('tel').addEventListener('input', validateFormReadiness);
+  document.getElementById('email').addEventListener('input', validateFormReadiness);
+
+  async function handleBookingSubmit() {
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.innerText = '予約処理を実行中...';
+
+    const selectedOptNames = getActiveOptions().map(o => o.name);
+
+    const reservationPayload = {
+      customerType: activeCustomerType,
+      menuName: activeMenu.name,
+      selectedOptions: selectedOptNames,
+      clothes: selectedClothes,
+      receipt: selectedReceipt,
+      totalPrice: finalTotalPrice,
+      totalDuration: finalTotalDuration,
+      startIso: activeSlotIso,
+      name: document.getElementById('name').value.trim(),
+      tel: document.getElementById('tel').value.trim(),
+      email: document.getElementById('email').value.trim(),
+      memo: document.getElementById('memo').value.trim()
+    };
+
+    try {
+      const response = await fetch(GAS_API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({ action: 'book', payload: reservationPayload })
+      });
+      const res = await response.json();
+
+      if (res.success) {
+        document.getElementById('reservationForm').style.display = 'none';
+
+        const dateParts = document.getElementById('dateInput').value.split('-');
+        const activeSlotBtn = document.querySelector('.slot-btn.active');
+        const slotLabel = activeSlotBtn ? activeSlotBtn.innerText : '';
+
+        document.getElementById('cDate').innerText = `${Number(dateParts[1])}月${Number(dateParts[2])}日 ${slotLabel}`;
+        document.getElementById('cMenu').innerText = activeMenu.name;
+        document.getElementById('cName').innerText = document.getElementById('name').value.trim() + ' 様';
+        document.getElementById('cClothes').innerText = selectedClothes;
+        document.getElementById('cReceipt').innerText = selectedReceipt === '要' ? '必要' : '不要';
+        document.getElementById('cTotal').innerText = `¥${finalTotalPrice.toLocaleString()}`;
+
+        document.getElementById('completeView').style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        alert('予約エラー: ' + (res.message || '予約処理に失敗しました。'));
+        btn.disabled = false;
+        btn.innerText = 'ご予約を確定する';
+      }
+    } catch (err) {
+      alert('通信エラーが発生しました。恐れ入りますがもう一度お試しください。');
+      btn.disabled = false;
+      btn.innerText = 'ご予約を確定する';
+    }
+  }
+
+  function resetAndShowForm() {
+    document.getElementById('completeView').style.display = 'none';
+    document.getElementById('reservationForm').style.display = 'block';
+
+    document.getElementById('dateInput').value = '';
+    document.getElementById('timeSlotBlock').style.display = 'none';
+    document.getElementById('timePeriodGroups').innerHTML = '';
+    document.getElementById('slotNotice').innerText = '';
+    document.getElementById('name').value = '';
+    document.getElementById('tel').value = '';
+    document.getElementById('email').value = '';
+    document.getElementById('memo').value = '';
+    document.getElementById('agreementCheck').checked = false;
+    activeSlotIso = null;
+
+    const clothesBtns = document.querySelectorAll('#clothesToggleGroup .toggle-btn');
+    clothesBtns.forEach((b, i) => b.classList.toggle('active', i === 0));
+    selectedClothes = '不要';
+
+    const receiptBtns = document.querySelectorAll('#receiptToggleGroup .toggle-btn');
+    receiptBtns.forEach((b, i) => b.classList.toggle('active', i === 0));
+    selectedReceipt = '不要';
+
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.innerText = 'ご予約を確定する';
+    btn.classList.remove('ready');
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+
 </body>
 </html>
