@@ -564,7 +564,7 @@
     <div class="form-group">
       <div class="section-label">予約メニュー</div>
       <select id="menuSelect" onchange="handleMenuSelect()" required>
-        <option value="">メニューを読み込み中...</option>
+        <option value="">設定を読み込み中...</option>
       </select>
     </div>
 
@@ -751,19 +751,22 @@
     const today = getLocalDateString(new Date());
     document.getElementById('dateInput').setAttribute('min', today);
 
-    populateMenuDropdown();
-    populateOptionsList();
+    const sel = document.getElementById('menuSelect');
+    sel.disabled = true;
 
     try {
       const res = await fetch(`${GAS_API_URL}?api=config`);
       const config = await res.json();
       if (config && config.menus && config.menus.length > 0) {
         serverConfig = config;
-        populateMenuDropdown();
-        populateOptionsList();
       }
     } catch (err) {
       console.error('設定取得スキップ:', err);
+    } finally {
+      populateMenuDropdown();
+      populateOptionsList();
+      sel.disabled = false;
+      handleMenuSelect();
     }
   });
 
