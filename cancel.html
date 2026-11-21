@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>ご予約の確認・キャンセル | 銀座そうぜん鍼灸院</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;600&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #2b2826;
+      --accent: #876d50;
+      --accent-light: #f8f6f2;
+      --bg: #f9f8f6;
+      --card-bg: #ffffff;
+      --border: #e6e2dc;
+      --text: #2b2826;
+      --text-sub: #78736d;
+      --error: #b8382c;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Zen Kaku Gothic New', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      padding: 30px 14px 60px;
+    }
+
+    .card {
+      max-width: 460px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      padding: 34px 22px;
+      border-radius: 14px;
+      box-shadow: 0 4px 24px rgba(43, 40, 38, 0.04);
+      border: 1px solid rgba(230, 226, 220, 0.6);
+    }
+
+    .brand-header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .brand-sub {
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .brand-title {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: var(--primary);
+      letter-spacing: 0.06em;
+    }
+
+    h2 {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 1.15rem;
+      text-align: center;
+      margin-top: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #eee;
+      color: var(--primary);
+    }
+
+    .lead-text {
+      font-size: 0.9rem;
+      color: var(--text);
+      margin: 16px 0 10px;
+      text-align: center;
+    }
+
+    .info-box {
+      background-color: #fdfdfc;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      padding: 16px 18px;
+      margin: 14px 0 24px;
+      font-size: 0.88rem;
+      line-height: 1.8;
+    }
+
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px dashed #eee;
+      padding: 6px 0;
+    }
+    .info-row:last-child {
+      border-bottom: none;
+    }
+    .info-row span:first-child {
+      color: var(--text-sub);
+    }
+
+    .cancel-btn {
+      width: 100%;
+      background-color: #fff;
+      color: var(--error);
+      border: 1.5px solid var(--error);
+      padding: 14px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      letter-spacing: 0.03em;
+    }
+
+    .cancel-btn:hover:not(:disabled) {
+      background-color: #fdf3f2;
+    }
+
+    .cancel-btn:disabled {
+      border-color: #ddd;
+      color: #999;
+      background: #f0f0f0;
+      cursor: not-allowed;
+    }
+
+    .deadline-card {
+      margin-top: 18px;
+      background: #fdf8f7;
+      border: 1px solid #f2dede;
+      border-radius: 10px;
+      padding: 18px 16px;
+      text-align: center;
+    }
+
+    .deadline-card-title {
+      font-weight: 700;
+      color: var(--error);
+      font-size: 0.92rem;
+      margin-bottom: 8px;
+    }
+
+    .deadline-card-desc {
+      font-size: 0.82rem;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .success-view {
+      padding: 10px 0;
+    }
+
+    .success-icon {
+      width: 50px;
+      height: 50px;
+      margin: 0 auto 16px;
+      border-radius: 50%;
+      background: var(--accent-light);
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      font-weight: bold;
+    }
+
+    .success-title {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 18px;
+      text-align: center;
+    }
+
+    .success-message-card {
+      background: #fdfdfc;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      padding: 18px 18px;
+      font-size: 0.88rem;
+      color: var(--text);
+      line-height: 1.8;
+      text-align: left;
+    }
+
+    .success-message-card p {
+      margin-bottom: 10px;
+    }
+    .success-message-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .error-msg {
+      margin-top: 16px;
+      color: var(--error);
+      font-size: 0.85rem;
+      line-height: 1.6;
+      background: #fdf3f2;
+      border: 1px solid #fadbd8;
+      padding: 12px;
+      border-radius: 8px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <div class="brand-header">
+    <div class="brand-sub">GINZA SOZEN ACUPUNCTURE</div>
+    <div class="brand-title">銀座そうぜん鍼灸院</div>
+  </div>
+
+  <div id="loading" style="text-align:center; padding: 30px; font-size: 0.9rem; color: var(--text-sub);">
+    ご予約内容を確認しております...
+  </div>
+
+  <div id="confirmView" style="display:none;">
+    <h2>ご予約のキャンセル</h2>
+    <div class="lead-text">以下のご予約をキャンセルしますか？</div>
+
+    <div class="info-box">
+      <div class="info-row">
+        <span>ご予約日時</span>
+        <strong id="resDate">-</strong>
+      </div>
+      <div class="info-row">
+        <span>メニュー</span>
+        <strong id="resMenu">-</strong>
+      </div>
+      <div class="info-row">
+        <span>お名前</span>
+        <span id="resName">-</span>
+      </div>
+    </div>
+
+    <button type="button" class="cancel-btn" id="cancelBtn" onclick="executeCancel()">予約をキャンセルする</button>
+
+    <div id="deadlineNotice" class="deadline-card" style="display:none;">
+      <div class="deadline-card-title" id="deadlineText">キャンセル受付期限を過ぎています</div>
+      <div class="deadline-card-desc">
+        Webからの受付期限を過ぎているため、予約完了・変更メールにご返信ください。<br>
+        <strong>※当日キャンセルはキャンセル料の対象となります。</strong>
+      </div>
+    </div>
+
+    <div id="errorBox" class="error-msg" style="display:none;"></div>
+  </div>
+
+  <div id="doneView" class="success-view" style="display:none;">
+    <div class="success-icon">✓</div>
+    <div class="success-title">ご予約のキャンセルが完了しました</div>
+
+    <div class="success-message-card">
+      <p>ご都合に合わせて事前にご連絡をいただき、誠にありがとうございます。</p>
+      <p><strong>カレンダーとお席のキャンセルが完了いたしました。</strong></p>
+      <p style="color: var(--text-sub); font-size: 0.84rem;">お体の調子やお時間がよろしい際に、いつでもまたお気軽にご相談・ご来院ください。</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  const GAS_API_URL = 'https://script.google.com/macros/s/AKfycbwdWIpPpxm6AH2NXDby99t8whlphY3CEAhjsOzboE--QDKMVNhFxDvJdVh5NO3jdt4G7A/exec';
+
+  const params = new URLSearchParams(window.location.search);
+  const cancelKey = params.get('key') || '';
+
+  const loading = document.getElementById('loading');
+  const confirmView = document.getElementById('confirmView');
+  const doneView = document.getElementById('doneView');
+  const cancelBtn = document.getElementById('cancelBtn');
+  const deadlineNotice = document.getElementById('deadlineNotice');
+  const errorBox = document.getElementById('errorBox');
+
+  window.addEventListener('DOMContentLoaded', async function() {
+    if (!cancelKey) {
+      loading.style.display = 'none';
+      showErrorOnly('無効なキャンセルURLです。確認メールのリンクから再度アクセスしてください。');
+      return;
+    }
+
+    try {
+      const response = await fetch(`${GAS_API_URL}?api=cancelInfo&key=${encodeURIComponent(cancelKey)}`);
+      const res = await response.json();
+      loading.style.display = 'none';
+
+      if (!res.success) {
+        if (res.isCancelled) {
+          showDoneView();
+        } else {
+          showErrorOnly(res.message || '該当するご予約が見つかりませんでした。');
+        }
+        return;
+      }
+
+      confirmView.style.display = 'block';
+      document.getElementById('resDate').innerText = res.dateStr;
+      document.getElementById('resName').innerText = res.name + ' 様';
+      document.getElementById('resMenu').innerText = res.menu;
+
+      if (res.isPastDeadline) {
+        cancelBtn.disabled = true;
+        cancelBtn.innerText = 'Web受付期限を過ぎています';
+        document.getElementById('deadlineText').innerText = `キャンセル受付期限（${res.deadlineStr}）を過ぎています`;
+        deadlineNotice.style.display = 'block';
+      }
+    } catch (err) {
+      loading.style.display = 'none';
+      showErrorOnly('通信エラーが発生しました。時間をおいて再度お試しください。');
+    }
+  });
+
+  function showErrorOnly(msg) {
+    errorBox.innerText = msg;
+    errorBox.style.display = 'block';
+    confirmView.style.display = 'block';
+    document.querySelector('#confirmView .info-box').style.display = 'none';
+    cancelBtn.style.display = 'none';
+    document.querySelector('#confirmView .lead-text').style.display = 'none';
+  }
+
+  async function executeCancel() {
+    if (!confirm('ご予約をキャンセルしてもよろしいですか？')) return;
+
+    cancelBtn.disabled = true;
+    cancelBtn.innerText = 'キャンセル処理中...';
+    errorBox.style.display = 'none';
+
+    try {
+      const response = await fetch(GAS_API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({ action: 'cancel', key: cancelKey })
+      });
+      const res = await response.json();
+
+      if (res.success) {
+        showDoneView();
+      } else {
+        cancelBtn.disabled = false;
+        cancelBtn.innerText = '予約をキャンセルする';
+        errorBox.innerText = res.message || 'キャンセル処理に失敗しました。';
+        errorBox.style.display = 'block';
+      }
+    } catch (err) {
+      cancelBtn.disabled = false;
+      cancelBtn.innerText = '予約をキャンセルする';
+      errorBox.innerText = '通信エラーが発生しました。もう一度お試しください。';
+      errorBox.style.display = 'block';
+    }
+  }
+
+  function showDoneView() {
+    confirmView.style.display = 'none';
+    loading.style.display = 'none';
+    doneView.style.display = 'block';
+  }
+</script>
+
+</body>
+</html>
