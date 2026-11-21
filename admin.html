@@ -200,6 +200,11 @@
       background: var(--accent);
       color: #fff;
     }
+    .btn-karte {
+      background: var(--info-bg);
+      color: var(--info);
+      border: 1px solid #b7d2ed;
+    }
     .btn-outline {
       background: #fff;
       color: var(--primary);
@@ -391,8 +396,14 @@
       margin-top: 8px;
     }
     .tt-drawer-actions .btn {
-      padding: 7px 6px;
+      padding: 8px 6px;
       font-size: 0.78rem;
+    }
+    .tt-karte-btn {
+      width: 100%;
+      margin-top: 8px;
+      padding: 9px;
+      font-size: 0.82rem;
     }
 
     /* ===== タブ2：予約一覧カード ===== */
@@ -448,12 +459,12 @@
     }
     .res-actions {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 6px;
     }
     .res-actions .btn {
-      padding: 9px 8px;
-      font-size: 0.82rem;
+      padding: 9px 4px;
+      font-size: 0.78rem;
     }
 
     /* ===== タブ3：枠ブロック管理（一括 ＋ 個別） ===== */
@@ -643,15 +654,15 @@
       transform: translateX(22px);
     }
 
-    /* モーダル（日時変更用） */
+    /* ===== モーダル共通（日時変更・カルテ） ===== */
     .modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.5);
+      background: rgba(0,0,0,0.55);
       display: none;
       align-items: center;
       justify-content: center;
-      padding: 16px;
+      padding: 14px;
       z-index: 100;
     }
     .modal-backdrop.open {
@@ -660,18 +671,31 @@
     .modal-box {
       background: #fff;
       width: 100%;
-      max-width: 420px;
+      max-width: 460px;
+      max-height: 90vh;
+      overflow-y: auto;
       border-radius: 14px;
-      padding: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      padding: 18px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
     }
     .modal-title {
       font-family: 'Shippori Mincho', serif;
-      font-size: 1.08rem;
+      font-size: 1.06rem;
       font-weight: 600;
       margin-bottom: 12px;
       padding-bottom: 8px;
       border-bottom: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .modal-close-x {
+      background: none;
+      border: none;
+      font-size: 1.3rem;
+      cursor: pointer;
+      color: var(--text-sub);
+      padding: 0 4px;
     }
     .form-field {
       margin-bottom: 14px;
@@ -705,6 +729,119 @@
       gap: 8px;
     }
 
+    /* カルテモーダル専用 */
+    .karte-upload-area {
+      background: var(--info-bg);
+      border: 1.5px dashed #9fc3e8;
+      border-radius: 10px;
+      padding: 14px;
+      text-align: center;
+      margin-bottom: 14px;
+    }
+    .karte-upload-label {
+      display: inline-block;
+      background: var(--info);
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .karte-upload-hint {
+      font-size: 0.74rem;
+      color: var(--text-sub);
+      margin-top: 6px;
+    }
+    .karte-progress {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--info);
+      margin-top: 8px;
+    }
+    .karte-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .karte-item-btn {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: 12px 14px;
+      background: #fdfdfc;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      cursor: pointer;
+      text-align: left;
+      font-family: inherit;
+    }
+    .karte-item-btn:hover {
+      background: var(--accent-light);
+      border-color: var(--accent);
+    }
+
+    /* 画像拡大ライトボックス */
+    .viewer-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      display: none;
+      flex-direction: column;
+      z-index: 250;
+    }
+    .viewer-backdrop.open {
+      display: flex;
+    }
+    .viewer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 16px;
+      color: #fff;
+      font-size: 0.88rem;
+    }
+    .viewer-stage {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px;
+      overflow: auto;
+    }
+    .viewer-stage img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      border-radius: 6px;
+    }
+    .viewer-bottom {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+      padding: 12px 14px 20px;
+      background: rgba(255,255,255,0.06);
+    }
+    .viewer-btn {
+      padding: 11px 6px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.28);
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .viewer-btn:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+    .viewer-btn-del {
+      background: rgba(192, 57, 43, 0.8);
+      border-color: rgba(255,255,255,0.2);
+    }
+
     .toast {
       position: fixed;
       bottom: 20px;
@@ -718,7 +855,7 @@
       font-weight: 700;
       box-shadow: 0 4px 16px rgba(0,0,0,0.25);
       display: none;
-      z-index: 200;
+      z-index: 300;
       white-space: nowrap;
       max-width: 92vw;
       overflow: hidden;
@@ -927,7 +1064,10 @@
   <!-- 日時変更モーダル -->
   <div id="rescheduleModal" class="modal-backdrop">
     <div class="modal-box">
-      <div class="modal-title">予約日時の変更</div>
+      <div class="modal-title">
+        <span>予約日時の変更</span>
+        <button type="button" class="modal-close-x" onclick="closeRescheduleModal()">×</button>
+      </div>
       <div id="modalTargetInfo" style="font-size:0.84rem; margin-bottom:14px; background:var(--accent-light); padding:10px; border-radius:8px;"></div>
 
       <div class="form-field">
@@ -950,6 +1090,46 @@
     </div>
   </div>
 
+  <!-- カルテ写真モーダル -->
+  <div id="karteModal" class="modal-backdrop">
+    <div class="modal-box">
+      <div class="modal-title">
+        <span id="karteModalTitle">カルテ写真</span>
+        <button type="button" class="modal-close-x" onclick="closeKarteModal()">×</button>
+      </div>
+
+      <div class="karte-upload-area">
+        <label class="karte-upload-label">
+          📷 カルテ写真を撮影・追加（複数OK）
+          <input type="file" id="karteFileInput" accept="image/*" multiple style="display:none;" onchange="handleKarteFilesSelected(this)">
+        </label>
+        <div class="karte-upload-hint">3枚前後までまとめて選択できます（自動で軽量化保存）</div>
+        <div id="karteUploadProgress" class="karte-progress" style="display:none;"></div>
+      </div>
+
+      <div id="karteListContainer" class="karte-list">
+        <div class="empty-msg">読み込み中...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- カルテ画像拡大ビューア -->
+  <div id="karteViewer" class="viewer-backdrop">
+    <div class="viewer-top">
+      <span id="viewerCaption">読み込み中...</span>
+      <button type="button" class="modal-close-x" style="color:#fff;" onclick="closeKarteViewer()">×</button>
+    </div>
+    <div class="viewer-stage">
+      <div id="viewerLoading" style="color:#fff; font-size:0.9rem;">画像を読み込み中...</div>
+      <img id="viewerImg" src="" alt="カルテ写真" style="display:none;">
+    </div>
+    <div class="viewer-bottom">
+      <button type="button" class="viewer-btn" id="viewerPrevBtn" onclick="stepKarteViewer(-1)">◀ 前へ</button>
+      <button type="button" class="viewer-btn viewer-btn-del" onclick="deleteCurrentKarte()">🗑 削除</button>
+      <button type="button" class="viewer-btn" id="viewerNextBtn" onclick="stepKarteViewer(1)">次へ ▶</button>
+    </div>
+  </div>
+
   <div id="toast" class="toast"></div>
 
   <script>
@@ -960,6 +1140,12 @@
     let adminReservations = [];
     let currentDailyData = null;
     let editingCancelKey = '';
+
+    // カルテ管理用ステート
+    let activeKartePatient = { name: '', tel: '', visitDate: '' };
+    let currentKarteItems = [];
+    let karteImageCache = {};
+    let viewerIndex = 0;
 
     window.addEventListener('DOMContentLoaded', () => {
       initTimeDropdowns();
@@ -1126,6 +1312,7 @@
       if (!currentDailyData) return;
       const container = document.getElementById('dailyTableContainer');
       const onlyActive = document.getElementById('dailyOnlyActiveCheck').checked;
+      const dateVal = document.getElementById('dailyDateInput').value;
       const list = onlyActive
         ? currentDailyData.rows.filter(r => r.type !== 'empty')
         : currentDailyData.rows;
@@ -1135,7 +1322,7 @@
         return;
       }
 
-      container.innerHTML = list.map((r, idx) => {
+      container.innerHTML = list.map(r => {
         if (r.type === 'empty') {
           return `
             <div class="tt-row tt-empty">
@@ -1163,10 +1350,12 @@
           r.receipt ? '<span class="tag tag-receipt">領収書</span>' : ''
         ].filter(Boolean).join('');
 
+        const karteBtn = `<button type="button" class="btn btn-karte tt-karte-btn" onclick="event.stopPropagation(); openKarteModal('${escapeJs(r.name)}', '${escapeJs(r.tel)}', '${escapeJs(dateVal)}')">📷 カルテ写真を見る・追加</button>`;
+
         const drawerActions = r.cancelKey
           ? `<div class="tt-drawer-actions">
-               <button type="button" class="btn btn-outline" onclick="event.stopPropagation(); openRescheduleModal('${escapeHtml(r.cancelKey)}')">日時を変更</button>
-               <button type="button" class="btn btn-danger-outline" onclick="event.stopPropagation(); executeAdminCancel('${escapeHtml(r.cancelKey)}', '${escapeHtml(r.name)}', '${escapeHtml(currentDailyData.dateStr)} ${escapeHtml(r.time)}')">キャンセル</button>
+               <button type="button" class="btn btn-outline" onclick="event.stopPropagation(); openRescheduleModal('${escapeJs(r.cancelKey)}')">日時を変更</button>
+               <button type="button" class="btn btn-danger-outline" onclick="event.stopPropagation(); executeAdminCancel('${escapeJs(r.cancelKey)}', '${escapeJs(r.name)}', '${escapeJs(currentDailyData.dateStr + ' ' + r.time)}')">キャンセル</button>
              </div>`
           : `<div style="margin-top:6px; font-size:0.72rem; color:var(--text-sub);">※日報シート手入力の枠です</div>`;
 
@@ -1183,6 +1372,7 @@
               <div class="tt-detail-drawer">
                 ${r.tel ? `<div>電話：<a href="tel:${escapeHtml(r.tel)}" onclick="event.stopPropagation()" style="color:var(--info);font-weight:700;">${escapeHtml(r.tel)}</a></div>` : ''}
                 ${r.memo && r.memo !== 'なし' ? `<div>メモ：${escapeHtml(r.memo)}</div>` : ''}
+                ${karteBtn}
                 ${drawerActions}
               </div>
             </div>
@@ -1191,7 +1381,212 @@
       }).join('');
     }
 
-    /* ----- タブ2：予約一覧（変更・キャンセル） ----- */
+    /* ----- カルテ写真モーダル＆拡大ビューア ----- */
+    async function openKarteModal(name, tel, visitDate) {
+      activeKartePatient = { name: name || '', tel: tel || '', visitDate: visitDate || getLocalDateString(new Date()) };
+      document.getElementById('karteModalTitle').textContent = `${name} 様のカルテ写真`;
+      document.getElementById('karteUploadProgress').style.display = 'none';
+      document.getElementById('karteFileInput').value = '';
+      document.getElementById('karteModal').classList.add('open');
+      await loadKarteList();
+    }
+
+    function closeKarteModal() {
+      document.getElementById('karteModal').classList.remove('open');
+    }
+
+    async function loadKarteList() {
+      const container = document.getElementById('karteListContainer');
+      container.innerHTML = '<div class="empty-msg">カルテ写真を読み込み中...</div>';
+
+      try {
+        const url = `${GAS_API_URL}?api=adminKarteList&pin=${encodeURIComponent(adminPin)}&name=${encodeURIComponent(activeKartePatient.name)}&tel=${encodeURIComponent(activeKartePatient.tel)}`;
+        const res = await fetch(url);
+        const data = await res.json();
+        if (!data.success) {
+          container.innerHTML = `<div class="empty-msg">${escapeHtml(data.message || '読み込みエラー')}</div>`;
+          return;
+        }
+
+        currentKarteItems = data.items || [];
+        if (currentKarteItems.length === 0) {
+          container.innerHTML = '<div class="empty-msg">まだカルテ写真が登録されていません。<br>上のボタンから撮影・追加してください。</div>';
+          return;
+        }
+
+        container.innerHTML = currentKarteItems.map((item, idx) => `
+          <button type="button" class="karte-item-btn" onclick="openKarteViewer(${idx})">
+            <div>
+              <div style="font-size:0.9rem; font-weight:700;">📄 ${escapeHtml(item.visitDate || '日付なし')}</div>
+              <div style="font-size:0.72rem; color:var(--text-sub);">登録：${escapeHtml(item.createdStr)}</div>
+            </div>
+            <span style="font-size:0.8rem; font-weight:700; color:var(--info);">見る ›</span>
+          </button>
+        `).join('');
+      } catch (e) {
+        container.innerHTML = '<div class="empty-msg">通信エラーが発生しました。</div>';
+      }
+    }
+
+    // 選択された複数写真を自動リサイズして順番にアップロード
+    async function handleKarteFilesSelected(input) {
+      const files = Array.from(input.files || []);
+      if (files.length === 0) return;
+
+      const prog = document.getElementById('karteUploadProgress');
+      prog.style.display = 'block';
+
+      let successCount = 0;
+      for (let i = 0; i < files.length; i++) {
+        prog.textContent = `${i + 1} / ${files.length} 枚目をアップロード中...`;
+        try {
+          const base64Data = await resizeImageToBase64(files[i], 1600, 0.82);
+          const res = await fetch(GAS_API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify({
+              action: 'adminUploadKarte',
+              pin: adminPin,
+              payload: {
+                name: activeKartePatient.name,
+                tel: activeKartePatient.tel,
+                visitDate: activeKartePatient.visitDate,
+                base64Data: base64Data,
+                index: i + 1
+              }
+            })
+          });
+          const data = await res.json();
+          if (data.success) successCount++;
+        } catch (err) {
+          console.error('アップロード失敗:', err);
+        }
+      }
+
+      input.value = '';
+      prog.textContent = `${successCount} 枚のカルテ写真を保存しました！`;
+      showToast(`${successCount} 枚のカルテを保存しました`);
+      await loadKarteList();
+    }
+
+    function resizeImageToBase64(file, maxSide, quality) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const img = new Image();
+          img.onload = () => {
+            let w = img.width;
+            let h = img.height;
+            if (w > maxSide || h > maxSide) {
+              if (w > h) {
+                h = Math.round(h * (maxSide / w));
+                w = maxSide;
+              } else {
+                w = Math.round(w * (maxSide / h));
+                h = maxSide;
+              }
+            }
+            const canvas = document.createElement('canvas');
+            canvas.width = w;
+            canvas.height = h;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, w, h);
+            resolve(canvas.toDataURL('image/jpeg', quality));
+          };
+          img.onerror = reject;
+          img.src = e.target.result;
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    async function openKarteViewer(idx) {
+      viewerIndex = idx;
+      document.getElementById('karteViewer').classList.add('open');
+      await showCurrentViewerImage();
+    }
+
+    function closeKarteViewer() {
+      document.getElementById('karteViewer').classList.remove('open');
+    }
+
+    async function stepKarteViewer(delta) {
+      const next = viewerIndex + delta;
+      if (next < 0 || next >= currentKarteItems.length) return;
+      viewerIndex = next;
+      await showCurrentViewerImage();
+    }
+
+    async function showCurrentViewerImage() {
+      const item = currentKarteItems[viewerIndex];
+      if (!item) return;
+
+      document.getElementById('viewerCaption').textContent = `${item.visitDate}（${viewerIndex + 1} / ${currentKarteItems.length}）`;
+      document.getElementById('viewerPrevBtn').disabled = (viewerIndex <= 0);
+      document.getElementById('viewerNextBtn').disabled = (viewerIndex >= currentKarteItems.length - 1);
+
+      const imgEl = document.getElementById('viewerImg');
+      const loadEl = document.getElementById('viewerLoading');
+
+      if (karteImageCache[item.fileId]) {
+        loadEl.style.display = 'none';
+        imgEl.src = karteImageCache[item.fileId];
+        imgEl.style.display = 'block';
+        return;
+      }
+
+      imgEl.style.display = 'none';
+      loadEl.style.display = 'block';
+      loadEl.textContent = '画像を読み込み中...';
+
+      try {
+        const res = await fetch(`${GAS_API_URL}?api=adminKarteImage&pin=${encodeURIComponent(adminPin)}&fileId=${encodeURIComponent(item.fileId)}`);
+        const data = await res.json();
+        if (data.success && data.dataUrl) {
+          karteImageCache[item.fileId] = data.dataUrl;
+          loadEl.style.display = 'none';
+          imgEl.src = data.dataUrl;
+          imgEl.style.display = 'block';
+        } else {
+          loadEl.textContent = '画像の読み込みに失敗しました。';
+        }
+      } catch (e) {
+        loadEl.textContent = '通信エラーが発生しました。';
+      }
+    }
+
+    async function deleteCurrentKarte() {
+      const item = currentKarteItems[viewerIndex];
+      if (!item) return;
+      if (!confirm('このカルテ写真を削除しますか？')) return;
+
+      showToast('削除中...');
+      try {
+        const res = await fetch(GAS_API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({
+            action: 'adminDeleteKarte',
+            pin: adminPin,
+            fileId: item.fileId
+          })
+        });
+        const data = await res.json();
+        if (data.success) {
+          delete karteImageCache[item.fileId];
+          closeKarteViewer();
+          showToast('削除しました');
+          await loadKarteList();
+        } else {
+          alert('削除エラー：' + (data.message || '削除に失敗しました'));
+        }
+      } catch (e) {
+        alert('通信エラーが発生しました。');
+      }
+    }
+
+    /* ----- タブ2：予約一覧（変更・キャンセル・カルテ） ----- */
     function renderReservations() {
       const kw = (document.getElementById('resSearch').value || '').trim().toLowerCase();
       const container = document.getElementById('resListContainer');
@@ -1220,8 +1615,9 @@
             ${r.memo && r.memo !== 'なし' ? `<br>メモ：${escapeHtml(r.memo)}` : ''}
           </div>
           <div class="res-actions">
-            <button type="button" class="btn btn-outline" onclick="openRescheduleModal('${escapeHtml(r.cancelKey)}')">日時を変更</button>
-            <button type="button" class="btn btn-danger-outline" onclick="executeAdminCancel('${escapeHtml(r.cancelKey)}', '${escapeHtml(r.name)}', '${escapeHtml(r.dateStr)}')">キャンセル</button>
+            <button type="button" class="btn btn-karte" onclick="openKarteModal('${escapeJs(r.name)}', '${escapeJs(r.tel)}', '${escapeJs(r.dateIso)}')">📷 カルテ</button>
+            <button type="button" class="btn btn-outline" onclick="openRescheduleModal('${escapeJs(r.cancelKey)}')">日時変更</button>
+            <button type="button" class="btn btn-danger-outline" onclick="executeAdminCancel('${escapeJs(r.cancelKey)}', '${escapeJs(r.name)}', '${escapeJs(r.dateStr)}')">キャンセル</button>
           </div>
         </div>
       `).join('');
@@ -1539,6 +1935,13 @@
         .replace(/>/g, '&gt;')
         .replace(/"/g, '&quot;')
         .replace(/'/g, '&#39;');
+    }
+
+    function escapeJs(str) {
+      return String(str || '')
+        .replace(/\\/g, '\\\\')
+        .replace(/'/g, "\\'")
+        .replace(/\n/g, ' ');
     }
   </script>
 </body>
