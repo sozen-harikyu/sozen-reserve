@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>予約管理・設定 | 銀座そうぜん鍼灸院</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #2b2826;
+      --accent: #876d50;
+      --accent-light: #f8f6f2;
+      --bg: #f5f3ef;
+      --card: #ffffff;
+      --border: #e5e0d8;
+      --text: #2b2826;
+      --text-sub: #78736d;
+      --danger: #c0392b;
+      --danger-bg: #fdf2f0;
+      --ok: #2e7d5b;
+      --ok-bg: #edf7f2;
+      --info: #3a6ea5;
+      --info-bg: #eef5fc;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Zen Kaku Gothic New', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding-bottom: 60px;
+    }
+
+    /* ヘッダー */
+    .top-bar {
+      background: var(--primary);
+      color: #fff;
+      padding: 16px 16px 14px;
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+    }
+    .top-bar-inner {
+      max-width: 560px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .top-title {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 1.08rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+    .top-sub {
+      font-size: 0.7rem;
+      color: #d6c8b8;
+    }
+    .reload-btn {
+      background: rgba(255,255,255,0.15);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .container {
+      max-width: 560px;
+      margin: 0 auto;
+      padding: 16px 14px;
+    }
+
+    /* ログイン画面 */
+    .login-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 32px 22px;
+      text-align: center;
+      margin-top: 40px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+    }
+    .login-card h2 {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 1.25rem;
+      margin-bottom: 8px;
+    }
+    .login-card p {
+      font-size: 0.84rem;
+      color: var(--text-sub);
+      margin-bottom: 20px;
+    }
+    .pin-input {
+      width: 180px;
+      text-align: center;
+      font-size: 1.5rem;
+      letter-spacing: 0.35em;
+      padding: 12px;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      outline: none;
+      margin-bottom: 16px;
+    }
+    .pin-input:focus {
+      border-color: var(--accent);
+    }
+
+    /* タブナビ */
+    .tab-bar {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      background: #e9e4dc;
+      padding: 5px;
+      border-radius: 12px;
+      margin-bottom: 16px;
+    }
+    .tab-btn {
+      border: none;
+      background: transparent;
+      padding: 10px 4px;
+      border-radius: 9px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-sub);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .tab-btn.active {
+      background: #fff;
+      color: var(--primary);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+
+    .tab-panel {
+      display: none;
+    }
+    .tab-panel.active {
+      display: block;
+    }
+
+    /* 共通カード・ボタン */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 14px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+    }
+    .card-title {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 0.98rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #f0ece5;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      border-radius: 8px;
+      padding: 11px 16px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      transition: opacity 0.15s;
+    }
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+      width: 100%;
+    }
+    .btn-accent {
+      background: var(--accent);
+      color: #fff;
+    }
+    .btn-outline {
+      background: #fff;
+      color: var(--primary);
+      border: 1px solid var(--border);
+    }
+    .btn-danger-outline {
+      background: #fff;
+      color: var(--danger);
+      border: 1px solid #e6b8b2;
+    }
+
+    /* 予約一覧カード */
+    .search-box {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 0.88rem;
+      margin-bottom: 12px;
+      background: #fff;
+      outline: none;
+    }
+    .res-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      border-radius: 11px;
+      padding: 14px;
+      margin-bottom: 11px;
+    }
+    .res-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+      gap: 8px;
+    }
+    .res-datetime {
+      font-size: 0.96rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .res-badge {
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 10px;
+      background: var(--accent-light);
+      color: var(--accent);
+      border: 1px solid #e2d5c5;
+    }
+    .res-name {
+      font-size: 1.02rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .res-meta {
+      font-size: 0.8rem;
+      color: var(--text-sub);
+      line-height: 1.55;
+      margin-bottom: 10px;
+    }
+    .res-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .res-actions .btn {
+      padding: 9px 8px;
+      font-size: 0.82rem;
+    }
+
+    /* 枠ブロック管理 */
+    .date-picker-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .date-picker-row input[type="date"] {
+      flex: 1;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      font-size: 0.92rem;
+      font-family: inherit;
+      background: #fff;
+    }
+    .legend-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      font-size: 0.74rem;
+      color: var(--text-sub);
+      margin-bottom: 12px;
+    }
+    .legend-dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 3px;
+      margin-right: 4px;
+      vertical-align: middle;
+    }
+    .slot-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+    .slot-item {
+      border-radius: 9px;
+      padding: 10px 6px;
+      text-align: center;
+      border: 1px solid var(--border);
+      background: #fff;
+      cursor: pointer;
+      transition: transform 0.1s;
+    }
+    .slot-item:active {
+      transform: scale(0.97);
+    }
+    .slot-item .s-time {
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+    .slot-item .s-label {
+      font-size: 0.68rem;
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .slot-open {
+      background: #fff;
+      color: var(--text);
+    }
+    .slot-open .s-label {
+      color: var(--ok);
+    }
+    .slot-blocked {
+      background: var(--danger-bg);
+      border-color: #e8b4ae;
+      color: var(--danger);
+    }
+    .slot-booked {
+      background: var(--info-bg);
+      border-color: #b7d2ed;
+      color: var(--info);
+      cursor: default;
+    }
+    .slot-sheet {
+      background: #f3efe9;
+      border-color: #d6cbbd;
+      color: var(--accent);
+    }
+
+    /* 設定シート編集 */
+    .setting-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 11px 0;
+      border-bottom: 1px dashed #eee;
+      gap: 10px;
+    }
+    .setting-row:last-child {
+      border-bottom: none;
+    }
+    .setting-label {
+      font-size: 0.88rem;
+      font-weight: 500;
+    }
+    .setting-sub {
+      font-size: 0.74rem;
+      color: var(--text-sub);
+    }
+    .num-input-wrap {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .num-input {
+      width: 92px;
+      padding: 8px 10px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.95rem;
+      text-align: right;
+      font-weight: 700;
+    }
+
+    /* トグルスイッチ */
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 48px;
+      height: 26px;
+      flex-shrink: 0;
+    }
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #ccc;
+      transition: .2s;
+      border-radius: 26px;
+    }
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 20px;
+      width: 20px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .2s;
+      border-radius: 50%;
+    }
+    input:checked + .slider {
+      background-color: var(--ok);
+    }
+    input:checked + .slider:before {
+      transform: translateX(22px);
+    }
+
+    /* モーダル（日時変更用） */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 100;
+    }
+    .modal-backdrop.open {
+      display: flex;
+    }
+    .modal-box {
+      background: #fff;
+      width: 100%;
+      max-width: 420px;
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    .modal-title {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 1.08rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #eee;
+    }
+    .form-field {
+      margin-bottom: 14px;
+    }
+    .form-field label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 700;
+      margin-bottom: 5px;
+      color: var(--text-sub);
+    }
+    .form-field input, .form-field select {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.92rem;
+      font-family: inherit;
+    }
+    .check-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.84rem;
+      margin-bottom: 16px;
+      cursor: pointer;
+    }
+    .modal-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--primary);
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: 24px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+      display: none;
+      z-index: 200;
+      white-space: nowrap;
+    }
+    .empty-msg {
+      text-align: center;
+      padding: 28px 10px;
+      color: var(--text-sub);
+      font-size: 0.86rem;
+    }
+    .err-text {
+      color: var(--danger);
+      font-size: 0.82rem;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="top-bar">
+    <div class="top-bar-inner">
+      <div>
+        <div class="top-title">銀座そうぜん鍼灸院 予約管理</div>
+        <div class="top-sub">スタッフ専用コントロールパネル</div>
+      </div>
+      <button type="button" class="reload-btn" id="headerReloadBtn" style="display:none;" onclick="loadAllAdminData()">↻ 更新</button>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- ログイン画面 -->
+    <div id="loginView" class="login-card">
+      <h2>スタッフ認証</h2>
+      <p>管理用パスコードを入力してください</p>
+      <input type="password" id="pinInput" class="pin-input" inputmode="numeric" maxlength="10" placeholder="••••">
+      <br>
+      <button type="button" class="btn btn-primary" style="max-width:220px;" id="loginBtn" onclick="attemptLogin()">管理画面を開く</button>
+      <div id="loginError" class="err-text"></div>
+    </div>
+
+    <!-- 管理メイン画面 -->
+    <div id="mainView" style="display:none;">
+      <div class="tab-bar">
+        <button type="button" class="tab-btn active" onclick="switchTab('reservations', this)">予約変更・取消</button>
+        <button type="button" class="tab-btn" onclick="switchTab('blocks', this)">予約不可設定</button>
+        <button type="button" class="tab-btn" onclick="switchTab('settings', this)">基本設定</button>
+      </div>
+
+      <!-- タブ1：予約一覧（変更・キャンセル） -->
+      <div id="tab-reservations" class="tab-panel active">
+        <input type="text" id="resSearch" class="search-box" placeholder="お名前・メニュー・日付で検索..." oninput="renderReservations()">
+        <div id="resListContainer">
+          <div class="empty-msg">読み込み中...</div>
+        </div>
+      </div>
+
+      <!-- タブ2：予約不可（枠ブロック） -->
+      <div id="tab-blocks" class="tab-panel">
+        <div class="card">
+          <div class="card-title">
+            <span>日付を選んで枠をタップ</span>
+            <span id="blockDateTitle" style="font-size:0.82rem; color:var(--accent);"></span>
+          </div>
+          <div class="date-picker-row">
+            <input type="date" id="blockDateInput" onchange="loadDaySlots()">
+            <button type="button" class="btn btn-outline" style="padding:10px 14px;" onclick="loadDaySlots()">表示</button>
+          </div>
+          <div class="legend-row">
+            <span><span class="legend-dot" style="background:#fff;border:1px solid #ccc;"></span>空き（タップで不可）</span>
+            <span><span class="legend-dot" style="background:#fdf2f0;border:1px solid #e8b4ae;"></span>予約不可（タップで解除）</span>
+            <span><span class="legend-dot" style="background:#eef5fc;border:1px solid #b7d2ed;"></span>予約あり</span>
+          </div>
+          <div id="daySlotsContainer" class="slot-grid">
+            <div class="empty-msg" style="grid-column:1/-1;">日付を選択してください</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- タブ3：設定シート編集 -->
+      <div id="tab-settings" class="tab-panel">
+        <div class="card">
+          <div class="card-title">受付日数・初診料の設定</div>
+          <div class="setting-row">
+            <div>
+              <div class="setting-label">院長の受付可能日数</div>
+              <div class="setting-sub">「1」にすると翌日のみ予約可能</div>
+            </div>
+            <div class="num-input-wrap">
+              <input type="number" id="setDirectorDays" class="num-input" min="0" max="365">
+              <span>日先まで</span>
+            </div>
+          </div>
+          <div class="setting-row">
+            <div>
+              <div class="setting-label">スタッフの受付可能日数</div>
+              <div class="setting-sub">通常は7日〜30日先まで</div>
+            </div>
+            <div class="num-input-wrap">
+              <input type="number" id="setStaffDays" class="num-input" min="0" max="365">
+              <span>日先まで</span>
+            </div>
+          </div>
+          <div class="setting-row">
+            <div>
+              <div class="setting-label">初診料（院長新規のみ）</div>
+              <div class="setting-sub">税込金額</div>
+            </div>
+            <div class="num-input-wrap">
+              <span>¥</span>
+              <input type="number" id="setFirstVisitFee" class="num-input" step="500" min="0">
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">メニューの受付 ON / OFF</div>
+          <div id="settingsMenuList"></div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">オプションの受付 ON / OFF</div>
+          <div id="settingsOptionList"></div>
+        </div>
+
+        <button type="button" class="btn btn-primary" id="saveConfigBtn" onclick="saveSettings()">設定をスプレッドシートへ保存する</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 日時変更モーダル -->
+  <div id="rescheduleModal" class="modal-backdrop">
+    <div class="modal-box">
+      <div class="modal-title">予約日時の変更</div>
+      <div id="modalTargetInfo" style="font-size:0.84rem; margin-bottom:14px; background:var(--accent-light); padding:10px; border-radius:8px;"></div>
+
+      <div class="form-field">
+        <label>新しいご予約日</label>
+        <input type="date" id="newDateInput">
+      </div>
+      <div class="form-field">
+        <label>新しいお時間</label>
+        <select id="newTimeSelect"></select>
+      </div>
+      <label class="check-row">
+        <input type="checkbox" id="sendRescheduleMailCheck" checked>
+        <span>患者様へ日時変更メールを送信する</span>
+      </label>
+
+      <div class="modal-actions">
+        <button type="button" class="btn btn-outline" onclick="closeRescheduleModal()">閉じる</button>
+        <button type="button" class="btn btn-accent" id="confirmRescheduleBtn" onclick="submitReschedule()">変更を確定</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script>
+    const GAS_API_URL = 'https://script.google.com/macros/s/AKfycbyefDj5Tnv1mGwXbPfhwH2d0qH3NxT9zfUBA8ZDkc4eIPTKDyC3-Mtie9vxAosblUgjWA/exec';
+
+    let adminPin = '';
+    let adminConfig = null;
+    let adminReservations = [];
+    let editingCancelKey = '';
+
+    window.addEventListener('DOMContentLoaded', () => {
+      initTimeDropdown();
+      const todayStr = getLocalDateString(new Date());
+      document.getElementById('blockDateInput').value = todayStr;
+
+      const savedPin = sessionStorage.getItem('sozen_admin_pin');
+      if (savedPin) {
+        document.getElementById('pinInput').value = savedPin;
+        attemptLogin();
+      }
+    });
+
+    document.getElementById('pinInput').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') attemptLogin();
+    });
+
+    function getLocalDateString(d) {
+      const y = d.getFullYear();
+      const m = String(d.getMonth() + 1).padStart(2, '0');
+      const day = String(d.getDate()).padStart(2, '0');
+      return `${y}-${m}-${day}`;
+    }
+
+    function initTimeDropdown() {
+      const sel = document.getElementById('newTimeSelect');
+      sel.innerHTML = '';
+      for (let h = 8; h < 20; h++) {
+        for (let m = 0; m < 60; m += 15) {
+          const t = `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
+          const opt = document.createElement('option');
+          opt.value = t;
+          opt.text = t;
+          sel.appendChild(opt);
+        }
+      }
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.style.display = 'block';
+      setTimeout(() => { t.style.display = 'none'; }, 2800);
+    }
+
+    async function attemptLogin() {
+      const pinVal = document.getElementById('pinInput').value.trim();
+      const errEl = document.getElementById('loginError');
+      const btn = document.getElementById('loginBtn');
+      if (!pinVal) {
+        errEl.textContent = 'パスコードを入力してください。';
+        return;
+      }
+
+      errEl.textContent = '';
+      btn.disabled = true;
+      btn.textContent = '認証中...';
+
+      try {
+        const res = await fetch(`${GAS_API_URL}?api=adminInit&pin=${encodeURIComponent(pinVal)}`);
+        const data = await res.json();
+        if (!data.success) {
+          errEl.textContent = data.message || '認証に失敗しました。';
+          sessionStorage.removeItem('sozen_admin_pin');
+          btn.disabled = false;
+          btn.textContent = '管理画面を開く';
+          return;
+        }
+
+        adminPin = pinVal;
+        sessionStorage.setItem('sozen_admin_pin', pinVal);
+        adminConfig = data.config;
+        adminReservations = data.reservations || [];
+
+        document.getElementById('loginView').style.display = 'none';
+        document.getElementById('mainView').style.display = 'block';
+        document.getElementById('headerReloadBtn').style.display = 'inline-block';
+
+        renderReservations();
+        renderSettings();
+        loadDaySlots();
+      } catch (err) {
+        errEl.textContent = '通信エラーが発生しました。時間をおいてお試しください。';
+        btn.disabled = false;
+        btn.textContent = '管理画面を開く';
+      }
+    }
+
+    async function loadAllAdminData() {
+      showToast('最新データを読み込み中...');
+      try {
+        const res = await fetch(`${GAS_API_URL}?api=adminInit&pin=${encodeURIComponent(adminPin)}`);
+        const data = await res.json();
+        if (data.success) {
+          adminConfig = data.config;
+          adminReservations = data.reservations || [];
+          renderReservations();
+          renderSettings();
+          loadDaySlots();
+          showToast('最新の状態に更新しました');
+        }
+      } catch (e) {
+        showToast('更新に失敗しました');
+      }
+    }
+
+    function switchTab(tabName, btnEl) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      btnEl.classList.add('active');
+      document.getElementById('tab-' + tabName).classList.add('active');
+      if (tabName === 'blocks') loadDaySlots();
+    }
+
+    /* ----- タブ1：予約一覧（変更・キャンセル） ----- */
+    function renderReservations() {
+      const kw = (document.getElementById('resSearch').value || '').trim().toLowerCase();
+      const container = document.getElementById('resListContainer');
+
+      const filtered = adminReservations.filter(r => {
+        if (!kw) return true;
+        return `${r.name} ${r.menuName} ${r.dateStr} ${r.tel}`.toLowerCase().includes(kw);
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = '<div class="empty-msg">該当する確定予約はありません。</div>';
+        return;
+      }
+
+      container.innerHTML = filtered.map(r => `
+        <div class="res-card">
+          <div class="res-top">
+            <div class="res-datetime">${escapeHtml(r.dateStr)}</div>
+            <span class="res-badge">${escapeHtml(r.customerType.includes('新規') ? '新規' : 'リピーター')}</span>
+          </div>
+          <div class="res-name">${escapeHtml(r.name)} 様</div>
+          <div class="res-meta">
+            メニュー：${escapeHtml(r.menuName)}<br>
+            オプション：${escapeHtml(r.options || 'なし')} ／ 着替え：${escapeHtml(r.clothes || '不要')} ／ 領収書：${escapeHtml(r.receipt === '要' ? '必要' : '不要')}<br>
+            電話：${escapeHtml(r.tel)} ／ 合計：¥${Number(r.totalPrice).toLocaleString()}
+            ${r.memo && r.memo !== 'なし' ? `<br>メモ：${escapeHtml(r.memo)}` : ''}
+          </div>
+          <div class="res-actions">
+            <button type="button" class="btn btn-outline" onclick="openRescheduleModal('${escapeHtml(r.cancelKey)}')">日時を変更</button>
+            <button type="button" class="btn btn-danger-outline" onclick="executeAdminCancel('${escapeHtml(r.cancelKey)}', '${escapeHtml(r.name)}', '${escapeHtml(r.dateStr)}')">キャンセル</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function openRescheduleModal(cancelKey) {
+      const target = adminReservations.find(r => r.cancelKey === cancelKey);
+      if (!target) return;
+      editingCancelKey = cancelKey;
+      document.getElementById('modalTargetInfo').innerHTML =
+        `<strong>${escapeHtml(target.name)} 様</strong><br>現在：${escapeHtml(target.dateStr)}（${escapeHtml(target.menuName)}）`;
+      document.getElementById('newDateInput').value = target.dateIso;
+      document.getElementById('newTimeSelect').value = target.timeStr;
+      document.getElementById('sendRescheduleMailCheck').checked = true;
+      document.getElementById('rescheduleModal').classList.add('open');
+    }
+
+    function closeRescheduleModal() {
+      document.getElementById('rescheduleModal').classList.remove('open');
+      editingCancelKey = '';
+    }
+
+    async function submitReschedule() {
+      const newDate = document.getElementById('newDateInput').value;
+      const newTime = document.getElementById('newTimeSelect').value;
+      const sendEmail = document.getElementById('sendRescheduleMailCheck').checked;
+      if (!newDate || !newTime) {
+        alert('新しい日付と時間を選択してください。');
+        return;
+      }
+
+      const btn = document.getElementById('confirmRescheduleBtn');
+      btn.disabled = true;
+      btn.textContent = '変更中...';
+
+      try {
+        const res = await fetch(GAS_API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({
+            action: 'adminReschedule',
+            pin: adminPin,
+            key: editingCancelKey,
+            newDate: newDate,
+            newTime: newTime,
+            sendEmail: sendEmail
+          })
+        });
+        const data = await res.json();
+        if (data.success) {
+          closeRescheduleModal();
+          showToast(data.message || '予約日時を変更しました');
+          await loadAllAdminData();
+        } else {
+          alert('エラー：' + (data.message || '変更に失敗しました'));
+        }
+      } catch (e) {
+        alert('通信エラーが発生しました。');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = '変更を確定';
+      }
+    }
+
+    async function executeAdminCancel(cancelKey, name, dateStr) {
+      if (!confirm(`${name}様（${dateStr}）のご予約をキャンセルしますか？\n※カレンダー削除・日報クリアも同時に実行されます。`)) return;
+
+      showToast('キャンセル処理を実行中...');
+      try {
+        const res = await fetch(GAS_API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({
+            action: 'adminCancel',
+            pin: adminPin,
+            key: cancelKey
+          })
+        });
+        const data = await res.json();
+        if (data.success) {
+          showToast('キャンセルが完了しました');
+          await loadAllAdminData();
+        } else {
+          alert('エラー：' + (data.message || 'キャンセルに失敗しました'));
+        }
+      } catch (e) {
+        alert('通信エラーが発生しました。');
+      }
+    }
+
+    /* ----- タブ2：予約不可（枠ブロック） ----- */
+    async function loadDaySlots() {
+      const dateVal = document.getElementById('blockDateInput').value;
+      const container = document.getElementById('daySlotsContainer');
+      if (!dateVal) return;
+
+      container.innerHTML = '<div class="empty-msg" style="grid-column:1/-1;">枠を読み込み中...</div>';
+      try {
+        const res = await fetch(`${GAS_API_URL}?api=adminDaySlots&pin=${encodeURIComponent(adminPin)}&date=${encodeURIComponent(dateVal)}`);
+        const data = await res.json();
+        if (!data.success) {
+          container.innerHTML = `<div class="empty-msg" style="grid-column:1/-1;">${escapeHtml(data.message || '読み込みエラー')}</div>`;
+          return;
+        }
+        document.getElementById('blockDateTitle').textContent = data.dateStr || '';
+        container.innerHTML = data.slots.map(s => {
+          let cls = 'slot-open';
+          let subText = '空き';
+          let clickAttr = `onclick="toggleSlotBlock('${dateVal}', '${s.time}', true)"`;
+
+          if (s.status === 'booked') {
+            cls = 'slot-booked';
+            subText = s.label || '予約あり';
+            clickAttr = '';
+          } else if (s.status === 'blocked') {
+            cls = 'slot-blocked';
+            subText = s.label || '予約不可';
+            clickAttr = `onclick="toggleSlotBlock('${dateVal}', '${s.time}', false)"`;
+          } else if (s.status === 'sheet_only') {
+            cls = 'slot-sheet';
+            subText = s.label || '記載あり';
+            clickAttr = `onclick="toggleSlotBlock('${dateVal}', '${s.time}', false)"`;
+          }
+
+          return `
+            <div class="slot-item ${cls}" ${clickAttr}>
+              <div class="s-time">${escapeHtml(s.time)}</div>
+              <div class="s-label">${escapeHtml(subText)}</div>
+            </div>
+          `;
+        }).join('');
+      } catch (e) {
+        container.innerHTML = '<div class="empty-msg" style="grid-column:1/-1;">通信エラーが発生しました。</div>';
+      }
+    }
+
+    async function toggleSlotBlock(dateVal, timeStr, shouldBlock) {
+      const msg = shouldBlock
+        ? `${dateVal} ${timeStr} を「予約不可」にしますか？`
+        : `${dateVal} ${timeStr} の予約不可（記載）を解除して空き枠に戻しますか？`;
+      if (!confirm(msg)) return;
+
+      showToast(shouldBlock ? '予約不可を設定中...' : '解除中...');
+      try {
+        const res = await fetch(GAS_API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({
+            action: 'adminToggleBlock',
+            pin: adminPin,
+            date: dateVal,
+            time: timeStr,
+            block: shouldBlock,
+            label: '予約不可'
+          })
+        });
+        const data = await res.json();
+        if (data.success) {
+          showToast(data.message || '更新しました');
+          loadDaySlots();
+        } else {
+          alert('エラー：' + (data.message || '更新に失敗しました'));
+        }
+      } catch (e) {
+        alert('通信エラーが発生しました。');
+      }
+    }
+
+    /* ----- タブ3：設定シート編集 ----- */
+    function renderSettings() {
+      if (!adminConfig) return;
+      document.getElementById('setDirectorDays').value = adminConfig.bookingLimits.director;
+      document.getElementById('setStaffDays').value = adminConfig.bookingLimits.staff;
+      document.getElementById('setFirstVisitFee').value = adminConfig.firstVisitFee;
+
+      document.getElementById('settingsMenuList').innerHTML = adminConfig.menus.map((m, idx) => `
+        <div class="setting-row">
+          <div>
+            <div class="setting-label">${escapeHtml(m.name)}</div>
+            <div class="setting-sub">${m.duration}分 ／ ¥${Number(m.price).toLocaleString()}</div>
+          </div>
+          <label class="switch">
+            <input type="checkbox" data-menu-idx="${idx}" ${m.active ? 'checked' : ''}>
+            <span class="slider"></span>
+          </label>
+        </div>
+      `).join('');
+
+      document.getElementById('settingsOptionList').innerHTML = adminConfig.options.map((o, idx) => `
+        <div class="setting-row">
+          <div>
+            <div class="setting-label">${escapeHtml(o.name)}</div>
+            <div class="setting-sub">+¥${Number(o.price).toLocaleString()}</div>
+          </div>
+          <label class="switch">
+            <input type="checkbox" data-opt-idx="${idx}" ${o.active ? 'checked' : ''}>
+            <span class="slider"></span>
+          </label>
+        </div>
+      `).join('');
+    }
+
+    async function saveSettings() {
+      const btn = document.getElementById('saveConfigBtn');
+      btn.disabled = true;
+      btn.textContent = '保存中...';
+
+      const menusPayload = adminConfig.menus.map((m, idx) => {
+        const cb = document.querySelector(`input[data-menu-idx="${idx}"]`);
+        return { rowIndex: m.rowIndex, active: cb ? cb.checked : m.active };
+      });
+      const optionsPayload = adminConfig.options.map((o, idx) => {
+        const cb = document.querySelector(`input[data-opt-idx="${idx}"]`);
+        return { rowIndex: o.rowIndex, colIndex: o.colIndex, active: cb ? cb.checked : o.active };
+      });
+
+      const payload = {
+        bookingLimits: {
+          director: Number(document.getElementById('setDirectorDays').value),
+          staff: Number(document.getElementById('setStaffDays').value)
+        },
+        firstVisitFee: Number(document.getElementById('setFirstVisitFee').value),
+        menus: menusPayload,
+        options: optionsPayload
+      };
+
+      try {
+        const res = await fetch(GAS_API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({
+            action: 'adminSaveConfig',
+            pin: adminPin,
+            payload: payload
+          })
+        });
+        const data = await res.json();
+        if (data.success) {
+          showToast('設定シートに保存しました！');
+          await loadAllAdminData();
+        } else {
+          alert('保存エラー：' + (data.message || '保存に失敗しました'));
+        }
+      } catch (e) {
+        alert('通信エラーが発生しました。');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = '設定をスプレッドシートへ保存する';
+      }
+    }
+
+    function escapeHtml(str) {
+      return String(str || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+  </script>
+</body>
+</html>
