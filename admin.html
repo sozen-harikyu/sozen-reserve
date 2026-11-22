@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>予約管理・設定 | 銀座そうぜん鍼灸院</title>
+  <title>予約管理・設定</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
@@ -25,12 +25,7 @@
       --info-bg: #eef5fc;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      -webkit-tap-highlight-color: transparent;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
     body {
       font-family: 'Zen Kaku Gothic New', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -40,7 +35,6 @@
       padding-bottom: 64px;
     }
 
-    /* ヘッダー */
     .top-bar {
       background: var(--primary);
       color: #fff;
@@ -50,828 +44,152 @@
       z-index: 30;
       box-shadow: 0 2px 10px rgba(0,0,0,0.12);
     }
-    .top-bar-inner {
-      max-width: 580px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .top-title {
-      font-family: 'Shippori Mincho', serif;
-      font-size: 1.06rem;
-      font-weight: 600;
-      letter-spacing: 0.05em;
-    }
-    .top-sub {
-      font-size: 0.7rem;
-      color: #d6c8b8;
-    }
-    .reload-btn {
-      background: rgba(255,255,255,0.15);
-      color: #fff;
-      border: 1px solid rgba(255,255,255,0.35);
-      border-radius: 8px;
-      padding: 6px 12px;
-      font-size: 0.78rem;
-      font-weight: 700;
-      cursor: pointer;
-    }
+    .top-bar-inner { max-width: 580px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+    .top-title { font-family: 'Shippori Mincho', serif; font-size: 1.06rem; font-weight: 600; letter-spacing: 0.05em; }
+    .top-sub { font-size: 0.7rem; color: #d6c8b8; }
+    .reload-btn { background: rgba(255,255,255,0.15); color: #fff; border: 1px solid rgba(255,255,255,0.35); border-radius: 8px; padding: 6px 12px; font-size: 0.78rem; font-weight: 700; cursor: pointer; }
 
-    .container {
-      max-width: 580px;
-      margin: 0 auto;
-      padding: 14px 12px;
-    }
+    .container { max-width: 580px; margin: 0 auto; padding: 14px 12px; }
 
-    /* ログイン画面 */
-    .login-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 32px 22px;
-      text-align: center;
-      margin-top: 40px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.04);
-    }
-    .login-card h2 {
-      font-family: 'Shippori Mincho', serif;
-      font-size: 1.25rem;
-      margin-bottom: 8px;
-    }
-    .login-card p {
-      font-size: 0.84rem;
-      color: var(--text-sub);
-      margin-bottom: 20px;
-    }
-    .pin-input {
-      width: 180px;
-      text-align: center;
-      font-size: 1.5rem;
-      letter-spacing: 0.35em;
-      padding: 12px;
-      border: 1.5px solid var(--border);
-      border-radius: 10px;
-      outline: none;
-      margin-bottom: 16px;
-    }
-    .pin-input:focus {
-      border-color: var(--accent);
-    }
+    .login-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 32px 22px; text-align: center; margin-top: 40px; box-shadow: 0 4px 20px rgba(0,0,0,0.04); }
+    .login-card h2 { font-family: 'Shippori Mincho', serif; font-size: 1.25rem; margin-bottom: 8px; }
+    .login-card p { font-size: 0.84rem; color: var(--text-sub); margin-bottom: 20px; }
+    .pin-input { width: 180px; text-align: center; font-size: 1.5rem; letter-spacing: 0.35em; padding: 12px; border: 1.5px solid var(--border); border-radius: 10px; outline: none; margin-bottom: 16px; }
+    .pin-input:focus { border-color: var(--accent); }
 
-    /* タブナビ（4タブ） */
-    .tab-bar {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 4px;
-      background: #e9e4dc;
-      padding: 4px;
-      border-radius: 12px;
-      margin-bottom: 14px;
-    }
-    .tab-btn {
-      border: none;
-      background: transparent;
-      padding: 10px 2px;
-      border-radius: 9px;
-      font-size: 0.76rem;
-      font-weight: 700;
-      color: var(--text-sub);
-      cursor: pointer;
-      transition: all 0.15s;
-    }
-    .tab-btn.active {
-      background: #fff;
-      color: var(--primary);
-      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-    }
+    .tab-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; background: #e9e4dc; padding: 4px; border-radius: 12px; margin-bottom: 14px; }
+    .tab-btn { border: none; background: transparent; padding: 10px 2px; border-radius: 9px; font-size: 0.76rem; font-weight: 700; color: var(--text-sub); cursor: pointer; transition: all 0.15s; }
+    .tab-btn.active { background: #fff; color: var(--primary); box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
 
-    .tab-panel {
-      display: none;
-    }
-    .tab-panel.active {
-      display: block;
-    }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 15px; margin-bottom: 14px; box-shadow: 0 2px 10px rgba(0,0,0,0.03); }
+    .card-title { font-family: 'Shippori Mincho', serif; font-size: 0.96rem; font-weight: 600; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #f0ece5; display: flex; justify-content: space-between; align-items: center; }
 
-    /* 共通カード・ボタン */
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 15px;
-      margin-bottom: 14px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.03);
-    }
-    .card-title {
-      font-family: 'Shippori Mincho', serif;
-      font-size: 0.96rem;
-      font-weight: 600;
-      margin-bottom: 12px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid #f0ece5;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+    .btn { display: inline-flex; align-items: center; justify-content: center; border: none; border-radius: 8px; padding: 10px 14px; font-size: 0.85rem; font-weight: 700; cursor: pointer; font-family: inherit; transition: opacity 0.15s; }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .btn-primary { background: var(--primary); color: #fff; width: 100%; }
+    .btn-accent { background: var(--accent); color: #fff; }
+    .btn-karte { background: var(--info-bg); color: var(--info); border: 1px solid #b7d2ed; }
+    .btn-outline { background: #fff; color: var(--primary); border: 1px solid var(--border); }
+    .btn-danger { background: var(--danger); color: #fff; }
+    .btn-danger-outline { background: #fff; color: var(--danger); border: 1px solid #e6b8b2; }
 
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border: none;
-      border-radius: 8px;
-      padding: 10px 14px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      cursor: pointer;
-      font-family: inherit;
-      transition: opacity 0.15s;
-    }
-    .btn:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-    .btn-primary {
-      background: var(--primary);
-      color: #fff;
-      width: 100%;
-    }
-    .btn-accent {
-      background: var(--accent);
-      color: #fff;
-    }
-    .btn-karte {
-      background: var(--info-bg);
-      color: var(--info);
-      border: 1px solid #b7d2ed;
-    }
-    .btn-outline {
-      background: #fff;
-      color: var(--primary);
-      border: 1px solid var(--border);
-    }
-    .btn-danger {
-      background: var(--danger);
-      color: #fff;
-    }
-    .btn-danger-outline {
-      background: #fff;
-      color: var(--danger);
-      border: 1px solid #e6b8b2;
-    }
+    /* 日報ビュー */
+    .day-nav { display: flex; gap: 6px; align-items: center; margin-bottom: 12px; }
+    .day-nav .btn-nav { padding: 9px 10px; font-size: 0.8rem; background: #fff; border: 1px solid var(--border); border-radius: 8px; font-weight: 700; cursor: pointer; color: var(--primary); white-space: nowrap; }
+    .day-nav input[type="date"] { flex: 1; padding: 8px 10px; border: 1px solid var(--border); border-radius: 8px; font-size: 0.9rem; font-family: inherit; background: #fff; min-width: 0; }
+    .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 12px; }
+    .kpi-box { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 8px 4px; text-align: center; }
+    .kpi-label { font-size: 0.66rem; color: var(--text-sub); }
+    .kpi-val { font-size: 0.95rem; font-weight: 700; color: var(--primary); margin-top: 2px; }
+    .kpi-val.money { color: var(--accent); }
+    .filter-strip { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 0.78rem; color: var(--text-sub); }
+    .filter-strip label { display: inline-flex; align-items: center; gap: 5px; cursor: pointer; font-weight: 700; color: var(--primary); }
 
-    /* ===== タブ1：日報ビュー ===== */
-    .day-nav {
-      display: flex;
-      gap: 6px;
-      align-items: center;
-      margin-bottom: 12px;
-    }
-    .day-nav .btn-nav {
-      padding: 9px 10px;
-      font-size: 0.8rem;
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      font-weight: 700;
-      cursor: pointer;
-      color: var(--primary);
-      white-space: nowrap;
-    }
-    .day-nav input[type="date"] {
-      flex: 1;
-      padding: 8px 10px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      font-size: 0.9rem;
-      font-family: inherit;
-      background: #fff;
-      min-width: 0;
-    }
+    .tt-row { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; margin-bottom: 7px; display: flex; align-items: flex-start; gap: 10px; }
+    .tt-row.tt-patient { border-left: 4px solid var(--accent); cursor: pointer; }
+    .tt-row.tt-blocked { background: var(--danger-bg); border-color: #eed0cc; border-left: 4px solid var(--danger); }
+    .tt-row.tt-empty { background: #faf9f7; padding: 7px 12px; color: #a69f97; }
+    .tt-time { font-size: 0.9rem; font-weight: 700; width: 48px; flex-shrink: 0; color: var(--primary); }
+    .tt-empty .tt-time { color: #a69f97; font-weight: 500; }
+    .tt-body { flex: 1; min-width: 0; }
+    .tt-header { display: flex; justify-content: space-between; align-items: center; gap: 6px; }
+    .tt-name { font-size: 0.95rem; font-weight: 700; }
+    .tt-amount { font-size: 0.85rem; font-weight: 700; color: var(--accent); white-space: nowrap; }
+    .tt-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
+    .tag { font-size: 0.68rem; font-weight: 700; padding: 1px 7px; border-radius: 6px; background: var(--accent-light); color: var(--accent); border: 1px solid #e5d8c8; }
+    .tag-new { background: #fff1e6; color: #c25e00; border-color: #f5cfa9; }
+    .tag-clothes { background: var(--info-bg); color: var(--info); border-color: #c2daf2; }
+    .tag-receipt { background: var(--ok-bg); color: var(--ok); border-color: #b7dfc9; }
+    .tt-detail-drawer { display: none; margin-top: 8px; padding-top: 8px; border-top: 1px dashed #e6e0d8; font-size: 0.78rem; color: var(--text-sub); }
+    .tt-row.expanded .tt-detail-drawer { display: block; }
+    .tt-drawer-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 8px; }
+    .tt-drawer-actions .btn { padding: 8px 6px; font-size: 0.78rem; }
+    .tt-karte-btn { width: 100%; margin-top: 8px; padding: 9px; font-size: 0.82rem; }
 
-    .kpi-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 6px;
-      margin-bottom: 12px;
-    }
-    .kpi-box {
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 8px 4px;
-      text-align: center;
-    }
-    .kpi-label {
-      font-size: 0.66rem;
-      color: var(--text-sub);
-    }
-    .kpi-val {
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: var(--primary);
-      margin-top: 2px;
-    }
-    .kpi-val.money {
-      color: var(--accent);
-    }
+    /* 予約一覧 */
+    .search-box { width: 100%; padding: 10px 14px; border: 1px solid var(--border); border-radius: 10px; font-size: 0.88rem; margin-bottom: 12px; background: #fff; outline: none; }
+    .res-card { background: #fff; border: 1px solid var(--border); border-left: 4px solid var(--accent); border-radius: 11px; padding: 14px; margin-bottom: 11px; }
+    .res-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; gap: 8px; }
+    .res-datetime { font-size: 0.96rem; font-weight: 700; color: var(--accent); }
+    .res-badge { font-size: 0.7rem; font-weight: 700; padding: 2px 8px; border-radius: 10px; background: var(--accent-light); color: var(--accent); border: 1px solid #e2d5c5; }
+    .res-name { font-size: 1.02rem; font-weight: 700; margin-bottom: 4px; }
+    .res-meta { font-size: 0.8rem; color: var(--text-sub); line-height: 1.55; margin-bottom: 10px; }
+    .res-actions { display: grid; grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); gap: 6px; }
+    .res-actions .btn { padding: 9px 4px; font-size: 0.78rem; }
 
-    .filter-strip {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
-      font-size: 0.78rem;
-      color: var(--text-sub);
-    }
-    .filter-strip label {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      cursor: pointer;
-      font-weight: 700;
-      color: var(--primary);
-    }
+    /* 枠ブロック */
+    .bulk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+    .bulk-field label { display: block; font-size: 0.74rem; font-weight: 700; color: var(--text-sub); margin-bottom: 4px; }
+    .bulk-field input, .bulk-field select { width: 100%; padding: 9px 10px; border: 1px solid var(--border); border-radius: 8px; font-size: 0.86rem; font-family: inherit; background: #fff; }
+    .bulk-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
+    .date-picker-row { display: flex; gap: 8px; align-items: center; margin-bottom: 12px; }
+    .date-picker-row input[type="date"] { flex: 1; padding: 10px 12px; border: 1px solid var(--border); border-radius: 9px; font-size: 0.92rem; font-family: inherit; background: #fff; }
+    .legend-row { display: flex; gap: 10px; flex-wrap: wrap; font-size: 0.74rem; color: var(--text-sub); margin-bottom: 12px; }
+    .legend-dot { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 4px; vertical-align: middle; }
+    .slot-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .slot-item { border-radius: 9px; padding: 10px 6px; text-align: center; border: 1px solid var(--border); background: #fff; cursor: pointer; }
+    .slot-item .s-time { font-size: 0.92rem; font-weight: 700; }
+    .slot-item .s-label { font-size: 0.68rem; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .slot-open { background: #fff; color: var(--text); }
+    .slot-open .s-label { color: var(--ok); }
+    .slot-blocked { background: var(--danger-bg); border-color: #e8b4ae; color: var(--danger); }
+    .slot-booked { background: var(--info-bg); border-color: #b7d2ed; color: var(--info); cursor: default; }
+    .slot-sheet { background: #f3efe9; border-color: #d6cbbd; color: var(--accent); }
 
-    .tt-row {
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 10px 12px;
-      margin-bottom: 7px;
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-    }
-    .tt-row.tt-patient {
-      border-left: 4px solid var(--accent);
-      cursor: pointer;
-    }
-    .tt-row.tt-blocked {
-      background: var(--danger-bg);
-      border-color: #eed0cc;
-      border-left: 4px solid var(--danger);
-    }
-    .tt-row.tt-empty {
-      background: #faf9f7;
-      padding: 7px 12px;
-      color: #a69f97;
-    }
-    .tt-time {
-      font-size: 0.9rem;
-      font-weight: 700;
-      width: 48px;
-      flex-shrink: 0;
-      color: var(--primary);
-    }
-    .tt-empty .tt-time {
-      color: #a69f97;
-      font-weight: 500;
-    }
-    .tt-body {
-      flex: 1;
-      min-width: 0;
-    }
-    .tt-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 6px;
-    }
-    .tt-name {
-      font-size: 0.95rem;
-      font-weight: 700;
-    }
-    .tt-amount {
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: var(--accent);
-      white-space: nowrap;
-    }
-    .tt-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 4px;
-      margin-top: 4px;
-    }
-    .tag {
-      font-size: 0.68rem;
-      font-weight: 700;
-      padding: 1px 7px;
-      border-radius: 6px;
-      background: var(--accent-light);
-      color: var(--accent);
-      border: 1px solid #e5d8c8;
-    }
-    .tag-new {
-      background: #fff1e6;
-      color: #c25e00;
-      border-color: #f5cfa9;
-    }
-    .tag-clothes {
-      background: var(--info-bg);
-      color: var(--info);
-      border-color: #c2daf2;
-    }
-    .tag-receipt {
-      background: var(--ok-bg);
-      color: var(--ok);
-      border-color: #b7dfc9;
-    }
-    .tt-detail-drawer {
-      display: none;
-      margin-top: 8px;
-      padding-top: 8px;
-      border-top: 1px dashed #e6e0d8;
-      font-size: 0.78rem;
-      color: var(--text-sub);
-    }
-    .tt-row.expanded .tt-detail-drawer {
-      display: block;
-    }
-    .tt-drawer-actions {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6px;
-      margin-top: 8px;
-    }
-    .tt-drawer-actions .btn {
-      padding: 8px 6px;
-      font-size: 0.78rem;
-    }
-    .tt-karte-btn {
-      width: 100%;
-      margin-top: 8px;
-      padding: 9px;
-      font-size: 0.82rem;
-    }
+    /* 設定シート編集 */
+    .setting-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px dashed #eee; gap: 10px; }
+    .setting-row:last-child { border-bottom: none; }
+    .setting-col { padding: 10px 0; border-bottom: 1px dashed #eee; }
+    .setting-col:last-child { border-bottom: none; }
+    .setting-label { font-size: 0.86rem; font-weight: 700; }
+    .setting-sub { font-size: 0.72rem; color: var(--text-sub); }
+    .num-input-wrap { display: flex; align-items: center; gap: 5px; }
+    .num-input { width: 84px; padding: 7px 9px; border: 1px solid var(--border); border-radius: 8px; font-size: 0.9rem; text-align: right; font-weight: 700; }
+    .text-input, .select-input, .textarea-input { width: 100%; margin-top: 5px; padding: 8px 10px; border: 1px solid var(--border); border-radius: 8px; font-size: 0.86rem; font-family: inherit; background: #fff; }
+    .textarea-input { min-height: 64px; resize: vertical; }
+    .two-col-mini { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 5px; }
 
-    /* ===== タブ2：予約一覧カード ===== */
-    .search-box {
-      width: 100%;
-      padding: 10px 14px;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      font-size: 0.88rem;
-      margin-bottom: 12px;
-      background: #fff;
-      outline: none;
-    }
-    .res-card {
-      background: #fff;
-      border: 1px solid var(--border);
-      border-left: 4px solid var(--accent);
-      border-radius: 11px;
-      padding: 14px;
-      margin-bottom: 11px;
-    }
-    .res-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 6px;
-      gap: 8px;
-    }
-    .res-datetime {
-      font-size: 0.96rem;
-      font-weight: 700;
-      color: var(--accent);
-    }
-    .res-badge {
-      font-size: 0.7rem;
-      font-weight: 700;
-      padding: 2px 8px;
-      border-radius: 10px;
-      background: var(--accent-light);
-      color: var(--accent);
-      border: 1px solid #e2d5c5;
-    }
-    .res-name {
-      font-size: 1.02rem;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-    .res-meta {
-      font-size: 0.8rem;
-      color: var(--text-sub);
-      line-height: 1.55;
-      margin-bottom: 10px;
-    }
-    .res-actions {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 6px;
-    }
-    .res-actions .btn {
-      padding: 9px 4px;
-      font-size: 0.78rem;
-    }
+    .switch { position: relative; display: inline-block; width: 48px; height: 26px; flex-shrink: 0; }
+    .switch input { opacity: 0; width: 0; height: 0; }
+    .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .2s; border-radius: 26px; }
+    .slider:before { position: absolute; content: ""; height: 20px; width: 20px; left: 3px; bottom: 3px; background-color: white; transition: .2s; border-radius: 50%; }
+    input:checked + .slider { background-color: var(--ok); }
+    input:checked + .slider:before { transform: translateX(22px); }
 
-    /* ===== タブ3：枠ブロック管理（一括 ＋ 個別） ===== */
-    .bulk-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-      margin-bottom: 10px;
-    }
-    .bulk-field label {
-      display: block;
-      font-size: 0.74rem;
-      font-weight: 700;
-      color: var(--text-sub);
-      margin-bottom: 4px;
-    }
-    .bulk-field input, .bulk-field select {
-      width: 100%;
-      padding: 9px 10px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      font-size: 0.86rem;
-      font-family: inherit;
-      background: #fff;
-    }
-    .bulk-actions {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-      margin-top: 12px;
-    }
+    /* モーダル */
+    .modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.55); display: none; align-items: center; justify-content: center; padding: 14px; z-index: 100; }
+    .modal-backdrop.open { display: flex; }
+    .modal-box { background: #fff; width: 100%; max-width: 460px; max-height: 90vh; overflow-y: auto; border-radius: 14px; padding: 18px; box-shadow: 0 10px 30px rgba(0,0,0,0.25); }
+    .modal-title { font-family: 'Shippori Mincho', serif; font-size: 1.06rem; font-weight: 600; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
+    .modal-close-x { background: none; border: none; font-size: 1.3rem; cursor: pointer; color: var(--text-sub); padding: 0 4px; }
+    .form-field { margin-bottom: 14px; }
+    .form-field label { display: block; font-size: 0.82rem; font-weight: 700; margin-bottom: 5px; color: var(--text-sub); }
+    .form-field input, .form-field select { width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 0.92rem; font-family: inherit; }
+    .check-row { display: flex; align-items: center; gap: 8px; font-size: 0.84rem; margin-bottom: 16px; cursor: pointer; }
+    .modal-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 
-    .date-picker-row {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-      margin-bottom: 12px;
-    }
-    .date-picker-row input[type="date"] {
-      flex: 1;
-      padding: 10px 12px;
-      border: 1px solid var(--border);
-      border-radius: 9px;
-      font-size: 0.92rem;
-      font-family: inherit;
-      background: #fff;
-    }
-    .legend-row {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      font-size: 0.74rem;
-      color: var(--text-sub);
-      margin-bottom: 12px;
-    }
-    .legend-dot {
-      display: inline-block;
-      width: 10px;
-      height: 10px;
-      border-radius: 3px;
-      margin-right: 4px;
-      vertical-align: middle;
-    }
-    .slot-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-    }
-    .slot-item {
-      border-radius: 9px;
-      padding: 10px 6px;
-      text-align: center;
-      border: 1px solid var(--border);
-      background: #fff;
-      cursor: pointer;
-      transition: transform 0.1s;
-    }
-    .slot-item:active {
-      transform: scale(0.97);
-    }
-    .slot-item .s-time {
-      font-size: 0.92rem;
-      font-weight: 700;
-    }
-    .slot-item .s-label {
-      font-size: 0.68rem;
-      margin-top: 2px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .slot-open {
-      background: #fff;
-      color: var(--text);
-    }
-    .slot-open .s-label {
-      color: var(--ok);
-    }
-    .slot-blocked {
-      background: var(--danger-bg);
-      border-color: #e8b4ae;
-      color: var(--danger);
-    }
-    .slot-booked {
-      background: var(--info-bg);
-      border-color: #b7d2ed;
-      color: var(--info);
-      cursor: default;
-    }
-    .slot-sheet {
-      background: #f3efe9;
-      border-color: #d6cbbd;
-      color: var(--accent);
-    }
+    .karte-upload-area { background: var(--info-bg); border: 1.5px dashed #9fc3e8; border-radius: 10px; padding: 14px; text-align: center; margin-bottom: 14px; }
+    .karte-upload-label { display: inline-block; background: var(--info); color: #fff; padding: 10px 18px; border-radius: 8px; font-size: 0.88rem; font-weight: 700; cursor: pointer; }
+    .karte-upload-hint { font-size: 0.74rem; color: var(--text-sub); margin-top: 6px; }
+    .karte-progress { font-size: 0.8rem; font-weight: 700; color: var(--info); margin-top: 8px; }
+    .karte-list { display: flex; flex-direction: column; gap: 8px; }
+    .karte-item-btn { display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 12px 14px; background: #fdfdfc; border: 1px solid var(--border); border-radius: 9px; cursor: pointer; text-align: left; font-family: inherit; }
 
-    /* ===== タブ4：設定シート編集 ===== */
-    .setting-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 11px 0;
-      border-bottom: 1px dashed #eee;
-      gap: 10px;
-    }
-    .setting-row:last-child {
-      border-bottom: none;
-    }
-    .setting-label {
-      font-size: 0.88rem;
-      font-weight: 500;
-    }
-    .setting-sub {
-      font-size: 0.74rem;
-      color: var(--text-sub);
-    }
-    .num-input-wrap {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .num-input {
-      width: 92px;
-      padding: 8px 10px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      font-size: 0.95rem;
-      text-align: right;
-      font-weight: 700;
-    }
+    .viewer-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.92); display: none; flex-direction: column; z-index: 250; }
+    .viewer-backdrop.open { display: flex; }
+    .viewer-top { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; color: #fff; font-size: 0.88rem; }
+    .viewer-stage { flex: 1; display: flex; align-items: center; justify-content: center; padding: 8px; overflow: auto; }
+    .viewer-stage img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 6px; }
+    .viewer-bottom { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; padding: 12px 14px 20px; background: rgba(255,255,255,0.06); }
+    .viewer-btn { padding: 11px 6px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.28); background: rgba(255,255,255,0.12); color: #fff; font-size: 0.85rem; font-weight: 700; cursor: pointer; }
+    .viewer-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+    .viewer-btn-del { background: rgba(192, 57, 43, 0.8); border-color: rgba(255,255,255,0.2); }
 
-    /* トグルスイッチ */
-    .switch {
-      position: relative;
-      display: inline-block;
-      width: 48px;
-      height: 26px;
-      flex-shrink: 0;
-    }
-    .switch input {
-      opacity: 0;
-      width: 0;
-      height: 0;
-    }
-    .slider {
-      position: absolute;
-      cursor: pointer;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-color: #ccc;
-      transition: .2s;
-      border-radius: 26px;
-    }
-    .slider:before {
-      position: absolute;
-      content: "";
-      height: 20px;
-      width: 20px;
-      left: 3px;
-      bottom: 3px;
-      background-color: white;
-      transition: .2s;
-      border-radius: 50%;
-    }
-    input:checked + .slider {
-      background-color: var(--ok);
-    }
-    input:checked + .slider:before {
-      transform: translateX(22px);
-    }
-
-    /* ===== モーダル共通（日時変更・カルテ） ===== */
-    .modal-backdrop {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.55);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 14px;
-      z-index: 100;
-    }
-    .modal-backdrop.open {
-      display: flex;
-    }
-    .modal-box {
-      background: #fff;
-      width: 100%;
-      max-width: 460px;
-      max-height: 90vh;
-      overflow-y: auto;
-      border-radius: 14px;
-      padding: 18px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-    }
-    .modal-title {
-      font-family: 'Shippori Mincho', serif;
-      font-size: 1.06rem;
-      font-weight: 600;
-      margin-bottom: 12px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid #eee;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .modal-close-x {
-      background: none;
-      border: none;
-      font-size: 1.3rem;
-      cursor: pointer;
-      color: var(--text-sub);
-      padding: 0 4px;
-    }
-    .form-field {
-      margin-bottom: 14px;
-    }
-    .form-field label {
-      display: block;
-      font-size: 0.82rem;
-      font-weight: 700;
-      margin-bottom: 5px;
-      color: var(--text-sub);
-    }
-    .form-field input, .form-field select {
-      width: 100%;
-      padding: 10px 12px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      font-size: 0.92rem;
-      font-family: inherit;
-    }
-    .check-row {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.84rem;
-      margin-bottom: 16px;
-      cursor: pointer;
-    }
-    .modal-actions {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-    }
-
-    /* カルテモーダル専用 */
-    .karte-upload-area {
-      background: var(--info-bg);
-      border: 1.5px dashed #9fc3e8;
-      border-radius: 10px;
-      padding: 14px;
-      text-align: center;
-      margin-bottom: 14px;
-    }
-    .karte-upload-label {
-      display: inline-block;
-      background: var(--info);
-      color: #fff;
-      padding: 10px 18px;
-      border-radius: 8px;
-      font-size: 0.88rem;
-      font-weight: 700;
-      cursor: pointer;
-    }
-    .karte-upload-hint {
-      font-size: 0.74rem;
-      color: var(--text-sub);
-      margin-top: 6px;
-    }
-    .karte-progress {
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: var(--info);
-      margin-top: 8px;
-    }
-    .karte-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .karte-item-btn {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-      padding: 12px 14px;
-      background: #fdfdfc;
-      border: 1px solid var(--border);
-      border-radius: 9px;
-      cursor: pointer;
-      text-align: left;
-      font-family: inherit;
-    }
-    .karte-item-btn:hover {
-      background: var(--accent-light);
-      border-color: var(--accent);
-    }
-
-    /* 画像拡大ライトボックス */
-    .viewer-backdrop {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.92);
-      display: none;
-      flex-direction: column;
-      z-index: 250;
-    }
-    .viewer-backdrop.open {
-      display: flex;
-    }
-    .viewer-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 16px;
-      color: #fff;
-      font-size: 0.88rem;
-    }
-    .viewer-stage {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 8px;
-      overflow: auto;
-    }
-    .viewer-stage img {
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain;
-      border-radius: 6px;
-    }
-    .viewer-bottom {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 8px;
-      padding: 12px 14px 20px;
-      background: rgba(255,255,255,0.06);
-    }
-    .viewer-btn {
-      padding: 11px 6px;
-      border-radius: 8px;
-      border: 1px solid rgba(255,255,255,0.28);
-      background: rgba(255,255,255,0.12);
-      color: #fff;
-      font-size: 0.85rem;
-      font-weight: 700;
-      cursor: pointer;
-    }
-    .viewer-btn:disabled {
-      opacity: 0.35;
-      cursor: not-allowed;
-    }
-    .viewer-btn-del {
-      background: rgba(192, 57, 43, 0.8);
-      border-color: rgba(255,255,255,0.2);
-    }
-
-    .toast {
-      position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--primary);
-      color: #fff;
-      padding: 10px 18px;
-      border-radius: 24px;
-      font-size: 0.84rem;
-      font-weight: 700;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.25);
-      display: none;
-      z-index: 300;
-      white-space: nowrap;
-      max-width: 92vw;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .empty-msg {
-      text-align: center;
-      padding: 28px 10px;
-      color: var(--text-sub);
-      font-size: 0.86rem;
-    }
-    .err-text {
-      color: var(--danger);
-      font-size: 0.82rem;
-      margin-top: 8px;
-    }
+    .toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: var(--primary); color: #fff; padding: 10px 18px; border-radius: 24px; font-size: 0.84rem; font-weight: 700; box-shadow: 0 4px 16px rgba(0,0,0,0.25); display: none; z-index: 300; white-space: nowrap; max-width: 92vw; overflow: hidden; text-overflow: ellipsis; }
+    .empty-msg { text-align: center; padding: 28px 10px; color: var(--text-sub); font-size: 0.86rem; }
+    .err-text { color: var(--danger); font-size: 0.82rem; margin-top: 8px; }
   </style>
 </head>
 <body>
@@ -879,7 +197,7 @@
   <header class="top-bar">
     <div class="top-bar-inner">
       <div>
-        <div class="top-title">銀座そうぜん鍼灸院 予約管理</div>
+        <div class="top-title" id="headerClinicTitle">予約管理</div>
         <div class="top-sub">スタッフ専用コントロールパネル</div>
       </div>
       <button type="button" class="reload-btn" id="headerReloadBtn" style="display:none;" onclick="loadAllAdminData()">↻ 更新</button>
@@ -887,8 +205,10 @@
   </header>
 
   <div class="container">
+    <div id="bootLoading" class="empty-msg" style="margin-top:40px;">管理画面を読み込み中...</div>
+
     <!-- ログイン画面 -->
-    <div id="loginView" class="login-card">
+    <div id="loginView" class="login-card" style="display:none;">
       <h2>スタッフ認証</h2>
       <p>管理用パスコードを入力してください</p>
       <input type="password" id="pinInput" class="pin-input" inputmode="numeric" maxlength="10" placeholder="••••">
@@ -906,7 +226,7 @@
         <button type="button" class="tab-btn" onclick="switchTab('settings', this)">基本設定</button>
       </div>
 
-      <!-- タブ1：日報タイムテーブル画面 -->
+      <!-- タブ1：日報ビュー -->
       <div id="tab-daily" class="tab-panel active">
         <div class="day-nav">
           <button type="button" class="btn-nav" onclick="shiftDailyDate(-1)">◀ 前日</button>
@@ -916,46 +236,27 @@
         </div>
 
         <div class="kpi-grid">
-          <div class="kpi-box">
-            <div class="kpi-label">患者様</div>
-            <div class="kpi-val" id="kpiPatients">-名</div>
-          </div>
-          <div class="kpi-box">
-            <div class="kpi-label">予定売上</div>
-            <div class="kpi-val money" id="kpiAmount">¥0</div>
-          </div>
-          <div class="kpi-box">
-            <div class="kpi-label">着替え</div>
-            <div class="kpi-val" id="kpiClothes">0件</div>
-          </div>
-          <div class="kpi-box">
-            <div class="kpi-label">領収書</div>
-            <div class="kpi-val" id="kpiReceipt">0件</div>
-          </div>
+          <div class="kpi-box"><div class="kpi-label">患者様</div><div class="kpi-val" id="kpiPatients">-名</div></div>
+          <div class="kpi-box"><div class="kpi-label">予定売上</div><div class="kpi-val money" id="kpiAmount">¥0</div></div>
+          <div class="kpi-box"><div class="kpi-label">着替え</div><div class="kpi-val" id="kpiClothes">0件</div></div>
+          <div class="kpi-box"><div class="kpi-label">領収書</div><div class="kpi-val" id="kpiReceipt">0件</div></div>
         </div>
 
         <div class="filter-strip">
           <span id="dailyDateLabel">読み込み中...</span>
-          <label>
-            <input type="checkbox" id="dailyOnlyActiveCheck" checked onchange="renderDailyTable()">
-            <span>予約・不可のみ表示</span>
-          </label>
+          <label><input type="checkbox" id="dailyOnlyActiveCheck" checked onchange="renderDailyTable()"><span>予約・不可のみ表示</span></label>
         </div>
 
-        <div id="dailyTableContainer">
-          <div class="empty-msg">日報データを読み込み中...</div>
-        </div>
+        <div id="dailyTableContainer"><div class="empty-msg">日報データを読み込み中...</div></div>
       </div>
 
-      <!-- タブ2：予約一覧（検索・変更・キャンセル） -->
+      <!-- タブ2：予約一覧 -->
       <div id="tab-reservations" class="tab-panel">
         <input type="text" id="resSearch" class="search-box" placeholder="お名前・メニュー・日付で検索..." oninput="renderReservations()">
-        <div id="resListContainer">
-          <div class="empty-msg">読み込み中...</div>
-        </div>
+        <div id="resListContainer"><div class="empty-msg">読み込み中...</div></div>
       </div>
 
-      <!-- タブ3：予約不可（期間一括 ＋ 個別タップ） -->
+      <!-- タブ3：予約不可 -->
       <div id="tab-blocks" class="tab-panel">
         <div class="card">
           <div class="card-title">
@@ -963,22 +264,10 @@
             <span style="font-size:0.72rem; color:var(--text-sub); font-weight:500;">既存予約は保護されます</span>
           </div>
           <div class="bulk-grid">
-            <div class="bulk-field">
-              <label>開始日</label>
-              <input type="date" id="bulkStartDate">
-            </div>
-            <div class="bulk-field">
-              <label>終了日</label>
-              <input type="date" id="bulkEndDate">
-            </div>
-            <div class="bulk-field">
-              <label>開始時間</label>
-              <select id="bulkStartTime"></select>
-            </div>
-            <div class="bulk-field">
-              <label>終了時間</label>
-              <select id="bulkEndTime"></select>
-            </div>
+            <div class="bulk-field"><label>開始日</label><input type="date" id="bulkStartDate"></div>
+            <div class="bulk-field"><label>終了日</label><input type="date" id="bulkEndDate"></div>
+            <div class="bulk-field"><label>開始時間</label><select id="bulkStartTime"></select></div>
+            <div class="bulk-field"><label>終了時間</label><select id="bulkEndTime"></select></div>
           </div>
           <div class="bulk-field">
             <label>日報に記載する文字（ラベル）</label>
@@ -1000,49 +289,131 @@
             <button type="button" class="btn btn-outline" style="padding:10px 14px;" onclick="loadDaySlots()">表示</button>
           </div>
           <div class="legend-row">
-            <span><span class="legend-dot" style="background:#fff;border:1px solid #ccc;"></span>空き（タップで不可）</span>
-            <span><span class="legend-dot" style="background:#fdf2f0;border:1px solid #e8b4ae;"></span>予約不可（タップで解除）</span>
+            <span><span class="legend-dot" style="background:#fff;border:1px solid #ccc;"></span>空き</span>
+            <span><span class="legend-dot" style="background:#fdf2f0;border:1px solid #e8b4ae;"></span>予約不可</span>
             <span><span class="legend-dot" style="background:#eef5fc;border:1px solid #b7d2ed;"></span>予約あり</span>
           </div>
-          <div id="daySlotsContainer" class="slot-grid">
-            <div class="empty-msg" style="grid-column:1/-1;">日付を選択してください</div>
-          </div>
+          <div id="daySlotsContainer" class="slot-grid"><div class="empty-msg" style="grid-column:1/-1;">日付を選択してください</div></div>
         </div>
       </div>
 
-      <!-- タブ4：設定シート編集 -->
+      <!-- タブ4：基本設定（全部入り） -->
       <div id="tab-settings" class="tab-panel">
         <div class="card">
-          <div class="card-title">受付日数・初診料の設定</div>
+          <div class="card-title">管理画面の暗証番号（パスコード）</div>
           <div class="setting-row">
             <div>
-              <div class="setting-label">院長の受付可能日数</div>
-              <div class="setting-sub">「1」にすると翌日のみ予約可能</div>
+              <div class="setting-label">パスコード認証を使う</div>
+              <div class="setting-sub">OFFにすると暗証番号なしで即開きます</div>
             </div>
-            <div class="num-input-wrap">
-              <input type="number" id="setDirectorDays" class="num-input" min="0" max="365">
-              <span>日先まで</span>
-            </div>
+            <label class="switch"><input type="checkbox" id="setPinEnabled"><span class="slider"></span></label>
           </div>
           <div class="setting-row">
             <div>
-              <div class="setting-label">スタッフの受付可能日数</div>
-              <div class="setting-sub">通常は7日〜30日先まで</div>
+              <div class="setting-label">暗証番号（パスコード）</div>
+              <div class="setting-sub">お好きな数字に変更できます</div>
             </div>
-            <div class="num-input-wrap">
-              <input type="number" id="setStaffDays" class="num-input" min="0" max="365">
-              <span>日先まで</span>
-            </div>
+            <input type="text" id="setAdminPin" class="num-input" style="text-align:center;" inputmode="numeric">
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">受付日数・初診料・予約ルール</div>
+          <div class="setting-row">
+            <div><div class="setting-label">院長の受付可能日数</div></div>
+            <div class="num-input-wrap"><input type="number" id="setDirectorDays" class="num-input" min="0" max="365"><span>日先</span></div>
+          </div>
+          <div class="setting-row">
+            <div><div class="setting-label">スタッフの受付可能日数</div></div>
+            <div class="num-input-wrap"><input type="number" id="setStaffDays" class="num-input" min="0" max="365"><span>日先</span></div>
+          </div>
+          <div class="setting-row">
+            <div><div class="setting-label">初診料（税込）</div></div>
+            <div class="num-input-wrap"><span>¥</span><input type="number" id="setFirstVisitFee" class="num-input" step="500" min="0"></div>
+          </div>
+          <div class="setting-col">
+            <div class="setting-label">初診料の適用ルール</div>
+            <select id="setFirstVisitRule" class="select-input">
+              <option value="院長新規のみ">院長新規のみ</option>
+              <option value="全員の新規">全員の新規</option>
+              <option value="なし">なし</option>
+            </select>
+          </div>
+          <div class="setting-row">
+            <div><div class="setting-label">予約枠の間隔</div></div>
+            <div class="num-input-wrap"><input type="number" id="setSlotInterval" class="num-input" min="5" max="120" step="5"><span>分</span></div>
+          </div>
+          <div class="setting-row">
+            <div><div class="setting-label">Webキャンセル期限（前日）</div></div>
+            <div class="num-input-wrap"><input type="number" id="setCancelDeadlineHour" class="num-input" min="0" max="23"><span>時まで</span></div>
           </div>
           <div class="setting-row">
             <div>
-              <div class="setting-label">初診料（院長新規のみ）</div>
-              <div class="setting-sub">税込金額</div>
+              <div class="setting-label">当日予約の締切</div>
+              <div class="setting-sub">0=制限なし / -1=当日不可 / 2=2時間前まで</div>
             </div>
-            <div class="num-input-wrap">
-              <span>¥</span>
-              <input type="number" id="setFirstVisitFee" class="num-input" step="500" min="0">
+            <div class="num-input-wrap"><input type="number" id="setSameDayCutoffHours" class="num-input" min="-1" max="24"><span>時間前</span></div>
+          </div>
+          <div class="setting-row">
+            <div><div class="setting-label">1枠の同時受付数</div></div>
+            <div class="num-input-wrap"><input type="number" id="setMaxConcurrent" class="num-input" min="1" max="10"><span>名</span></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">営業時間・曜日・休み設定</div>
+          <div class="setting-col">
+            <div class="setting-label">院長施術曜日（カンマ区切り）</div>
+            <input type="text" id="setDirectorDaysOfWeek" class="text-input" placeholder="火,水,金,土">
+            <div class="two-col-mini">
+              <div><span class="setting-sub">開始（時）</span><input type="number" id="setDirectorStartHour" class="text-input" min="0" max="23"></div>
+              <div><span class="setting-sub">終了（時）</span><input type="number" id="setDirectorEndHour" class="text-input" min="1" max="24"></div>
             </div>
+          </div>
+          <div class="setting-col">
+            <div class="setting-label">スタッフ施術曜日（カンマ区切り）</div>
+            <input type="text" id="setStaffDaysOfWeek" class="text-input" placeholder="日,月,木">
+            <div class="two-col-mini">
+              <div><span class="setting-sub">開始（時）</span><input type="number" id="setStaffStartHour" class="text-input" min="0" max="23"></div>
+              <div><span class="setting-sub">終了（時）</span><input type="number" id="setStaffEndHour" class="text-input" min="1" max="24"></div>
+            </div>
+          </div>
+          <div class="setting-col">
+            <div class="setting-label">固定休憩時間（空欄でなし）</div>
+            <input type="text" id="setBreakTime" class="text-input" placeholder="例: 13:00-14:00">
+          </div>
+          <div class="setting-col">
+            <div class="setting-label">臨時休業日（カンマ区切り）</div>
+            <input type="text" id="setClosedDates" class="text-input" placeholder="例: 2026-12-30,2026-12-31">
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">院情報・メール・表示ON/OFF</div>
+          <div class="setting-col"><div class="setting-label">院名</div><input type="text" id="setClinicName" class="text-input"></div>
+          <div class="setting-col"><div class="setting-label">連携カレンダー名</div><input type="text" id="setCalendarName" class="text-input"></div>
+          <div class="setting-col"><div class="setting-label">カルテ保存フォルダ名</div><input type="text" id="setKarteFolderName" class="text-input"></div>
+          <div class="setting-col"><div class="setting-label">月次アーカイブフォルダID</div><input type="text" id="setArchiveFolderId" class="text-input" placeholder="共有フォルダのID"></div>
+          <div class="setting-col"><div class="setting-label">管理者通知メール（複数可・空欄=オーナー）</div><input type="text" id="setAdminEmails" class="text-input" placeholder="a@example.com, b@example.com"></div>
+          <div class="setting-col"><div class="setting-label">メール末尾の署名</div><textarea id="setEmailSignature" class="textarea-input"></textarea></div>
+          <div class="setting-col"><div class="setting-label">予約画面お知らせバナー（空欄で非表示）</div><input type="text" id="setNoticeBanner" class="text-input"></div>
+          <div class="setting-col"><div class="setting-label">予約確定前の注意事項</div><textarea id="setBookingNotice" class="textarea-input"></textarea></div>
+
+          <div class="setting-row">
+            <div><div class="setting-label">前日リマインドメール送信</div></div>
+            <label class="switch"><input type="checkbox" id="setReminderEnabled"><span class="slider"></span></label>
+          </div>
+          <div class="setting-row">
+            <div><div class="setting-label">「お着替え」選択を表示</div></div>
+            <label class="switch"><input type="checkbox" id="setShowClothes"><span class="slider"></span></label>
+          </div>
+          <div class="setting-row">
+            <div><div class="setting-label">「領収書」選択を表示</div></div>
+            <label class="switch"><input type="checkbox" id="setShowReceipt"><span class="slider"></span></label>
+          </div>
+          <div class="setting-row">
+            <div><div class="setting-label">カルテ写真機能を使用</div></div>
+            <label class="switch"><input type="checkbox" id="setKarteEnabled"><span class="slider"></span></label>
           </div>
         </div>
 
@@ -1056,7 +427,7 @@
           <div id="settingsOptionList"></div>
         </div>
 
-        <button type="button" class="btn btn-primary" id="saveConfigBtn" onclick="saveSettings()">設定をスプレッドシートへ保存する</button>
+        <button type="button" class="btn btn-primary" id="saveConfigBtn" onclick="saveSettings()">すべての設定をスプレッドシートへ保存する</button>
       </div>
     </div>
   </div>
@@ -1069,20 +440,9 @@
         <button type="button" class="modal-close-x" onclick="closeRescheduleModal()">×</button>
       </div>
       <div id="modalTargetInfo" style="font-size:0.84rem; margin-bottom:14px; background:var(--accent-light); padding:10px; border-radius:8px;"></div>
-
-      <div class="form-field">
-        <label>新しいご予約日</label>
-        <input type="date" id="newDateInput">
-      </div>
-      <div class="form-field">
-        <label>新しいお時間</label>
-        <select id="newTimeSelect"></select>
-      </div>
-      <label class="check-row">
-        <input type="checkbox" id="sendRescheduleMailCheck" checked>
-        <span>患者様へ日時変更メールを送信する</span>
-      </label>
-
+      <div class="form-field"><label>新しいご予約日</label><input type="date" id="newDateInput"></div>
+      <div class="form-field"><label>新しいお時間</label><select id="newTimeSelect"></select></div>
+      <label class="check-row"><input type="checkbox" id="sendRescheduleMailCheck" checked><span>患者様へ日時変更メールを送信する</span></label>
       <div class="modal-actions">
         <button type="button" class="btn btn-outline" onclick="closeRescheduleModal()">閉じる</button>
         <button type="button" class="btn btn-accent" id="confirmRescheduleBtn" onclick="submitReschedule()">変更を確定</button>
@@ -1097,7 +457,6 @@
         <span id="karteModalTitle">カルテ写真</span>
         <button type="button" class="modal-close-x" onclick="closeKarteModal()">×</button>
       </div>
-
       <div class="karte-upload-area">
         <label class="karte-upload-label">
           📷 カルテを撮影する
@@ -1106,10 +465,7 @@
         <div class="karte-upload-hint">タップするとカメラが起動します（複数枚撮る場合は続けて撮影）</div>
         <div id="karteUploadProgress" class="karte-progress" style="display:none;"></div>
       </div>
-
-      <div id="karteListContainer" class="karte-list">
-        <div class="empty-msg">読み込み中...</div>
-      </div>
+      <div id="karteListContainer" class="karte-list"><div class="empty-msg">読み込み中...</div></div>
     </div>
   </div>
 
@@ -1140,14 +496,12 @@
     let adminReservations = [];
     let currentDailyData = null;
     let editingCancelKey = '';
-
-    // カルテ管理用ステート
     let activeKartePatient = { name: '', tel: '', visitDate: '' };
     let currentKarteItems = [];
     let karteImageCache = {};
     let viewerIndex = 0;
 
-    window.addEventListener('DOMContentLoaded', () => {
+    window.addEventListener('DOMContentLoaded', async () => {
       initTimeDropdowns();
       const todayStr = getLocalDateString(new Date());
       document.getElementById('dailyDateInput').value = todayStr;
@@ -1155,10 +509,30 @@
       document.getElementById('bulkStartDate').value = todayStr;
       document.getElementById('bulkEndDate').value = todayStr;
 
+      try {
+        const res = await fetch(`${GAS_API_URL}?api=adminAuthCheck`);
+        const auth = await res.json();
+        if (auth.clinicName) {
+          document.getElementById('headerClinicTitle').textContent = `${auth.clinicName} 予約管理`;
+          document.title = `予約管理・設定 | ${auth.clinicName}`;
+        }
+        document.getElementById('bootLoading').style.display = 'none';
+
+        if (auth.success && auth.pinEnabled === false) {
+          // パスコード認証OFFなら即ログイン
+          await loginWithPin('');
+          return;
+        }
+      } catch (e) {
+        document.getElementById('bootLoading').style.display = 'none';
+      }
+
       const savedPin = sessionStorage.getItem('sozen_admin_pin');
       if (savedPin) {
         document.getElementById('pinInput').value = savedPin;
         attemptLogin();
+      } else {
+        document.getElementById('loginView').style.display = 'block';
       }
     });
 
@@ -1167,10 +541,7 @@
     });
 
     function getLocalDateString(d) {
-      const y = d.getFullYear();
-      const m = String(d.getMonth() + 1).padStart(2, '0');
-      const day = String(d.getDate()).padStart(2, '0');
-      return `${y}-${m}-${day}`;
+      return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
     }
 
     function initTimeDropdowns() {
@@ -1180,12 +551,9 @@
           timeList.push(`${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`);
         }
       }
-
       ['newTimeSelect', 'bulkStartTime', 'bulkEndTime'].forEach(id => {
-        const sel = document.getElementById(id);
-        sel.innerHTML = timeList.map(t => `<option value="${t}">${t}</option>`).join('');
+        document.getElementById(id).innerHTML = timeList.map(t => `<option value="${t}">${t}</option>`).join('');
       });
-
       document.getElementById('bulkStartTime').value = '08:00';
       document.getElementById('bulkEndTime').value = '19:45';
     }
@@ -1200,12 +568,13 @@
     async function attemptLogin() {
       const pinVal = document.getElementById('pinInput').value.trim();
       const errEl = document.getElementById('loginError');
-      const btn = document.getElementById('loginBtn');
-      if (!pinVal) {
-        errEl.textContent = 'パスコードを入力してください。';
-        return;
-      }
+      if (!pinVal) { errEl.textContent = 'パスコードを入力してください。'; return; }
+      await loginWithPin(pinVal);
+    }
 
+    async function loginWithPin(pinVal) {
+      const errEl = document.getElementById('loginError');
+      const btn = document.getElementById('loginBtn');
       errEl.textContent = '';
       btn.disabled = true;
       btn.textContent = '認証中...';
@@ -1214,6 +583,7 @@
         const res = await fetch(`${GAS_API_URL}?api=adminInit&pin=${encodeURIComponent(pinVal)}`);
         const data = await res.json();
         if (!data.success) {
+          document.getElementById('loginView').style.display = 'block';
           errEl.textContent = data.message || '認証に失敗しました。';
           sessionStorage.removeItem('sozen_admin_pin');
           btn.disabled = false;
@@ -1222,9 +592,13 @@
         }
 
         adminPin = pinVal;
-        sessionStorage.setItem('sozen_admin_pin', pinVal);
+        if (pinVal) sessionStorage.setItem('sozen_admin_pin', pinVal);
         adminConfig = data.config;
         adminReservations = data.reservations || [];
+
+        if (adminConfig.settings && adminConfig.settings.clinicName) {
+          document.getElementById('headerClinicTitle').textContent = `${adminConfig.settings.clinicName} 予約管理`;
+        }
 
         document.getElementById('loginView').style.display = 'none';
         document.getElementById('mainView').style.display = 'block';
@@ -1235,7 +609,8 @@
         loadDailyReport();
         loadDaySlots();
       } catch (err) {
-        errEl.textContent = '通信エラーが発生しました。時間をおいてお試しください。';
+        document.getElementById('loginView').style.display = 'block';
+        errEl.textContent = '通信エラーが発生しました。';
         btn.disabled = false;
         btn.textContent = '管理画面を開く';
       }
@@ -1249,15 +624,16 @@
         if (data.success) {
           adminConfig = data.config;
           adminReservations = data.reservations || [];
+          if (adminConfig.settings && adminConfig.settings.clinicName) {
+            document.getElementById('headerClinicTitle').textContent = `${adminConfig.settings.clinicName} 予約管理`;
+          }
           renderReservations();
           renderSettings();
           loadDailyReport();
           loadDaySlots();
           showToast('最新の状態に更新しました');
         }
-      } catch (e) {
-        showToast('更新に失敗しました');
-      }
+      } catch (e) { showToast('更新に失敗しました'); }
     }
 
     function switchTab(tabName, btnEl) {
@@ -1269,15 +645,13 @@
       if (tabName === 'blocks') loadDaySlots();
     }
 
-    /* ----- タブ1：日報ビュー ----- */
+    /* ----- 日報ビュー ----- */
     function shiftDailyDate(delta) {
       const input = document.getElementById('dailyDateInput');
       const parts = (input.value || getLocalDateString(new Date())).split('-').map(Number);
-      const d = new Date(parts[0], parts[1] - 1, parts[2] + delta);
-      input.value = getLocalDateString(d);
+      input.value = getLocalDateString(new Date(parts[0], parts[1] - 1, parts[2] + delta));
       loadDailyReport();
     }
-
     function setDailyToday() {
       document.getElementById('dailyDateInput').value = getLocalDateString(new Date());
       loadDailyReport();
@@ -1292,10 +666,7 @@
       try {
         const res = await fetch(`${GAS_API_URL}?api=adminDailyReport&pin=${encodeURIComponent(adminPin)}&date=${encodeURIComponent(dateVal)}`);
         const data = await res.json();
-        if (!data.success) {
-          container.innerHTML = `<div class="empty-msg">${escapeHtml(data.message || '読み込みに失敗しました')}</div>`;
-          return;
-        }
+        if (!data.success) { container.innerHTML = `<div class="empty-msg">${escapeHtml(data.message)}</div>`; return; }
         currentDailyData = data;
         document.getElementById('dailyDateLabel').textContent = data.dateStr + (data.hasDailySheet ? '' : '（日報未作成）');
         document.getElementById('kpiPatients').textContent = `${data.summary.patients}名`;
@@ -1303,9 +674,7 @@
         document.getElementById('kpiClothes').textContent = `${data.summary.clothes}件`;
         document.getElementById('kpiReceipt').textContent = `${data.summary.receipt}件`;
         renderDailyTable();
-      } catch (e) {
-        container.innerHTML = '<div class="empty-msg">通信エラーが発生しました。</div>';
-      }
+      } catch (e) { container.innerHTML = '<div class="empty-msg">通信エラーが発生しました。</div>'; }
     }
 
     function renderDailyTable() {
@@ -1313,34 +682,17 @@
       const container = document.getElementById('dailyTableContainer');
       const onlyActive = document.getElementById('dailyOnlyActiveCheck').checked;
       const dateVal = document.getElementById('dailyDateInput').value;
-      const list = onlyActive
-        ? currentDailyData.rows.filter(r => r.type !== 'empty')
-        : currentDailyData.rows;
+      const karteOn = !(adminConfig && adminConfig.settings && adminConfig.settings.karteEnabled === false);
+      const list = onlyActive ? currentDailyData.rows.filter(r => r.type !== 'empty') : currentDailyData.rows;
 
       if (list.length === 0) {
-        container.innerHTML = '<div class="empty-msg">この日の予約・ブロックはありません。<br>（右上のチェックを外すと全時間枠が表示されます）</div>';
+        container.innerHTML = '<div class="empty-msg">この日の予約・ブロックはありません。</div>';
         return;
       }
 
       container.innerHTML = list.map(r => {
-        if (r.type === 'empty') {
-          return `
-            <div class="tt-row tt-empty">
-              <div class="tt-time">${escapeHtml(r.time)}</div>
-              <div class="tt-body" style="font-size:0.78rem;">空き</div>
-            </div>
-          `;
-        }
-        if (r.type === 'blocked') {
-          return `
-            <div class="tt-row tt-blocked">
-              <div class="tt-time">${escapeHtml(r.time)}</div>
-              <div class="tt-body">
-                <div class="tt-name" style="color:var(--danger);">${escapeHtml(r.name)}</div>
-              </div>
-            </div>
-          `;
-        }
+        if (r.type === 'empty') return `<div class="tt-row tt-empty"><div class="tt-time">${escapeHtml(r.time)}</div><div class="tt-body" style="font-size:0.78rem;">空き</div></div>`;
+        if (r.type === 'blocked') return `<div class="tt-row tt-blocked"><div class="tt-time">${escapeHtml(r.time)}</div><div class="tt-body"><div class="tt-name" style="color:var(--danger);">${escapeHtml(r.name)}</div></div></div>`;
 
         const isNew = r.customerType && r.customerType.includes('新規');
         const tagsHtml = [
@@ -1350,8 +702,7 @@
           r.receipt ? '<span class="tag tag-receipt">領収書</span>' : ''
         ].filter(Boolean).join('');
 
-        const karteBtn = `<button type="button" class="btn btn-karte tt-karte-btn" onclick="event.stopPropagation(); openKarteModal('${escapeJs(r.name)}', '${escapeJs(r.tel)}', '${escapeJs(dateVal)}')">📷 カルテ写真を見る・撮影</button>`;
-
+        const karteBtn = karteOn ? `<button type="button" class="btn btn-karte tt-karte-btn" onclick="event.stopPropagation(); openKarteModal('${escapeJs(r.name)}', '${escapeJs(r.tel)}', '${escapeJs(dateVal)}')">📷 カルテ写真を見る・撮影</button>` : '';
         const drawerActions = r.cancelKey
           ? `<div class="tt-drawer-actions">
                <button type="button" class="btn btn-outline" onclick="event.stopPropagation(); openRescheduleModal('${escapeJs(r.cancelKey)}')">日時を変更</button>
@@ -1376,12 +727,11 @@
                 ${drawerActions}
               </div>
             </div>
-          </div>
-        `;
+          </div>`;
       }).join('');
     }
 
-    /* ----- カルテ写真モーダル＆拡大ビューア ----- */
+    /* ----- カルテ写真 ----- */
     async function openKarteModal(name, tel, visitDate) {
       activeKartePatient = { name: name || '', tel: tel || '', visitDate: visitDate || getLocalDateString(new Date()) };
       document.getElementById('karteModalTitle').textContent = `${name} 様のカルテ写真`;
@@ -1390,53 +740,35 @@
       document.getElementById('karteModal').classList.add('open');
       await loadKarteList();
     }
-
-    function closeKarteModal() {
-      document.getElementById('karteModal').classList.remove('open');
-    }
+    function closeKarteModal() { document.getElementById('karteModal').classList.remove('open'); }
 
     async function loadKarteList() {
       const container = document.getElementById('karteListContainer');
       container.innerHTML = '<div class="empty-msg">カルテ写真を読み込み中...</div>';
-
       try {
-        const url = `${GAS_API_URL}?api=adminKarteList&pin=${encodeURIComponent(adminPin)}&name=${encodeURIComponent(activeKartePatient.name)}&tel=${encodeURIComponent(activeKartePatient.tel)}`;
-        const res = await fetch(url);
+        const res = await fetch(`${GAS_API_URL}?api=adminKarteList&pin=${encodeURIComponent(adminPin)}&name=${encodeURIComponent(activeKartePatient.name)}&tel=${encodeURIComponent(activeKartePatient.tel)}`);
         const data = await res.json();
-        if (!data.success) {
-          container.innerHTML = `<div class="empty-msg">${escapeHtml(data.message || '読み込みエラー')}</div>`;
-          return;
-        }
-
+        if (!data.success) { container.innerHTML = `<div class="empty-msg">${escapeHtml(data.message)}</div>`; return; }
         currentKarteItems = data.items || [];
         if (currentKarteItems.length === 0) {
           container.innerHTML = '<div class="empty-msg">まだカルテ写真が登録されていません。<br>上のボタンから撮影してください。</div>';
           return;
         }
-
         container.innerHTML = currentKarteItems.map((item, idx) => `
           <button type="button" class="karte-item-btn" onclick="openKarteViewer(${idx})">
-            <div>
-              <div style="font-size:0.9rem; font-weight:700;">📄 ${escapeHtml(item.visitDate || '日付なし')}</div>
-              <div style="font-size:0.72rem; color:var(--text-sub);">登録：${escapeHtml(item.createdStr)}</div>
-            </div>
+            <div><div style="font-size:0.9rem; font-weight:700;">📄 ${escapeHtml(item.visitDate || '日付なし')}</div><div style="font-size:0.72rem; color:var(--text-sub);">登録：${escapeHtml(item.createdStr)}</div></div>
             <span style="font-size:0.8rem; font-weight:700; color:var(--info);">見る ›</span>
-          </button>
-        `).join('');
-      } catch (e) {
-        container.innerHTML = '<div class="empty-msg">通信エラーが発生しました。</div>';
-      }
+          </button>`).join('');
+      } catch (e) { container.innerHTML = '<div class="empty-msg">通信エラーが発生しました。</div>'; }
     }
 
-    // 撮影した写真を自動リサイズしてアップロード
     async function handleKarteFilesSelected(input) {
       const files = Array.from(input.files || []);
       if (files.length === 0) return;
-
       const prog = document.getElementById('karteUploadProgress');
       prog.style.display = 'block';
-
       let successCount = 0;
+
       for (let i = 0; i < files.length; i++) {
         prog.textContent = `${i + 1} / ${files.length} 枚目を保存中...`;
         try {
@@ -1447,22 +779,13 @@
             body: JSON.stringify({
               action: 'adminUploadKarte',
               pin: adminPin,
-              payload: {
-                name: activeKartePatient.name,
-                tel: activeKartePatient.tel,
-                visitDate: activeKartePatient.visitDate,
-                base64Data: base64Data,
-                index: i + 1
-              }
+              payload: { name: activeKartePatient.name, tel: activeKartePatient.tel, visitDate: activeKartePatient.visitDate, base64Data, index: i + 1 }
             })
           });
           const data = await res.json();
           if (data.success) successCount++;
-        } catch (err) {
-          console.error('アップロード失敗:', err);
-        }
+        } catch (err) { console.error(err); }
       }
-
       input.value = '';
       prog.textContent = `${successCount} 枚のカルテ写真を保存しました！`;
       showToast(`${successCount} 枚のカルテを保存しました`);
@@ -1475,22 +798,14 @@
         reader.onload = (e) => {
           const img = new Image();
           img.onload = () => {
-            let w = img.width;
-            let h = img.height;
+            let w = img.width, h = img.height;
             if (w > maxSide || h > maxSide) {
-              if (w > h) {
-                h = Math.round(h * (maxSide / w));
-                w = maxSide;
-              } else {
-                w = Math.round(w * (maxSide / h));
-                h = maxSide;
-              }
+              if (w > h) { h = Math.round(h * (maxSide / w)); w = maxSide; }
+              else { w = Math.round(w * (maxSide / h)); h = maxSide; }
             }
             const canvas = document.createElement('canvas');
-            canvas.width = w;
-            canvas.height = h;
-            const ctx = canvas.getContext('2d');
-            ctx.drawImage(img, 0, 0, w, h);
+            canvas.width = w; canvas.height = h;
+            canvas.getContext('2d').drawImage(img, 0, 0, w, h);
             resolve(canvas.toDataURL('image/jpeg', quality));
           };
           img.onerror = reject;
@@ -1501,105 +816,51 @@
       });
     }
 
-    async function openKarteViewer(idx) {
-      viewerIndex = idx;
-      document.getElementById('karteViewer').classList.add('open');
-      await showCurrentViewerImage();
-    }
-
-    function closeKarteViewer() {
-      document.getElementById('karteViewer').classList.remove('open');
-    }
-
-    async function stepKarteViewer(delta) {
-      const next = viewerIndex + delta;
-      if (next < 0 || next >= currentKarteItems.length) return;
-      viewerIndex = next;
-      await showCurrentViewerImage();
-    }
+    async function openKarteViewer(idx) { viewerIndex = idx; document.getElementById('karteViewer').classList.add('open'); await showCurrentViewerImage(); }
+    function closeKarteViewer() { document.getElementById('karteViewer').classList.remove('open'); }
+    async function stepKarteViewer(delta) { const next = viewerIndex + delta; if (next < 0 || next >= currentKarteItems.length) return; viewerIndex = next; await showCurrentViewerImage(); }
 
     async function showCurrentViewerImage() {
       const item = currentKarteItems[viewerIndex];
       if (!item) return;
-
       document.getElementById('viewerCaption').textContent = `${item.visitDate}（${viewerIndex + 1} / ${currentKarteItems.length}）`;
       document.getElementById('viewerPrevBtn').disabled = (viewerIndex <= 0);
       document.getElementById('viewerNextBtn').disabled = (viewerIndex >= currentKarteItems.length - 1);
-
       const imgEl = document.getElementById('viewerImg');
       const loadEl = document.getElementById('viewerLoading');
-
-      if (karteImageCache[item.fileId]) {
-        loadEl.style.display = 'none';
-        imgEl.src = karteImageCache[item.fileId];
-        imgEl.style.display = 'block';
-        return;
-      }
-
-      imgEl.style.display = 'none';
-      loadEl.style.display = 'block';
-      loadEl.textContent = '画像を読み込み中...';
-
+      if (karteImageCache[item.fileId]) { loadEl.style.display = 'none'; imgEl.src = karteImageCache[item.fileId]; imgEl.style.display = 'block'; return; }
+      imgEl.style.display = 'none'; loadEl.style.display = 'block'; loadEl.textContent = '画像を読み込み中...';
       try {
         const res = await fetch(`${GAS_API_URL}?api=adminKarteImage&pin=${encodeURIComponent(adminPin)}&fileId=${encodeURIComponent(item.fileId)}`);
         const data = await res.json();
-        if (data.success && data.dataUrl) {
-          karteImageCache[item.fileId] = data.dataUrl;
-          loadEl.style.display = 'none';
-          imgEl.src = data.dataUrl;
-          imgEl.style.display = 'block';
-        } else {
-          loadEl.textContent = '画像の読み込みに失敗しました。';
-        }
-      } catch (e) {
-        loadEl.textContent = '通信エラーが発生しました。';
-      }
+        if (data.success && data.dataUrl) { karteImageCache[item.fileId] = data.dataUrl; loadEl.style.display = 'none'; imgEl.src = data.dataUrl; imgEl.style.display = 'block'; }
+        else loadEl.textContent = '画像の読み込みに失敗しました。';
+      } catch (e) { loadEl.textContent = '通信エラーが発生しました。'; }
     }
 
     async function deleteCurrentKarte() {
       const item = currentKarteItems[viewerIndex];
-      if (!item) return;
-      if (!confirm('このカルテ写真を削除しますか？')) return;
-
+      if (!item || !confirm('このカルテ写真を削除しますか？')) return;
       showToast('削除中...');
       try {
         const res = await fetch(GAS_API_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify({
-            action: 'adminDeleteKarte',
-            pin: adminPin,
-            fileId: item.fileId
-          })
+          method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({ action: 'adminDeleteKarte', pin: adminPin, fileId: item.fileId })
         });
         const data = await res.json();
-        if (data.success) {
-          delete karteImageCache[item.fileId];
-          closeKarteViewer();
-          showToast('削除しました');
-          await loadKarteList();
-        } else {
-          alert('削除エラー：' + (data.message || '削除に失敗しました'));
-        }
-      } catch (e) {
-        alert('通信エラーが発生しました。');
-      }
+        if (data.success) { delete karteImageCache[item.fileId]; closeKarteViewer(); showToast('削除しました'); await loadKarteList(); }
+        else alert('削除エラー：' + data.message);
+      } catch (e) { alert('通信エラーが発生しました。'); }
     }
 
-    /* ----- タブ2：予約一覧（変更・キャンセル・カルテ） ----- */
+    /* ----- 予約一覧 ----- */
     function renderReservations() {
       const kw = (document.getElementById('resSearch').value || '').trim().toLowerCase();
       const container = document.getElementById('resListContainer');
+      const karteOn = !(adminConfig && adminConfig.settings && adminConfig.settings.karteEnabled === false);
+      const filtered = adminReservations.filter(r => !kw || `${r.name} ${r.menuName} ${r.dateStr} ${r.tel}`.toLowerCase().includes(kw));
 
-      const filtered = adminReservations.filter(r => {
-        if (!kw) return true;
-        return `${r.name} ${r.menuName} ${r.dateStr} ${r.tel}`.toLowerCase().includes(kw);
-      });
-
-      if (filtered.length === 0) {
-        container.innerHTML = '<div class="empty-msg">該当する確定予約はありません。</div>';
-        return;
-      }
+      if (filtered.length === 0) { container.innerHTML = '<div class="empty-msg">該当する確定予約はありません。</div>'; return; }
 
       container.innerHTML = filtered.map(r => `
         <div class="res-card">
@@ -1615,333 +876,236 @@
             ${r.memo && r.memo !== 'なし' ? `<br>メモ：${escapeHtml(r.memo)}` : ''}
           </div>
           <div class="res-actions">
-            <button type="button" class="btn btn-karte" onclick="openKarteModal('${escapeJs(r.name)}', '${escapeJs(r.tel)}', '${escapeJs(r.dateIso)}')">📷 カルテ</button>
+            ${karteOn ? `<button type="button" class="btn btn-karte" onclick="openKarteModal('${escapeJs(r.name)}', '${escapeJs(r.tel)}', '${escapeJs(r.dateIso)}')">📷 カルテ</button>` : ''}
             <button type="button" class="btn btn-outline" onclick="openRescheduleModal('${escapeJs(r.cancelKey)}')">日時変更</button>
             <button type="button" class="btn btn-danger-outline" onclick="executeAdminCancel('${escapeJs(r.cancelKey)}', '${escapeJs(r.name)}', '${escapeJs(r.dateStr)}')">キャンセル</button>
           </div>
-        </div>
-      `).join('');
+        </div>`).join('');
     }
 
     function openRescheduleModal(cancelKey) {
       const target = adminReservations.find(r => r.cancelKey === cancelKey);
-      if (!target) {
-        alert('対象データが見つかりません。右上の「更新」を押してからお試しください。');
-        return;
-      }
+      if (!target) { alert('対象データが見つかりません。'); return; }
       editingCancelKey = cancelKey;
-      document.getElementById('modalTargetInfo').innerHTML =
-        `<strong>${escapeHtml(target.name)} 様</strong><br>現在：${escapeHtml(target.dateStr)}（${escapeHtml(target.menuName)}）`;
+      document.getElementById('modalTargetInfo').innerHTML = `<strong>${escapeHtml(target.name)} 様</strong><br>現在：${escapeHtml(target.dateStr)}（${escapeHtml(target.menuName)}）`;
       document.getElementById('newDateInput').value = target.dateIso;
       document.getElementById('newTimeSelect').value = target.timeStr;
       document.getElementById('sendRescheduleMailCheck').checked = true;
       document.getElementById('rescheduleModal').classList.add('open');
     }
-
-    function closeRescheduleModal() {
-      document.getElementById('rescheduleModal').classList.remove('open');
-      editingCancelKey = '';
-    }
+    function closeRescheduleModal() { document.getElementById('rescheduleModal').classList.remove('open'); editingCancelKey = ''; }
 
     async function submitReschedule() {
       const newDate = document.getElementById('newDateInput').value;
       const newTime = document.getElementById('newTimeSelect').value;
       const sendEmail = document.getElementById('sendRescheduleMailCheck').checked;
-      if (!newDate || !newTime) {
-        alert('新しい日付と時間を選択してください。');
-        return;
-      }
-
       const btn = document.getElementById('confirmRescheduleBtn');
-      btn.disabled = true;
-      btn.textContent = '変更中...';
-
+      btn.disabled = true; btn.textContent = '変更中...';
       try {
         const res = await fetch(GAS_API_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify({
-            action: 'adminReschedule',
-            pin: adminPin,
-            key: editingCancelKey,
-            newDate: newDate,
-            newTime: newTime,
-            sendEmail: sendEmail
-          })
+          method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({ action: 'adminReschedule', pin: adminPin, key: editingCancelKey, newDate, newTime, sendEmail })
         });
         const data = await res.json();
-        if (data.success) {
-          closeRescheduleModal();
-          showToast(data.message || '予約日時を変更しました');
-          await loadAllAdminData();
-        } else {
-          alert('エラー：' + (data.message || '変更に失敗しました'));
-        }
-      } catch (e) {
-        alert('通信エラーが発生しました。');
-      } finally {
-        btn.disabled = false;
-        btn.textContent = '変更を確定';
-      }
+        if (data.success) { closeRescheduleModal(); showToast(data.message); await loadAllAdminData(); }
+        else alert('エラー：' + data.message);
+      } catch (e) { alert('通信エラーが発生しました。'); }
+      finally { btn.disabled = false; btn.textContent = '変更を確定'; }
     }
 
     async function executeAdminCancel(cancelKey, name, dateStr) {
-      if (!confirm(`${name}様（${dateStr}）のご予約をキャンセルしますか？\n※カレンダー削除・日報クリアも同時に実行されます。`)) return;
-
+      if (!confirm(`${name}様（${dateStr}）のご予約をキャンセルしますか？`)) return;
       showToast('キャンセル処理を実行中...');
       try {
         const res = await fetch(GAS_API_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify({
-            action: 'adminCancel',
-            pin: adminPin,
-            key: cancelKey
-          })
+          method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({ action: 'adminCancel', pin: adminPin, key: cancelKey })
         });
         const data = await res.json();
-        if (data.success) {
-          showToast('キャンセルが完了しました');
-          await loadAllAdminData();
-        } else {
-          alert('エラー：' + (data.message || 'キャンセルに失敗しました'));
-        }
-      } catch (e) {
-        alert('通信エラーが発生しました。');
-      }
+        if (data.success) { showToast('キャンセルが完了しました'); await loadAllAdminData(); }
+        else alert('エラー：' + data.message);
+      } catch (e) { alert('通信エラーが発生しました。'); }
     }
 
-    /* ----- タブ3：予約不可（一括 ＋ 個別） ----- */
+    /* ----- 予約不可 ----- */
     async function executeBulkBlock(shouldBlock) {
       const startDate = document.getElementById('bulkStartDate').value;
       const endDate = document.getElementById('bulkEndDate').value;
       const startTime = document.getElementById('bulkStartTime').value;
       const endTime = document.getElementById('bulkEndTime').value;
       const label = document.getElementById('bulkLabel').value.trim() || '予約不可';
+      if (!startDate || !endDate) { alert('日付を選択してください。'); return; }
+      if (!confirm(`${startDate} 〜 ${endDate}（${startTime}〜${endTime}）をまとめて${shouldBlock ? '「' + label + '」に設定' : '解除'}しますか？`)) return;
 
-      if (!startDate || !endDate) {
-        alert('開始日と終了日を選択してください。');
-        return;
-      }
-
-      const confirmMsg = shouldBlock
-        ? `${startDate} 〜 ${endDate} の ${startTime}〜${endTime} を\nまとめて「${label}」に設定しますか？\n（※既存の予約枠は上書きされません）`
-        : `${startDate} 〜 ${endDate} の ${startTime}〜${endTime} の\n予約不可設定をまとめて解除しますか？\n（※患者様の予約枠は消えません）`;
-
-      if (!confirm(confirmMsg)) return;
-
-      const btn1 = document.getElementById('bulkBlockBtn');
-      const btn2 = document.getElementById('bulkUnblockBtn');
-      btn1.disabled = true;
-      btn2.disabled = true;
-      showToast(shouldBlock ? '期間一括で予約不可を設定中...' : '期間一括で解除中...');
-
+      const b1 = document.getElementById('bulkBlockBtn'), b2 = document.getElementById('bulkUnblockBtn');
+      b1.disabled = true; b2.disabled = true;
+      showToast('一括処理中...');
       try {
         const res = await fetch(GAS_API_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify({
-            action: 'adminBulkBlock',
-            pin: adminPin,
-            startDate: startDate,
-            endDate: endDate,
-            startTime: startTime,
-            endTime: endTime,
-            block: shouldBlock,
-            label: label
-          })
+          method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({ action: 'adminBulkBlock', pin: adminPin, startDate, endDate, startTime, endTime, block: shouldBlock, label })
         });
         const data = await res.json();
-        if (data.success) {
-          alert(data.message);
-          loadDaySlots();
-          loadDailyReport();
-        } else {
-          alert('エラー：' + (data.message || '処理に失敗しました'));
-        }
-      } catch (e) {
-        alert('通信エラーが発生しました。');
-      } finally {
-        btn1.disabled = false;
-        btn2.disabled = false;
-      }
+        if (data.success) { alert(data.message); loadDaySlots(); loadDailyReport(); }
+        else alert('エラー：' + data.message);
+      } catch (e) { alert('通信エラーが発生しました。'); }
+      finally { b1.disabled = false; b2.disabled = false; }
     }
 
     async function loadDaySlots() {
       const dateVal = document.getElementById('blockDateInput').value;
       const container = document.getElementById('daySlotsContainer');
       if (!dateVal) return;
-
       container.innerHTML = '<div class="empty-msg" style="grid-column:1/-1;">枠を読み込み中...</div>';
       try {
         const res = await fetch(`${GAS_API_URL}?api=adminDaySlots&pin=${encodeURIComponent(adminPin)}&date=${encodeURIComponent(dateVal)}`);
         const data = await res.json();
-        if (!data.success) {
-          container.innerHTML = `<div class="empty-msg" style="grid-column:1/-1;">${escapeHtml(data.message || '読み込みエラー')}</div>`;
-          return;
-        }
+        if (!data.success) { container.innerHTML = `<div class="empty-msg" style="grid-column:1/-1;">${escapeHtml(data.message)}</div>`; return; }
         document.getElementById('blockDateTitle').textContent = data.dateStr || '';
         container.innerHTML = data.slots.map(s => {
-          let cls = 'slot-open';
-          let subText = '空き';
-          let clickAttr = `onclick="toggleSlotBlock('${dateVal}', '${s.time}', true)"`;
-
-          if (s.status === 'booked') {
-            cls = 'slot-booked';
-            subText = s.label || '予約あり';
-            clickAttr = '';
-          } else if (s.status === 'blocked') {
-            cls = 'slot-blocked';
-            subText = s.label || '予約不可';
-            clickAttr = `onclick="toggleSlotBlock('${dateVal}', '${s.time}', false)"`;
-          } else if (s.status === 'sheet_only') {
-            cls = 'slot-sheet';
-            subText = s.label || '記載あり';
-            clickAttr = `onclick="toggleSlotBlock('${dateVal}', '${s.time}', false)"`;
-          }
-
-          return `
-            <div class="slot-item ${cls}" ${clickAttr}>
-              <div class="s-time">${escapeHtml(s.time)}</div>
-              <div class="s-label">${escapeHtml(subText)}</div>
-            </div>
-          `;
+          let cls = 'slot-open', subText = '空き', clickAttr = `onclick="toggleSlotBlock('${dateVal}', '${s.time}', true)"`;
+          if (s.status === 'booked') { cls = 'slot-booked'; subText = s.label || '予約あり'; clickAttr = ''; }
+          else if (s.status === 'blocked') { cls = 'slot-blocked'; subText = s.label || '予約不可'; clickAttr = `onclick="toggleSlotBlock('${dateVal}', '${s.time}', false)"`; }
+          else if (s.status === 'sheet_only') { cls = 'slot-sheet'; subText = s.label || '記載あり'; clickAttr = `onclick="toggleSlotBlock('${dateVal}', '${s.time}', false)"`; }
+          return `<div class="slot-item ${cls}" ${clickAttr}><div class="s-time">${escapeHtml(s.time)}</div><div class="s-label">${escapeHtml(subText)}</div></div>`;
         }).join('');
-      } catch (e) {
-        container.innerHTML = '<div class="empty-msg" style="grid-column:1/-1;">通信エラーが発生しました。</div>';
-      }
+      } catch (e) { container.innerHTML = '<div class="empty-msg" style="grid-column:1/-1;">通信エラーが発生しました。</div>'; }
     }
 
     async function toggleSlotBlock(dateVal, timeStr, shouldBlock) {
-      const msg = shouldBlock
-        ? `${dateVal} ${timeStr} を「予約不可」にしますか？`
-        : `${dateVal} ${timeStr} の予約不可（記載）を解除して空き枠に戻しますか？`;
-      if (!confirm(msg)) return;
-
-      showToast(shouldBlock ? '予約不可を設定中...' : '解除中...');
+      if (!confirm(`${dateVal} ${timeStr} を${shouldBlock ? '「予約不可」に設定' : '解除'}しますか？`)) return;
+      showToast('更新中...');
       try {
         const res = await fetch(GAS_API_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify({
-            action: 'adminToggleBlock',
-            pin: adminPin,
-            date: dateVal,
-            time: timeStr,
-            block: shouldBlock,
-            label: '予約不可'
-          })
+          method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({ action: 'adminToggleBlock', pin: adminPin, date: dateVal, time: timeStr, block: shouldBlock, label: '予約不可' })
         });
         const data = await res.json();
-        if (data.success) {
-          showToast(data.message || '更新しました');
-          loadDaySlots();
-          loadDailyReport();
-        } else {
-          alert('エラー：' + (data.message || '更新に失敗しました'));
-        }
-      } catch (e) {
-        alert('通信エラーが発生しました。');
-      }
+        if (data.success) { showToast(data.message); loadDaySlots(); loadDailyReport(); }
+        else alert('エラー：' + data.message);
+      } catch (e) { alert('通信エラーが発生しました。'); }
     }
 
-    /* ----- タブ4：設定シート編集 ----- */
+    /* ----- 基本設定（全部入り） ----- */
     function renderSettings() {
       if (!adminConfig) return;
+      const st = adminConfig.settings || {};
       document.getElementById('setDirectorDays').value = adminConfig.bookingLimits.director;
       document.getElementById('setStaffDays').value = adminConfig.bookingLimits.staff;
       document.getElementById('setFirstVisitFee').value = adminConfig.firstVisitFee;
 
+      document.getElementById('setPinEnabled').checked = st.pinEnabled !== false;
+      document.getElementById('setAdminPin').value = st.adminPin || '1234';
+      document.getElementById('setClinicName').value = st.clinicName || '';
+      document.getElementById('setCalendarName').value = st.calendarName || '';
+      document.getElementById('setKarteFolderName').value = st.karteFolderName || '';
+      document.getElementById('setDirectorDaysOfWeek').value = st.directorDaysOfWeek || '';
+      document.getElementById('setStaffDaysOfWeek').value = st.staffDaysOfWeek || '';
+      document.getElementById('setDirectorStartHour').value = st.directorStartHour ?? 8;
+      document.getElementById('setDirectorEndHour').value = st.directorEndHour ?? 20;
+      document.getElementById('setStaffStartHour').value = st.staffStartHour ?? 10;
+      document.getElementById('setStaffEndHour').value = st.staffEndHour ?? 19;
+      document.getElementById('setSlotInterval').value = st.slotInterval ?? 15;
+      document.getElementById('setCancelDeadlineHour').value = st.cancelDeadlineHour ?? 21;
+      document.getElementById('setSameDayCutoffHours').value = st.sameDayCutoffHours ?? 0;
+      document.getElementById('setBreakTime').value = st.breakTime || '';
+      document.getElementById('setClosedDates').value = st.closedDates || '';
+      document.getElementById('setMaxConcurrent').value = st.maxConcurrent ?? 1;
+      document.getElementById('setAdminEmails').value = st.adminEmails || '';
+      document.getElementById('setReminderEnabled').checked = st.reminderEnabled !== false;
+      document.getElementById('setEmailSignature').value = st.emailSignature || '';
+      document.getElementById('setNoticeBanner').value = st.noticeBanner || '';
+      document.getElementById('setShowClothes').checked = st.showClothes !== false;
+      document.getElementById('setShowReceipt').checked = st.showReceipt !== false;
+      document.getElementById('setFirstVisitRule').value = st.firstVisitRule || '院長新規のみ';
+      document.getElementById('setBookingNotice').value = st.bookingNotice || '';
+      document.getElementById('setArchiveFolderId').value = st.archiveFolderId || '';
+      document.getElementById('setKarteEnabled').checked = st.karteEnabled !== false;
+
       document.getElementById('settingsMenuList').innerHTML = adminConfig.menus.map((m, idx) => `
         <div class="setting-row">
-          <div>
-            <div class="setting-label">${escapeHtml(m.name)}</div>
-            <div class="setting-sub">${m.duration}分 ／ ¥${Number(m.price).toLocaleString()}</div>
-          </div>
-          <label class="switch">
-            <input type="checkbox" data-menu-idx="${idx}" ${m.active ? 'checked' : ''}>
-            <span class="slider"></span>
-          </label>
-        </div>
-      `).join('');
+          <div><div class="setting-label">${escapeHtml(m.name)}</div><div class="setting-sub">${m.duration}分 ／ ¥${Number(m.price).toLocaleString()}</div></div>
+          <label class="switch"><input type="checkbox" data-menu-idx="${idx}" ${m.active ? 'checked' : ''}><span class="slider"></span></label>
+        </div>`).join('');
 
       document.getElementById('settingsOptionList').innerHTML = adminConfig.options.map((o, idx) => `
         <div class="setting-row">
-          <div>
-            <div class="setting-label">${escapeHtml(o.name)}</div>
-            <div class="setting-sub">+¥${Number(o.price).toLocaleString()}</div>
-          </div>
-          <label class="switch">
-            <input type="checkbox" data-opt-idx="${idx}" ${o.active ? 'checked' : ''}>
-            <span class="slider"></span>
-          </label>
-        </div>
-      `).join('');
+          <div><div class="setting-label">${escapeHtml(o.name)}</div><div class="setting-sub">+¥${Number(o.price).toLocaleString()}</div></div>
+          <label class="switch"><input type="checkbox" data-opt-idx="${idx}" ${o.active ? 'checked' : ''}><span class="slider"></span></label>
+        </div>`).join('');
     }
 
     async function saveSettings() {
       const btn = document.getElementById('saveConfigBtn');
-      btn.disabled = true;
-      btn.textContent = '保存中...';
+      btn.disabled = true; btn.textContent = '保存中...';
 
-      const menusPayload = adminConfig.menus.map((m, idx) => {
-        const cb = document.querySelector(`input[data-menu-idx="${idx}"]`);
-        return { rowIndex: m.rowIndex, active: cb ? cb.checked : m.active };
-      });
-      const optionsPayload = adminConfig.options.map((o, idx) => {
-        const cb = document.querySelector(`input[data-opt-idx="${idx}"]`);
-        return { rowIndex: o.rowIndex, colIndex: o.colIndex, active: cb ? cb.checked : o.active };
-      });
-
+      const newPin = document.getElementById('setAdminPin').value.trim() || '1234';
       const payload = {
         bookingLimits: {
           director: Number(document.getElementById('setDirectorDays').value),
           staff: Number(document.getElementById('setStaffDays').value)
         },
         firstVisitFee: Number(document.getElementById('setFirstVisitFee').value),
-        menus: menusPayload,
-        options: optionsPayload
+        settings: {
+          pinEnabled: document.getElementById('setPinEnabled').checked,
+          adminPin: newPin,
+          clinicName: document.getElementById('setClinicName').value.trim(),
+          calendarName: document.getElementById('setCalendarName').value.trim(),
+          karteFolderName: document.getElementById('setKarteFolderName').value.trim(),
+          directorDaysOfWeek: document.getElementById('setDirectorDaysOfWeek').value.trim(),
+          staffDaysOfWeek: document.getElementById('setStaffDaysOfWeek').value.trim(),
+          directorStartHour: Number(document.getElementById('setDirectorStartHour').value),
+          directorEndHour: Number(document.getElementById('setDirectorEndHour').value),
+          staffStartHour: Number(document.getElementById('setStaffStartHour').value),
+          staffEndHour: Number(document.getElementById('setStaffEndHour').value),
+          slotInterval: Number(document.getElementById('setSlotInterval').value),
+          cancelDeadlineHour: Number(document.getElementById('setCancelDeadlineHour').value),
+          sameDayCutoffHours: Number(document.getElementById('setSameDayCutoffHours').value),
+          breakTime: document.getElementById('setBreakTime').value.trim(),
+          closedDates: document.getElementById('setClosedDates').value.trim(),
+          maxConcurrent: Number(document.getElementById('setMaxConcurrent').value),
+          adminEmails: document.getElementById('setAdminEmails').value.trim(),
+          reminderEnabled: document.getElementById('setReminderEnabled').checked,
+          emailSignature: document.getElementById('setEmailSignature').value,
+          noticeBanner: document.getElementById('setNoticeBanner').value.trim(),
+          showClothes: document.getElementById('setShowClothes').checked,
+          showReceipt: document.getElementById('setShowReceipt').checked,
+          firstVisitRule: document.getElementById('setFirstVisitRule').value,
+          bookingNotice: document.getElementById('setBookingNotice').value,
+          archiveFolderId: document.getElementById('setArchiveFolderId').value.trim(),
+          karteEnabled: document.getElementById('setKarteEnabled').checked
+        },
+        menus: adminConfig.menus.map((m, idx) => {
+          const cb = document.querySelector(`input[data-menu-idx="${idx}"]`);
+          return { rowIndex: m.rowIndex, active: cb ? cb.checked : m.active };
+        }),
+        options: adminConfig.options.map((o, idx) => {
+          const cb = document.querySelector(`input[data-opt-idx="${idx}"]`);
+          return { rowIndex: o.rowIndex, colIndex: o.colIndex, active: cb ? cb.checked : o.active };
+        })
       };
 
       try {
         const res = await fetch(GAS_API_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify({
-            action: 'adminSaveConfig',
-            pin: adminPin,
-            payload: payload
-          })
+          method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({ action: 'adminSaveConfig', pin: adminPin, payload })
         });
         const data = await res.json();
         if (data.success) {
-          showToast('設定シートに保存しました！');
+          adminPin = newPin;
+          sessionStorage.setItem('sozen_admin_pin', newPin);
+          showToast('すべての設定を保存しました！');
           await loadAllAdminData();
-        } else {
-          alert('保存エラー：' + (data.message || '保存に失敗しました'));
-        }
-      } catch (e) {
-        alert('通信エラーが発生しました。');
-      } finally {
-        btn.disabled = false;
-        btn.textContent = '設定をスプレッドシートへ保存する';
-      }
+        } else alert('保存エラー：' + data.message);
+      } catch (e) { alert('通信エラーが発生しました。'); }
+      finally { btn.disabled = false; btn.textContent = 'すべての設定をスプレッドシートへ保存する'; }
     }
 
     function escapeHtml(str) {
-      return String(str || '')
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#39;');
+      return String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
     }
-
     function escapeJs(str) {
-      return String(str || '')
-        .replace(/\\/g, '\\\\')
-        .replace(/'/g, "\\'")
-        .replace(/\n/g, ' ');
+      return String(str || '').replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/\n/g, ' ');
     }
   </script>
 </body>
