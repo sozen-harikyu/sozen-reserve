@@ -49,7 +49,7 @@
 
     .header {
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 26px;
     }
 
     .header-sub {
@@ -76,6 +76,21 @@
       font-size: 0.78rem;
       color: var(--text-sub);
       letter-spacing: 0.06em;
+    }
+
+    /* 設定シート F25：お知らせバナー */
+    .notice-banner {
+      display: none;
+      background: #fdf8ef;
+      border: 1px solid #e5d2b5;
+      border-left: 4px solid var(--accent);
+      color: #5c4934;
+      padding: 12px 14px;
+      border-radius: 8px;
+      margin-bottom: 24px;
+      font-size: 0.85rem;
+      line-height: 1.6;
+      white-space: pre-wrap;
     }
 
     .form-group {
@@ -360,6 +375,20 @@
       margin-bottom: 4px;
     }
 
+    /* 設定シート F29：追加の注意事項 */
+    .custom-booking-notice {
+      display: none;
+      font-size: 0.82rem;
+      color: var(--error);
+      background: #fff5f5;
+      border: 1px solid #f2cccc;
+      border-radius: 6px;
+      padding: 10px 12px;
+      margin-bottom: 12px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+    }
+
     .agreement-label {
       display: flex;
       align-items: center;
@@ -544,9 +573,12 @@
 <div class="wrapper">
   <div class="header">
     <div class="header-sub">GINZA SOZEN ACUPUNCTURE</div>
-    <div class="header-title">銀座そうぜん鍼灸院</div>
+    <div class="header-title" id="clinicTitle">銀座そうぜん鍼灸院</div>
     <div class="header-desc">完全予約制／完治を目指す鍼灸院</div>
   </div>
+
+  <!-- 設定シート F25：お知らせバナー（入力時のみ自動表示） -->
+  <div id="noticeBanner" class="notice-banner"></div>
 
   <form id="reservationForm" onsubmit="return false;">
     <div class="form-group">
@@ -573,7 +605,7 @@
       <div class="options-wrapper" id="optionsContainer"></div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group" id="clothesBlock">
       <div class="section-label">お着替えのお貸し出し</div>
       <div class="btn-toggle-group grid-4" id="clothesToggleGroup">
         <button type="button" class="toggle-btn active" onclick="setClothes(this, '不要')">不要</button>
@@ -583,7 +615,7 @@
       </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group" id="receiptBlock">
       <div class="section-label">医療費控除に使える領収書</div>
       <div class="btn-toggle-group grid-2" id="receiptToggleGroup">
         <button type="button" class="toggle-btn active" onclick="setReceipt(this, '不要')">不要</button>
@@ -647,6 +679,8 @@
         <li><strong>海外旅行の予定や大事なご用事の前日</strong>は施術をお控えください（鍼の反応や内出血等が出る場合がございます）。</li>
         <li><strong>当日キャンセルはキャンセル料が発生</strong>いたします（変更・キャンセルは前日21:00まで）。</li>
       </ul>
+      <!-- 設定シート F29：予約確定前の注意事項（入力時のみ自動表示） -->
+      <div id="customBookingNotice" class="custom-booking-notice"></div>
       <label class="agreement-label">
         <input type="checkbox" id="agreementCheck" onchange="validateFormReadiness()">
         <span>上記重要事項を確認・同意しました</span>
@@ -681,11 +715,11 @@
         <span>お名前</span>
         <span id="cName">-</span>
       </div>
-      <div class="complete-row">
+      <div class="complete-row" id="cClothesRow">
         <span>お着替え</span>
         <span id="cClothes">-</span>
       </div>
-      <div class="complete-row">
+      <div class="complete-row" id="cReceiptRow">
         <span>領収書</span>
         <span id="cReceipt">-</span>
       </div>
@@ -728,8 +762,13 @@
       { name: "鍼追加（3倍）", duration: 0, price: 1000 },
       { name: "吸玉", duration: 0, price: 1000 }
     ],
-    firstVisit: { fee: 12000, duration: 0 },
-    bookingLimits: { director: 30, staff: 60 }
+    firstVisit: { fee: 10000, duration: 0, rule: '院長新規のみ' },
+    bookingLimits: { director: 4, staff: 7 },
+    clinicName: '銀座そうぜん鍼灸院',
+    noticeBanner: '',
+    showClothes: true,
+    showReceipt: true,
+    bookingNotice: ''
   };
 
   let activeCustomerType = '初めてのご来院（新規）';
@@ -763,12 +802,62 @@
     } catch (err) {
       console.error('設定取得スキップ:', err);
     } finally {
+      applyDynamicSettings();
       populateMenuDropdown();
       populateOptionsList();
       sel.disabled = false;
       handleMenuSelect();
     }
   });
+
+  // 設定シート（F7, F25〜F29）の内容を画面へ反映
+  function applyDynamicSettings() {
+    // 院名（F7）
+    if (serverConfig.clinicName) {
+      document.title = `${serverConfig.clinicName} ご予約`;
+      document.getElementById('clinicTitle').innerText = serverConfig.clinicName;
+    }
+
+    // お知らせバナー（F25）
+    const banner = document.getElementById('noticeBanner');
+    if (serverConfig.noticeBanner && String(serverConfig.noticeBanner).trim() !== '') {
+      banner.innerText = serverConfig.noticeBanner;
+      banner.style.display = 'block';
+    } else {
+      banner.style.display = 'none';
+    }
+
+    // お着替え・領収書の表示ON/OFF（F26・F27）
+    const showClothes = serverConfig.showClothes !== false;
+    const showReceipt = serverConfig.showReceipt !== false;
+    document.getElementById('clothesBlock').style.display = showClothes ? 'block' : 'none';
+    document.getElementById('receiptBlock').style.display = showReceipt ? 'block' : 'none';
+    document.getElementById('cClothesRow').style.display = showClothes ? 'flex' : 'none';
+    document.getElementById('cReceiptRow').style.display = showReceipt ? 'flex' : 'none';
+    if (!showClothes) selectedClothes = '不要';
+    if (!showReceipt) selectedReceipt = '不要';
+
+    // 初診料ルール・金額（F4・F28）に合わせて新規ボタンの表示を更新
+    const fvFee = (serverConfig.firstVisit && serverConfig.firstVisit.fee) ? Number(serverConfig.firstVisit.fee) : 0;
+    const fvRule = (serverConfig.firstVisit && serverConfig.firstVisit.rule) ? serverConfig.firstVisit.rule : '院長新規のみ';
+    const btnNew = document.getElementById('btnNew');
+    if (fvFee > 0 && fvRule === '院長新規のみ') {
+      btnNew.innerText = `初めてのご来院（新規 / 院長施術のみ初診料¥${fvFee.toLocaleString()}）`;
+    } else if (fvFee > 0 && fvRule === '全員の新規') {
+      btnNew.innerText = `初めてのご来院（新規 / 初診料¥${fvFee.toLocaleString()}）`;
+    } else {
+      btnNew.innerText = '初めてのご来院（新規）';
+    }
+
+    // 予約確定前の注意事項（F29）
+    const customNotice = document.getElementById('customBookingNotice');
+    if (serverConfig.bookingNotice && String(serverConfig.bookingNotice).trim() !== '') {
+      customNotice.innerText = serverConfig.bookingNotice;
+      customNotice.style.display = 'block';
+    } else {
+      customNotice.style.display = 'none';
+    }
+  }
 
   function setCustomerType(type) {
     activeCustomerType = type;
@@ -871,8 +960,15 @@
       menuPrice = activeMenu.price;
       duration = activeMenu.duration;
 
-      if (activeCustomerType.includes('新規') && activeMenu.name.includes('院長')) {
-        firstVisitFee = (serverConfig && serverConfig.firstVisit && serverConfig.firstVisit.fee) ? serverConfig.firstVisit.fee : 12000;
+      const fvFee = (serverConfig && serverConfig.firstVisit && serverConfig.firstVisit.fee) ? Number(serverConfig.firstVisit.fee) : 0;
+      const fvRule = (serverConfig && serverConfig.firstVisit && serverConfig.firstVisit.rule) ? serverConfig.firstVisit.rule : '院長新規のみ';
+
+      if (fvFee > 0 && activeCustomerType.includes('新規')) {
+        if (fvRule === '全員の新規') {
+          firstVisitFee = fvFee;
+        } else if (fvRule === '院長新規のみ' && activeMenu.name.includes('院長') && !activeMenu.name.includes('加藤') && !activeMenu.name.includes('スタッフ')) {
+          firstVisitFee = fvFee;
+        }
       }
     }
 
